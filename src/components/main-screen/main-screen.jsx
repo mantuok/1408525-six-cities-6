@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import OfferCard from '../offer-card/offer-card';
+import OffersList from '../offers-list/offers-list';
+import {offersPropTypes} from '../../utils/props-validation';
 
 const MainScreen = (props) => {
   const {offers} = props;
@@ -87,9 +88,7 @@ const MainScreen = (props) => {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {offers.map((offer) => <OfferCard key={offer.id} offer={offer} />)}
-              </div>
+              <OffersList offers={offers} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
@@ -101,47 +100,6 @@ const MainScreen = (props) => {
   );
 };
 
-MainScreen.propTypes = {
-  offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        bedrooms: PropTypes.number.isRequired,
-        city: PropTypes.shape({
-          location: PropTypes.shape({
-            latitude: PropTypes.number.isRequired,
-            longitude: PropTypes.number.isRequired,
-            zoom: PropTypes.number.isRequired
-          }),
-          name: PropTypes.string.isRequired
-        }),
-        description: PropTypes.string.isRequired,
-        goods: PropTypes.arrayOf(
-          PropTypes.string.isRequired
-        ),
-        host: PropTypes.shape({
-          avatarUrl: PropTypes.string.isRequired,
-          id: PropTypes.number.isRequired,
-          isPro: PropTypes.bool.isRequired,
-          name: PropTypes.string.isRequired
-        }),
-        id: PropTypes.number.isRequired,
-        images:  PropTypes.arrayOf(
-          PropTypes.string.isRequired
-        ),
-        isFavorite: PropTypes.bool.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        location: PropTypes.shape({
-          latitude: PropTypes.number.isRequired,
-          longitude: PropTypes.number.isRequired,
-          zoom: PropTypes.number.isRequired
-        }),
-        maxAdults: PropTypes.number.isRequired,
-        previewImage: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        rating: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired
-      })
-  )
-};
+MainScreen.propTypes = offersPropTypes;
 
 export default MainScreen;
