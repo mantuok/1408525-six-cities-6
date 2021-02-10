@@ -26,7 +26,7 @@ export default [{
     zoom: 8
   },
   maxAdults: 4,
-  previewImage: `img/1.png`,
+  previewImage: `img/apartment-01.jpg`,
   price: 120,
   rating: 4.8,
   title: `Beautiful & luxurious studio at great location`,
@@ -60,7 +60,7 @@ export default [{
     zoom: 8
   },
   maxAdults: 2,
-  previewImage: `img/1.png`,
+  previewImage: `img/apartment-01.jpg`,
   price: 80,
   rating: 4.1,
   title: `Lorem ipsum dolor sit amet`,
@@ -94,7 +94,7 @@ export default [{
     zoom: 8
   },
   maxAdults: 4,
-  previewImage: `img/1.png`,
+  previewImage: `img/apartment-01.jpg`,
   price: 110,
   rating: 4.9,
   title: `At vero eos et accusamus et`,
@@ -128,10 +128,10 @@ export default [{
     zoom: 8
   },
   maxAdults: 8,
-  previewImage: `img/1.png`,
+  previewImage: `img/apartment-01.jpg`,
   price: 165,
-  rating: 3.5,
+  rating: 3.4,
   title: `Maecenas faucibus enim liber`,
   type: `apartment`
-}
+},
 ]
