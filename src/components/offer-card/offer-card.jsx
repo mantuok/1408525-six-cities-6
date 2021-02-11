@@ -2,14 +2,15 @@ import React from 'react';
 import {getRatingStarsWidth} from '../../utils/common';
 import {offersPropTypes} from '../../utils/props-validation';
 
-const OfferCard = ({offer}) => {
-  const {title, previewImage, price, rating, type} = offer;
+const OfferCard = (props) => {
+  const {handleMouseOver, offer} = props;
+  const {isPremium, title, previewImage, price, rating, type} = offer;
   return (
-    <article className="cities__place-card place-card">
-      <div className="place-card__mark">
+    <article className="cities__place-card place-card" onMouseOver={handleMouseOver}>
+      <div className="place-card__mark" style={{display: isPremium ? `block` : `none`}}>
         <span>Premium</span>
       </div>
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className="cities__image-wrapper place-card__image-wrapper" >
         <a href="#">
           <img className="place-card__image" src={"./" + previewImage} width="260" height="200" alt={title} />
         </a>
