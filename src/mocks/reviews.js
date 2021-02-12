@@ -4,9 +4,9 @@ export default [{
     id: 1,
     rating: 4,
     user: {
-      avatarUrl: `img/1.png`,
+      avatarUrl: `https://assets.htmlacademy.ru/intensives/javascript-3/avatar/5.jpg`,
       id: 4,
-      isPro: false,
+      isPro: true,
       name: `Max`
     }
   },
@@ -16,7 +16,7 @@ export default [{
     id: 2,
     rating: 3,
     user: {
-      avatarUrl: `img/1.png`,
+      avatarUrl: `https://assets.htmlacademy.ru/intensives/javascript-3/avatar/5.jpg`,
       id: 5,
       isPro: false,
       name: `Ben`
@@ -28,7 +28,7 @@ export default [{
     id: 3,
     rating: 5,
     user: {
-      avatarUrl: `img/1.png`,
+      avatarUrl: `https://assets.htmlacademy.ru/intensives/javascript-3/avatar/5.jpg`,
       id: 7,
       isPro: false,
       name: `Anna`
@@ -40,7 +40,7 @@ export default [{
     id: 4,
     rating: 4,
     user: {
-      avatarUrl: `img/1.png`,
+      avatarUrl: `https://assets.htmlacademy.ru/intensives/javascript-3/avatar/5.jpg`,
       id: 8,
       isPro: false,
       name: `Mary`

@@ -9,7 +9,7 @@ import {getOfferById} from '../../utils/common'
 import {offersPropTypes} from '../../utils/props-validation';
 
 const App = (props) => {
-  const {offers} = props;
+  const {offers, reviews} = props;
 
   return (
     <BrowserRouter>
@@ -26,7 +26,7 @@ const App = (props) => {
         <Route exact path="/offer/:id"
             render = {(props) => {
               const offerId = parseInt(props.match.params.id, 10);
-              return <OfferScreen offer={getOfferById(offers, offerId)}/>;
+              return <OfferScreen offer={getOfferById(offers, offerId)} reviews={reviews} />;
         }} />
         <Route>
           <PageNotFoundScreen />

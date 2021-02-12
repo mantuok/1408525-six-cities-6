@@ -11,13 +11,18 @@ export default [{
   description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
   goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
   host: {
-    avatarUrl: `img/1.png`,
+    avatarUrl: `img/avatar-angelina.jpg`,
     id: 3,
     isPro: true,
     name: `Angelina`
   },
   id: 1,
-  images: [`img/1.png`, `img/2.png`],
+  images: [
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/6.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/7.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/14.jpg`
+    ],
   isFavorite: true,
   isPremium: true,
   location: {
@@ -45,13 +50,18 @@ export default [{
   description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. `,
   goods: [`Heating`, `Kitchen`, `Washing machine`, `Dishwasher`],
   host: {
-    avatarUrl: `img/1.png`,
+    avatarUrl: `img/avatar-angelina.jpg`,
     id: 4,
     isPro: true,
     name: `John`
   },
   id: 2,
-  images: [`img/1.png`, `img/2.png`],
+  images: [
+    `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/11.jpg`,
+    `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/8.jpg`,
+    `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/2.jpg`,
+    `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/6.jpg`
+  ],
   isFavorite: false,
   isPremium: false,
   location: {
@@ -79,13 +89,17 @@ export default [{
   description: `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti.`,
   goods: [`Heating`, `Kitchen`, `Cable TV`],
   host: {
-    avatarUrl: `img/1.png`,
+    avatarUrl: `img/avatar-angelina.jpg`,
     id: 5,
     isPro: false,
     name: `Bill`
   },
   id: 3,
-  images: [`img/1.png`, `img/2.png`],
+  images: [
+    `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/1.jpg`,
+    `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/3.jpg`,
+    `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/15.jpg`
+  ],
   isFavorite: false,
   isPremium: false,
   location: {
@@ -113,13 +127,16 @@ export default [{
   description: `Maecenas faucibus enim libero, eu eleifend nisl commodo ut. Aliquam erat volutpat.`,
   goods: [`Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
   host: {
-    avatarUrl: `img/1.png`,
+    avatarUrl: `img/avatar-angelina.jpg`,
     id: 6,
     isPro: false,
     name: `Bella`
   },
   id: 4,
-  images: [`img/1.png`, `img/2.png`],
+  images: [
+    `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/5.jpg`,
+    `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/9.jpg`
+  ],
   isFavorite: false,
   isPremium: false,
   location: {
@@ -135,3 +152,6 @@ export default [{
   type: `apartment`
 },
 ]
+
+
+
