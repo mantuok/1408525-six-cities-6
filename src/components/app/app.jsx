@@ -5,6 +5,7 @@ import OfferScreen from '../offer-screen/offer-screen';
 import FavoritesScreen from '../favorites-screen/favorites-screen';
 import SignInScreen from '../sign-in-screen/sign-in-screen';
 import PageNotFoundScreen from '../page-not-found-screen/page-not-found-screen';
+import {getOfferById} from '../../utils/common'
 import {offersPropTypes} from '../../utils/props-validation';
 
 const App = (props) => {
@@ -22,9 +23,11 @@ const App = (props) => {
         <Route exact path="/favorites">
           <FavoritesScreen offers={offers} />
         </Route>
-        <Route exact path="/offer/:id">
-          <OfferScreen />
-        </Route>
+        <Route exact path="/offer/:id"
+            render = {(props) => {
+              const offerId = parseInt(props.match.params.id, 10);
+              return <OfferScreen offer={getOfferById(offers, offerId)}/>;
+        }} />
         <Route>
           <PageNotFoundScreen />
         </Route>

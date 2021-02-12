@@ -5,7 +5,6 @@ import {offersPropTypes} from '../../utils/props-validation';
 const OffersList = (props) => {
   const {offers} = props;
   const [activeCard, setActiveCard] = useState(undefined);
-  console.log(activeCard)
 
   return (
     <div className="cities__places-list places__list tabs__content">

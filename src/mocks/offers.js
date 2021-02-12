@@ -18,7 +18,7 @@ export default [{
   },
   id: 1,
   images: [`img/1.png`, `img/2.png`],
-  isFavorite: false,
+  isFavorite: true,
   isPremium: true,
   location: {
     latitude: 52.35514938496378,

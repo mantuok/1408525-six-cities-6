@@ -1,19 +1,20 @@
 import React from 'react';
+import {Link} from  'react-router-dom';
 import {getRatingStarsWidth} from '../../utils/common';
 import {offersPropTypes} from '../../utils/props-validation';
 
 const OfferCard = (props) => {
   const {handleMouseOver, offer} = props;
-  const {isPremium, title, previewImage, price, rating, type} = offer;
+  const {id, isPremium, title, previewImage, price, rating, type} = offer;
   return (
     <article className="cities__place-card place-card" onMouseOver={handleMouseOver}>
       <div className="place-card__mark" style={{display: isPremium ? `block` : `none`}}>
         <span>Premium</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper" >
-        <a href="#">
+        <Link to={'/offer/' + id}>
           <img className="place-card__image" src={"./" + previewImage} width="260" height="200" alt={title} />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
