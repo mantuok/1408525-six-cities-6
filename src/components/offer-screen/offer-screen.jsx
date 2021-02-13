@@ -1,11 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {getRatingStarsWidth} from '../../utils/common';
-import {offersPropTypes} from '../../utils/props-validation';
+import {
+  offerPropTypes,
+  reviewsPropTypes
+} from '../../utils/props-validation';
 import OfferImage from './offer-image';
 import OfferGood from './offer-good';
 import OfferReview from './offer-review';
-import NewReview from './new-review'
+import NewReview from './new-review';
 
 const OfferScreen = ({offer, reviews}) => {
   const {bedrooms, description, goods, isPremium, images, maxAdults, title, price, rating, type} = offer;
@@ -91,7 +94,7 @@ const OfferScreen = ({offer, reviews}) => {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className={"property__avatar-wrapper user__avatar-wrapper" + (isPro ?  ` property__avatar-wrapper--pro` : ``)}>
+                  <div className={`property__avatar-wrapper user__avatar-wrapper` + (isPro ? ` property__avatar-wrapper--pro` : ``)}>
                     <img className="property__avatar user__avatar" src={avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
@@ -227,6 +230,9 @@ const OfferScreen = ({offer, reviews}) => {
   );
 };
 
-OfferScreen.propTypes = offersPropTypes;
+OfferScreen.propTypes = {
+  offer: offerPropTypes,
+  reviews: reviewsPropTypes
+};
 
 export default OfferScreen;

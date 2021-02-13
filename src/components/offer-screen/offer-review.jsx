@@ -2,7 +2,8 @@ import React from 'react';
 import {
   getRatingStarsWidth,
   getFormatedDate
-} from '../../utils/common'
+} from '../../utils/common';
+import {reviewPropTypes} from '../../utils/props-validation';
 
 const OfferReview = ({review}) => {
   const {date, rating, comment} = review;
@@ -11,7 +12,7 @@ const OfferReview = ({review}) => {
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
-        <div className={"reviews__avatar-wrapper user__avatar-wrapper" + (isPro ? `user__avatar-wrapper--pro` : ``)}>
+        <div className={`reviews__avatar-wrapper user__avatar-wrapper` + (isPro ? `user__avatar-wrapper--pro` : ``)}>
           <img className="reviews__avatar user__avatar" src={avatarUrl} width="54" height="54" alt="Reviews avatar" />
         </div>
         <span className="reviews__user-name">
@@ -21,7 +22,7 @@ const OfferReview = ({review}) => {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-          <span style={{width: `${getRatingStarsWidth(rating)}%`}}></span>
+            <span style={{width: `${getRatingStarsWidth(rating)}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -31,7 +32,11 @@ const OfferReview = ({review}) => {
         <time className="reviews__time" dateTime={date}>{getFormatedDate(date)}</time>
       </div>
     </li>
-  )
+  );
+};
+
+OfferReview.propTypes = {
+  review: reviewPropTypes
 };
 
 export default OfferReview;

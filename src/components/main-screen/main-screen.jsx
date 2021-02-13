@@ -105,6 +105,8 @@ const MainScreen = (props) => {
   );
 };
 
-MainScreen.propTypes = offersPropTypes;
+MainScreen.propTypes = {
+  offers: offersPropTypes
+};
 
 export default MainScreen;

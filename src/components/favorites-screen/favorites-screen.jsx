@@ -4,7 +4,7 @@ import OfferCard from '../offer-card/offer-card';
 import {offersPropTypes} from '../../utils/props-validation';
 
 const FavoritesScreen = ({offers}) => {
-  const favoriteOffers = offers.filter((offer) => offer.isFavorite)
+  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
 
   return (
     <div className="page">
@@ -61,6 +61,8 @@ const FavoritesScreen = ({offers}) => {
   );
 };
 
-FavoritesScreen.propTypes = offersPropTypes;
+FavoritesScreen.propTypes = {
+  offers: offersPropTypes
+};
 
 export default FavoritesScreen;

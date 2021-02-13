@@ -5,4 +5,4 @@ export const RATING_STARS = {
   3: 60,
   4: 80,
   5: 100
-}
+};

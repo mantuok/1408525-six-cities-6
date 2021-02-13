@@ -18,11 +18,11 @@ export default [{
   },
   id: 1,
   images: [
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/6.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/7.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/14.jpg`
-    ],
+    `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg`,
+    `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/6.jpg`,
+    `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/7.jpg`,
+    `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/14.jpg`
+  ],
   isFavorite: true,
   isPremium: true,
   location: {
@@ -151,7 +151,4 @@ export default [{
   title: `Maecenas faucibus enim liber`,
   type: `apartment`
 },
-]
-
-
-
+];

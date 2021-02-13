@@ -1,7 +1,10 @@
 import React from 'react';
-import {Link} from  'react-router-dom';
+import {Link} from 'react-router-dom';
 import {getRatingStarsWidth} from '../../utils/common';
-import {offersPropTypes} from '../../utils/props-validation';
+import {
+  offerPropTypes,
+  functionPropTypes
+} from '../../utils/props-validation';
 
 const OfferCard = (props) => {
   const {handleMouseOver, offer} = props;
@@ -12,8 +15,8 @@ const OfferCard = (props) => {
         <span>Premium</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper" >
-        <Link to={'/offer/' + id}>
-          <img className="place-card__image" src={"./" + previewImage} width="260" height="200" alt={title} />
+        <Link to={`/offer/` + id}>
+          <img className="place-card__image" src={`./` + previewImage} width="260" height="200" alt={title} />
         </Link>
       </div>
       <div className="place-card__info">
@@ -44,6 +47,9 @@ const OfferCard = (props) => {
   );
 };
 
-OfferCard.propTypes = offersPropTypes;
+OfferCard.propTypes = {
+  offer: offerPropTypes,
+  handleMouseOver: functionPropTypes
+};
 
 export default OfferCard;
