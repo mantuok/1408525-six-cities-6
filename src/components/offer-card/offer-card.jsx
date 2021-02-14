@@ -3,14 +3,15 @@ import {Link} from 'react-router-dom';
 import {getRatingStarsWidth} from '../../utils/common';
 import {
   offerPropTypes,
-  functionPropTypes
+  functionPropTypes,
+  booleanPropTypes
 } from '../../utils/props-validation';
 
 const OfferCard = (props) => {
-  const {handleMouseOver, offer} = props;
+  const {handleMouseOver, isCardActive, offer} = props;
   const {id, isPremium, title, previewImage, price, rating, type} = offer;
   return (
-    <article className="cities__place-card place-card" onMouseOver={handleMouseOver}>
+    <article className={`cities__place-card place-card` + (isCardActive ? `place-card--active` : ``)} onMouseOver={handleMouseOver}>
       <div className="place-card__mark" style={{display: isPremium ? `block` : `none`}}>
         <span>Premium</span>
       </div>
@@ -49,7 +50,8 @@ const OfferCard = (props) => {
 
 OfferCard.propTypes = {
   offer: offerPropTypes,
-  handleMouseOver: functionPropTypes
+  handleMouseOver: functionPropTypes,
+  isCardActive: booleanPropTypes
 };
 
 export default OfferCard;

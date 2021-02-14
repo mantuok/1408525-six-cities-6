@@ -6,9 +6,16 @@ const OffersList = (props) => {
   const {offers} = props;
   const [activeCardId, setActiveCard] = useState(undefined);
 
+  const isCardActive = (offer) => offer.id === activeCardId;
+
   return (
     <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer) => <OfferCard handleMouseOver={() => setActiveCard(offer.id)} key={offer.id} offer={offer} />)}
+      {offers.map((offer) => <OfferCard
+        handleMouseOver={() => setActiveCard(offer.id)}
+        isCardActive={isCardActive(offer)}
+        key={offer.id}
+        offer={offer}
+      />)}
     </div>
   );
 };

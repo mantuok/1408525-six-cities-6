@@ -59,3 +59,4 @@ export const goodPropTypes = PropTypes.string.isRequired;
 export const imagePropTypes = PropTypes.string.isRequired;
 export const titlePropTypes = PropTypes.string.isRequired;
 export const functionPropTypes = PropTypes.func.isRequired;
+export const booleanPropTypes = PropTypes.bool.isRequired;
