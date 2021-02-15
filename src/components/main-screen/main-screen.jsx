@@ -1,6 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import OfferCard from '../offer-card/offer-card';
+import {Link} from 'react-router-dom';
+import OffersList from '../offers-list/offers-list';
+import {offersPropTypes} from '../../utils/props-validation';
 
 const MainScreen = (props) => {
   const {offers} = props;
@@ -18,11 +19,11 @@ const MainScreen = (props) => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
+                  <Link className="header__nav-link header__nav-link--profile" to="/favorites">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>
@@ -87,9 +88,7 @@ const MainScreen = (props) => {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {offers.map((offer) => <OfferCard key={offer.id} />)}
-              </div>
+              <OffersList offers={offers} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
@@ -97,16 +96,17 @@ const MainScreen = (props) => {
           </div>
         </div>
       </main>
+      <footer className="footer container">
+        <Link className="footer__logo-link" to="/">
+          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
+        </Link>
+      </footer>
     </div>
   );
 };
 
 MainScreen.propTypes = {
-  offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired
-      })
-  )
+  offers: offersPropTypes
 };
 
 export default MainScreen;
