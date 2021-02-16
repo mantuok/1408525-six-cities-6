@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import {Link} from 'react-router-dom';
 import {getRatingStarsWidth} from '../../utils/common';
 import {
@@ -11,8 +12,8 @@ const OfferCard = (props) => {
   const {handleMouseOver, isCardActive, offer} = props;
   const {id, isPremium, title, previewImage, price, rating, type} = offer;
   return (
-    <article className={`cities__place-card place-card` + (isCardActive ? `place-card--active` : ``)} onMouseOver={handleMouseOver}>
-      <div className="place-card__mark" style={{display: isPremium ? `block` : `none`}}>
+    <article className={classNames("cities__place-card place-card", {"place-card--active" : isCardActive})} onMouseOver={handleMouseOver}>
+      <div className={classNames("place-card__mark", {"visually-hidden" : !isPremium})}>
         <span>Premium</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper" >

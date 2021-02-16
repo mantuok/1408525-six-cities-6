@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import {Link, useParams} from 'react-router-dom';
 import {
   getRatingStarsWidth,
@@ -53,7 +54,7 @@ const OfferScreen = ({offers, reviews}) => {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              <div className="property__mark" style={{display: isPremium ? `block` : `none`}}>
+              <div className={classnames("property__mark", {"visually-hidden": !isPremium})}>
                 <span>Premium</span>
               </div>
               <div className="property__name-wrapper">
@@ -98,7 +99,7 @@ const OfferScreen = ({offers, reviews}) => {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className={`property__avatar-wrapper user__avatar-wrapper` + (isPro ? ` property__avatar-wrapper--pro` : ``)}>
+                  <div className={classnames("property__avatar-wrapper user__avatar-wrapper", {"property__avatar-wrapper--pro" : isPro })}>
                     <img className="property__avatar user__avatar" src={avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
