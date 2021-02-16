@@ -9,7 +9,10 @@ const NewReview = () => {
 
   const handleFieldChange = (evt) => {
     const {name, value} = evt.target;
-    setReviewForm({...reviewForm, [name]: value});
+    setReviewForm({
+      ...reviewForm,
+      [name]: value
+    });
   };
 
   return (
