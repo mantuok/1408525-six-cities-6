@@ -1,6 +1,9 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {getRatingStarsWidth} from '../../utils/common';
+import {Link, useParams} from 'react-router-dom';
+import {
+  getRatingStarsWidth,
+  getOfferById
+} from '../../utils/common';
 import {
   offerPropTypes,
   reviewsPropTypes
@@ -10,10 +13,11 @@ import OfferGood from './offer-good';
 import OfferReview from './offer-review';
 import NewReview from './new-review';
 
-const OfferScreen = ({offer, reviews}) => {
+const OfferScreen = ({offers, reviews}) => {
+  const {id} = useParams();
+  const offer = getOfferById(offers, id);
   const {bedrooms, description, goods, isPremium, images, maxAdults, title, price, rating, type} = offer;
   const {avatarUrl, isPro, name} = offer.host;
-
 
   return (
     <div className="page">

@@ -26,11 +26,13 @@ const App = (props) => {
         <Route exact path="/favorites">
           <FavoritesScreen offers={offers} />
         </Route>
-        <Route exact path="/offer/:id"
-          render = {({match}) => {
-            const offerId = parseInt(match.params.id, 10);
-            return <OfferScreen offer={getOfferById(offers, offerId)} reviews={reviews} />;
-          }} />
+        <Route exact path="/offer/:id">
+          {/* // render = {({match}) => { */}
+          {/* //   const offerId = parseInt(match.params.id, 10);
+          //   return <OfferScreen offer={getOfferById(offers, offerId)} reviews={reviews} />;
+          // }} /> */}
+          <OfferScreen offers={offers} reviews={reviews} />
+        </Route>
         <Route>
           <PageNotFoundScreen />
         </Route>
