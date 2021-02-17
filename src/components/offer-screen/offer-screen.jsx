@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import {nanoid} from 'nanoid';
 import {Link, useParams} from 'react-router-dom';
 import {
   getRatingStarsWidth,
@@ -13,6 +14,18 @@ import OfferImage from './offer-image';
 import OfferGood from './offer-good';
 import OfferReview from './offer-review';
 import NewReview from './new-review';
+
+const renderImages = (images, title) => {
+  return images.map((image) => <OfferImage image={image} title={title} key={nanoid()}/>)
+}
+
+const renderGoods = (goods) => {
+  return goods.map((good) => <OfferGood good={good} key={nanoid()}/>)
+}
+
+const renderReviews = (reviews) => {
+  return reviews.map((review) => <OfferReview review={review} key={review.id} />)
+}
 
 const OfferScreen = ({offers, reviews}) => {
   const {id} = useParams();
@@ -49,7 +62,7 @@ const OfferScreen = ({offers, reviews}) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {images.map((image, i) => <OfferImage image={image} title={title} key={i}/>)}
+              {renderImages(images, title)}
             </div>
           </div>
           <div className="property__container container">
@@ -93,7 +106,7 @@ const OfferScreen = ({offers, reviews}) => {
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  {goods.map((good, i) => <OfferGood good={good} key={i} />)}
+                  {renderGoods(goods)}
                 </ul>
               </div>
               <div className="property__host">
@@ -115,7 +128,7 @@ const OfferScreen = ({offers, reviews}) => {
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                 <ul className="reviews__list">
-                  {reviews.map((review) => <OfferReview review={review} key={review.id} />)}
+                  {renderReviews(reviews)}
                 </ul>
                 {<NewReview />}
               </section>
