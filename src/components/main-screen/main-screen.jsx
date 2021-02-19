@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import OffersList from '../offers-list/offers-list';
+import Map from '../map/map';
 import {offersPropTypes} from '../../utils/props-validation';
 
 const MainScreen = (props) => {
@@ -91,7 +92,9 @@ const MainScreen = (props) => {
               <OffersList offers={offers} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map offers={offers} />
+              </section>
             </div>
           </div>
         </div>

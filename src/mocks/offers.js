@@ -26,8 +26,8 @@ export default [{
   isFavorite: true,
   isPremium: true,
   location: {
-    latitude: 52.35514938496378,
-    longitude: 4.673877537499948,
+    latitude: 52.3909553943508,
+    longitude: 4.85309666406198,
     zoom: 8
   },
   maxAdults: 4,
@@ -41,11 +41,11 @@ export default [{
   bedrooms: 1,
   city: {
     location: {
-      latitude: 50.851097,
-      longitude: 4.351680,
+      latitude: 52.370216,
+      longitude: 4.895168,
       zoom: 10
     },
-    name: `Brussels`
+    name: `Amsterdam`
   },
   description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. `,
   goods: [`Heating`, `Kitchen`, `Washing machine`, `Dishwasher`],
@@ -65,8 +65,8 @@ export default [{
   isFavorite: false,
   isPremium: false,
   location: {
-    latitude: 50.85363225247392,
-    longitude: 4.3481508756470815,
+    latitude: 52.369553943508,
+    longitude: 4.85309666406198,
     zoom: 8
   },
   maxAdults: 2,
@@ -80,11 +80,11 @@ export default [{
   bedrooms: 5,
   city: {
     location: {
-      latitude: 53.548376,
-      longitude: 9.988388,
+      latitude: 52.370216,
+      longitude: 4.895168,
       zoom: 10
     },
-    name: `Hamburg`
+    name: `Amsterdam`
   },
   description: `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti.`,
   goods: [`Heating`, `Kitchen`, `Cable TV`],
@@ -103,8 +103,8 @@ export default [{
   isFavorite: false,
   isPremium: false,
   location: {
-    latitude: 53.55162125708585,
-    longitude: 9.990394434194565,
+    latitude: 52.3909553943508,
+    longitude: 4.929309666406198,
     zoom: 8
   },
   maxAdults: 4,
@@ -140,8 +140,8 @@ export default [{
   isFavorite: false,
   isPremium: false,
   location: {
-    latitude: 52.37071986948459,
-    longitude: 4.879983651847732,
+    latitude: 52.3809553943508,
+    longitude: 4.939309666406198,
     zoom: 8
   },
   maxAdults: 8,

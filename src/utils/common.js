@@ -6,5 +6,5 @@ export const getOfferById = (offers, id) => {
   if (id.typeof !== `number`) {
     id = parseInt(id, 10);
   }
-  return offers.find((offer) => offer.id === id)
+  return offers.find((offer) => offer.id === id);
 };

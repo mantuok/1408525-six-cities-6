@@ -7,7 +7,7 @@ import {
   getOfferById
 } from '../../utils/common';
 import {
-  offerPropTypes,
+  offersPropTypes,
   reviewsPropTypes
 } from '../../utils/props-validation';
 import OfferImage from './offer-image';
@@ -16,16 +16,16 @@ import OfferReview from './offer-review';
 import NewReview from './new-review';
 
 const renderImages = (images, title) => {
-  return images.map((image) => <OfferImage image={image} title={title} key={nanoid()}/>)
-}
+  return images.map((image) => <OfferImage image={image} title={title} key={nanoid()}/>);
+};
 
 const renderGoods = (goods) => {
-  return goods.map((good) => <OfferGood good={good} key={nanoid()}/>)
-}
+  return goods.map((good) => <OfferGood good={good} key={nanoid()}/>);
+};
 
 const renderReviews = (reviews) => {
-  return reviews.map((review) => <OfferReview review={review} key={review.id} />)
-}
+  return reviews.map((review) => <OfferReview review={review} key={review.id} />);
+};
 
 const OfferScreen = ({offers, reviews}) => {
   const {id} = useParams();
@@ -67,7 +67,7 @@ const OfferScreen = ({offers, reviews}) => {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              <div className={classnames("property__mark", {"visually-hidden": !isPremium})}>
+              <div className={classnames(`property__mark`, {"visually-hidden": !isPremium})}>
                 <span>Premium</span>
               </div>
               <div className="property__name-wrapper">
@@ -112,7 +112,7 @@ const OfferScreen = ({offers, reviews}) => {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className={classnames("property__avatar-wrapper user__avatar-wrapper", {"property__avatar-wrapper--pro" : isPro })}>
+                  <div className={classnames(`property__avatar-wrapper user__avatar-wrapper`, {"property__avatar-wrapper--pro": isPro})}>
                     <img className="property__avatar user__avatar" src={avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
@@ -249,7 +249,7 @@ const OfferScreen = ({offers, reviews}) => {
 };
 
 OfferScreen.propTypes = {
-  offer: offerPropTypes,
+  offers: offersPropTypes,
   reviews: reviewsPropTypes
 };
 
