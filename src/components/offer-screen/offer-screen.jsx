@@ -1,8 +1,13 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {getRatingStarsWidth} from '../../utils/common';
+import classnames from 'classnames';
+import {nanoid} from 'nanoid';
+import {Link, useParams} from 'react-router-dom';
 import {
-  offerPropTypes,
+  getRatingStarsWidth,
+  getOfferById
+} from '../../utils/common';
+import {
+  offersPropTypes,
   reviewsPropTypes
 } from '../../utils/props-validation';
 import OfferImage from './offer-image';
@@ -10,10 +15,23 @@ import OfferGood from './offer-good';
 import OfferReview from './offer-review';
 import NewReview from './new-review';
 
-const OfferScreen = ({offer, reviews}) => {
+const renderImages = (images, title) => {
+  return images.map((image) => <OfferImage image={image} title={title} key={nanoid()}/>);
+};
+
+const renderGoods = (goods) => {
+  return goods.map((good) => <OfferGood good={good} key={nanoid()}/>);
+};
+
+const renderReviews = (reviews) => {
+  return reviews.map((review) => <OfferReview review={review} key={review.id} />);
+};
+
+const OfferScreen = ({offers, reviews}) => {
+  const {id} = useParams();
+  const offer = getOfferById(offers, id);
   const {bedrooms, description, goods, isPremium, images, maxAdults, title, price, rating, type} = offer;
   const {avatarUrl, isPro, name} = offer.host;
-
 
   return (
     <div className="page">
@@ -44,12 +62,12 @@ const OfferScreen = ({offer, reviews}) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {images.map((image, i) => <OfferImage image={image} title={title} key={i}/>)}
+              {renderImages(images, title)}
             </div>
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              <div className="property__mark" style={{display: isPremium ? `block` : `none`}}>
+              <div className={classnames(`property__mark`, {"visually-hidden": !isPremium})}>
                 <span>Premium</span>
               </div>
               <div className="property__name-wrapper">
@@ -88,13 +106,13 @@ const OfferScreen = ({offer, reviews}) => {
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  {goods.map((good, i) => <OfferGood good={good} key={i} />)}
+                  {renderGoods(goods)}
                 </ul>
               </div>
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className={`property__avatar-wrapper user__avatar-wrapper` + (isPro ? ` property__avatar-wrapper--pro` : ``)}>
+                  <div className={classnames(`property__avatar-wrapper user__avatar-wrapper`, {"property__avatar-wrapper--pro": isPro})}>
                     <img className="property__avatar user__avatar" src={avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
@@ -110,7 +128,7 @@ const OfferScreen = ({offer, reviews}) => {
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                 <ul className="reviews__list">
-                  {reviews.map((review) => <OfferReview review={review} key={review.id} />)}
+                  {renderReviews(reviews)}
                 </ul>
                 {<NewReview />}
               </section>
@@ -231,7 +249,7 @@ const OfferScreen = ({offer, reviews}) => {
 };
 
 OfferScreen.propTypes = {
-  offer: offerPropTypes,
+  offers: offersPropTypes,
   reviews: reviewsPropTypes
 };
 
