@@ -1,10 +1,14 @@
-import offers from './mocks/offers';
-import {City} from './const';
-import {ActionType} from './action'
+import offers from '../mocks/offers';
+import {City} from '../const';
+import {ActionType} from './action';
+
+const getOffersPerCity = (offers, selectedCity) => {
+  offers.filter((offer) => offer.city.name === selectedCity);
+}
 
 const initialState = {
   offers: offers,
-  city: City.PARIS
+  activeCity: City.PARIS
 };
 
 const reducer = (state = initialState, action) => {
@@ -12,17 +16,16 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_CITY:
       return {
         ...state,
-        city: state.city
+        activeCity: action.payload
       };
     case ActionType.SET_OFFERS_PER_CITY:
       return {
         ...state,
-        offers: state.offers
-      }
+        offers: getOffersPerCity(state.offers, action.payload)
+      };
   }
 
   return state;
 };
 
 export {reducer};
-
