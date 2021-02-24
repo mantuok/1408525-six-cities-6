@@ -4,12 +4,12 @@ export const ActionType = {
 }
 
 export const ActionCreator = {
-  setCity: () => ({
+  setCity: (selectedCity) => ({
     type: ActionType.SET_CITY,
-    payload: city
+    payload: selectedCity
   }),
   setOffersPerCity: () => ({
     type: ActionType.SET_OFFERS_PER_CITY,
-    payload: city
+    // payload: city
   })
 }

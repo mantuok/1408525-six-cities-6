@@ -9,11 +9,8 @@ import {City} from '../../const';
 const CitiesList = (props) => {
   const {activeCity, onCityClick} = props;
 
-  console.log(activeCity)
-
   const cityClickHandler = (evt) => {
     evt.preventDefault();
-    console.log(onCityClick)
     onCityClick(evt.target.textContent);
   }
 
@@ -38,11 +35,8 @@ const mapStateToProps = (state) => ({
   activeCity: state.activeCity,
 });
 
-
 const mapDispatchToProps = (dispatch) => ({
   onCityClick(selectedCity) {
-    debugger
-    console.log(`selectedCity`)
     dispatch(ActionCreator.setCity(selectedCity));
   },
 });
