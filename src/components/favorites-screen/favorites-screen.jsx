@@ -1,9 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 import OfferCard from '../offer-card/offer-card';
 import {offersPropTypes} from '../../utils/props-validation';
 
-const FavoritesScreen = ({offers}) => {
+const FavoritesScreen = (props) => {
+  const {offers} = props;
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
 
   return (
@@ -61,8 +63,13 @@ const FavoritesScreen = ({offers}) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+  activeCity: state.activeCity
+ })
+
 FavoritesScreen.propTypes = {
   offers: offersPropTypes
 };
 
-export default FavoritesScreen;
+export default connect(mapStateToProps, null)(FavoritesScreen);

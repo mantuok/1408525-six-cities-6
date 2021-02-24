@@ -6,14 +6,10 @@ const getOffersPerCity = (offers, selectedCity) => {
   return offers.filter((offer) => offer.city.name === selectedCity);
 }
 
-console.log(getOffersPerCity(offers, City.Paris.NAME))
-
 const initialState = {
   offers: offers,
   activeCity: City.Paris.NAME
 };
-
-console.log(initialState.activeCity)
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {

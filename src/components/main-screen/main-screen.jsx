@@ -14,8 +14,6 @@ const MainScreen = (props) => {
     onScreenRender()
   }, [activeCity])
 
-  console.log(offers)
-
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -89,7 +87,7 @@ const MainScreen = (props) => {
 const mapStateToProps = (state) => ({
  offers: state.offers,
  activeCity: state.activeCity
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onScreenRender() {

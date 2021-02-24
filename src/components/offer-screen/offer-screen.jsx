@@ -2,6 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import {nanoid} from 'nanoid';
 import {Link, useParams} from 'react-router-dom';
+import {connect} from 'react-redux';
 import {
   getRatingStarsWidth,
   getOfferById
@@ -27,7 +28,11 @@ const renderReviews = (reviews) => {
   return reviews.map((review) => <OfferReview review={review} key={review.id} />);
 };
 
-const OfferScreen = ({offers, reviews}) => {
+const OfferScreen = (props) => {
+
+  const {reviews, offers} = props;
+
+  console.log(offers)
   const {id} = useParams();
   const offer = getOfferById(offers, id);
   const {bedrooms, description, goods, isPremium, images, maxAdults, title, price, rating, type} = offer;
@@ -248,9 +253,13 @@ const OfferScreen = ({offers, reviews}) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  offers: state.offers
+ })
+
 OfferScreen.propTypes = {
   offers: offersPropTypes,
   reviews: reviewsPropTypes
 };
 
-export default OfferScreen;
+export default connect(mapStateToProps, null)(OfferScreen);
