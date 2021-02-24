@@ -1,4 +1,7 @@
-import {RATING_STARS} from '../const';
+import {
+  RATING_STARS,
+  City
+} from '../const';
 
 export const getRatingStarsWidth = (rating) => RATING_STARS[Math.round(rating)];
 export const getFormatedDate = (date) => new Date(date).toLocaleDateString(`en-US`, {year: `numeric`, month: `long`});
@@ -8,3 +11,4 @@ export const getOfferById = (offers, id) => {
   }
   return offers.find((offer) => offer.id === id);
 };
+export const getCityCoordinates = (cityName) => ([City[cityName].LATITUDE, City[cityName].LONGITUDE]);

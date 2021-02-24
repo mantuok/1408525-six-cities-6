@@ -3,16 +3,17 @@ import {City} from '../const';
 import {ActionType} from './action';
 
 const getOffersPerCity = (offers, selectedCity) => {
-  console.log(offers)
   return offers.filter((offer) => offer.city.name === selectedCity);
 }
 
-console.log(getOffersPerCity(offers, City.PARIS))
+console.log(getOffersPerCity(offers, City.Paris.NAME))
 
 const initialState = {
   offers: offers,
-  activeCity: City.PARIS
+  activeCity: City.Paris.NAME
 };
+
+console.log(initialState.activeCity)
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {

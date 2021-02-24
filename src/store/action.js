@@ -10,6 +10,5 @@ export const ActionCreator = {
   }),
   setOffersPerCity: () => ({
     type: ActionType.SET_OFFERS_PER_CITY,
-    // payload: city
   })
 }

@@ -15,10 +15,11 @@ const CitiesList = (props) => {
   }
 
   const renderCityItems = () => {
+    console.log(Object.values(City))
     return Object.values(City).map((city) => (
         <li className="locations__item" key={nanoid()}>
-          <a className={classNames(`locations__item-link tabs__item`, {"tabs__item--active": city === activeCity})} href="#" onClick={cityClickHandler}>
-            <span>{city}</span>
+          <a className={classNames(`locations__item-link tabs__item`, {"tabs__item--active": city.NAME === activeCity})} href="#" onClick={cityClickHandler}>
+            <span>{city.NAME}</span>
           </a>
         </li>
     ))
