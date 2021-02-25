@@ -62,7 +62,7 @@ export default [{
     `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/2.jpg`,
     `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/6.jpg`
   ],
-  isFavorite: false,
+  isFavorite: true,
   isPremium: false,
   location: {
     latitude: 48.87446537823792,

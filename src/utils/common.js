@@ -13,3 +13,7 @@ export const getOfferById = (offers, id) => {
 };
 export const getCityCoordinates = (cityName) => ([City[cityName].LATITUDE, City[cityName].LONGITUDE]);
 export const isListEmpty = (list) => list.length === 0;
+export const getFavoriteOffers = (offers) => offers.filter((offer) => offer.isFavorite);
+export const getOffersPerCity = (offers, selectedCity) => {
+  return offers.filter((offer) => offer.city.name === selectedCity);
+}
