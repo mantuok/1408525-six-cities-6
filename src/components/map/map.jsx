@@ -56,7 +56,8 @@ const Map = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  activeCity: state.activeCity
+  activeCity: state.activeCity,
+  offers: state.offers
 })
 
 Map.propTypes = {

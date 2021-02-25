@@ -12,3 +12,4 @@ export const getOfferById = (offers, id) => {
   return offers.find((offer) => offer.id === id);
 };
 export const getCityCoordinates = (cityName) => ([City[cityName].LATITUDE, City[cityName].LONGITUDE]);
+export const isListEmpty = (list) => list.length === 0;
