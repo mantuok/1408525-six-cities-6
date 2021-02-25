@@ -5,11 +5,15 @@ import {ActionCreator} from '../../store/action';
 import OffersList from '../offers-list/offers-list';
 import CitiesList from '../cities-list/cities-list';
 import Map from '../map/map';
-import {offersPropTypes} from '../../utils/props-validation';
+import {
+  offersPropTypes,
+  stringPropTypes,
+  functionPropTypes
+} from '../../utils/props-validation';
 import {isListEmpty} from '../../utils/common';
 
-const renderOffersListMapContainer = (isListEmpty) => {
-  if (isListEmpty) {
+const renderOffersListMapContainer = (emptyList) => {
+  if (emptyList) {
     return (
       <div className="cities__places-container container cities__places-container--empty">
         <section className="cities__no-places">
@@ -20,7 +24,7 @@ const renderOffersListMapContainer = (isListEmpty) => {
         </section>
         <div className="cities__right-section"></div>
       </div>
-    )
+    );
   } else {
     return (
       <div className="cities__places-container container">
@@ -31,16 +35,16 @@ const renderOffersListMapContainer = (isListEmpty) => {
           </section>
         </div>
       </div>
-    )
+    );
   }
-}
+};
 
 const MainScreen = (props) => {
   const {offers, activeCity, onScreenRender} = props;
 
   useEffect(() => {
-    onScreenRender()
-  }, [activeCity])
+    onScreenRender();
+  }, [activeCity]);
 
   return (
     <div className="page page--gray page--main">
@@ -87,8 +91,8 @@ const MainScreen = (props) => {
 };
 
 const mapStateToProps = (state) => ({
- offers: state.offers,
- activeCity: state.activeCity
+  offers: state.offers,
+  activeCity: state.activeCity
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -98,7 +102,9 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 MainScreen.propTypes = {
-  offers: offersPropTypes
+  offers: offersPropTypes,
+  activeCity: stringPropTypes,
+  onScreenRender: functionPropTypes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

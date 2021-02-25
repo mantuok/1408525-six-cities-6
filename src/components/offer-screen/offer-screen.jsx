@@ -29,10 +29,7 @@ const renderReviews = (reviews) => {
 };
 
 const OfferScreen = (props) => {
-
   const {reviews, offers} = props;
-
-  console.log(offers)
   const {id} = useParams();
   const offer = getOfferById(offers, id);
   const {bedrooms, description, goods, isPremium, images, maxAdults, title, price, rating, type} = offer;
@@ -255,7 +252,7 @@ const OfferScreen = (props) => {
 
 const mapStateToProps = (state) => ({
   offers: state.offers
- })
+});
 
 OfferScreen.propTypes = {
   offers: offersPropTypes,

@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import OfferCard from '../offer-card/offer-card';
-import {offersPropTypes} from '../../utils/props-validation';
+import {
+  offersPropTypes,
+  stringPropTypes
+} from '../../utils/props-validation';
 
 const OffersList = (props) => {
   const {offers, activeCity} = props;
@@ -43,10 +46,11 @@ const OffersList = (props) => {
 const mapStateToProps = (state) => ({
   offers: state.offers,
   activeCity: state.activeCity
- });
+});
 
 OffersList.propTypes = {
-  offers: offersPropTypes
+  offers: offersPropTypes,
+  activeCity: stringPropTypes
 };
 
 export default connect(mapStateToProps, null)(OffersList);

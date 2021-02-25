@@ -1,12 +1,12 @@
 import React, {useRef, useEffect} from 'react';
 import leaflet from 'leaflet';
 import {connect} from 'react-redux';
-import {offersPropTypes} from '../../utils/props-validation';
 import {
-  City,
-  ZOOM
-} from '../../const';
-import {getCityCoordinates} from '../../utils/common'
+  offersPropTypes,
+  stringPropTypes
+} from '../../utils/props-validation';
+import {ZOOM} from '../../const';
+import {getCityCoordinates} from '../../utils/common';
 
 import "leaflet/dist/leaflet.css";
 
@@ -58,10 +58,11 @@ const Map = (props) => {
 const mapStateToProps = (state) => ({
   activeCity: state.activeCity,
   offers: state.offers
-})
+});
 
 Map.propTypes = {
-  offers: offersPropTypes
+  offers: offersPropTypes,
+  activeCity: stringPropTypes
 };
 
 export default connect(mapStateToProps, null)(Map);

@@ -4,13 +4,17 @@ import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 import {nanoid} from 'nanoid';
 import OfferCard from '../offer-card/offer-card';
-import {offersPropTypes} from '../../utils/props-validation';
+import {
+  offersPropTypes,
+  stringPropTypes,
+  functionPropTypes
+} from '../../utils/props-validation';
 import {City} from '../../const';
 import {getOffersPerCity} from '../../utils/common';
 
 const renderFavoriteLocationItems = (offers) => {
   return Object.keys(City).map((city) => {
-    const favoriteOffersPerCity = getOffersPerCity(offers, city)
+    const favoriteOffersPerCity = getOffersPerCity(offers, city);
     if (favoriteOffersPerCity.length > 0) {
       return (
         <li className="favorites__locations-items" key={nanoid()}>
@@ -25,19 +29,19 @@ const renderFavoriteLocationItems = (offers) => {
             {favoriteOffersPerCity.map((offer) => <OfferCard key={offer.id} offer={offer} />)}
           </div>
         </li>
-      )
+      );
+    } else {
+      return null;
     }
-  })
-}
+  });
+};
 
 const FavoritesScreen = (props) => {
   const {offers, activeCity, onScreenRender} = props;
 
   useEffect(()=> {
-    onScreenRender()
-  }, [activeCity])
-
-  console.log(offers)
+    onScreenRender();
+  }, [activeCity]);
 
   return (
     <div className="page">
@@ -86,16 +90,18 @@ const FavoritesScreen = (props) => {
 const mapStateToProps = (state) => ({
   offers: state.offers,
   activeCity: state.activeCity
- })
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onScreenRender() {
-    dispatch(ActionCreator.setFavoriteOffers())
+    dispatch(ActionCreator.setFavoriteOffers());
   }
-})
+});
 
-// FavoritesScreen.propTypes = {
-//   offers: offersPropTypes
-// };
+FavoritesScreen.propTypes = {
+  offers: offersPropTypes,
+  activeCity: stringPropTypes,
+  onScreenRender: functionPropTypes
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(FavoritesScreen);

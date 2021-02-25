@@ -16,4 +16,4 @@ export const isListEmpty = (list) => list.length === 0;
 export const getFavoriteOffers = (offers) => offers.filter((offer) => offer.isFavorite);
 export const getOffersPerCity = (offers, selectedCity) => {
   return offers.filter((offer) => offer.city.name === selectedCity);
-}
+};

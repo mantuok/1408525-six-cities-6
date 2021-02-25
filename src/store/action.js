@@ -2,7 +2,7 @@ export const ActionType = {
   SET_CITY: `setCity`,
   SET_OFFERS_PER_CITY: `setOffersPerCity`,
   SET_FAVORITE_OFFERS: `setFavoriteOffers`
-}
+};
 
 export const ActionCreator = {
   setCity: (selectedCity) => ({
@@ -15,4 +15,4 @@ export const ActionCreator = {
   setFavoriteOffers: () => ({
     type: ActionType.SET_FAVORITE_OFFERS,
   })
-}
+};

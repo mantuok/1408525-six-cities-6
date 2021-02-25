@@ -38,6 +38,6 @@ export const City = {
     LATITUDE: 51.225402,
     LONGITUDE: 6.776314
   }
-}
+};
 
 export const ZOOM = 12;

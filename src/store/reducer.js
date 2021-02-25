@@ -6,12 +6,8 @@ import {
   getOffersPerCity
 } from '../utils/common';
 
-// const getOffersPerCity = (offers, selectedCity) => {
-//   return offers.filter((offer) => offer.city.name === selectedCity);
-// }
-
 const initialState = {
-  offers: offers,
+  offers,
   activeCity: City.Paris.NAME
 };
 
@@ -31,7 +27,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         offers: getFavoriteOffers(initialState.offers)
-      }
+      };
   }
   return state;
 };

@@ -11,7 +11,7 @@ import {
 } from '../../utils/props-validation';
 
 const App = (props) => {
-  const {offers, reviews} = props;
+  const {reviews} = props;
 
   return (
     <BrowserRouter>
