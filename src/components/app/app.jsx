@@ -11,22 +11,22 @@ import {
 } from '../../utils/props-validation';
 
 const App = (props) => {
-  const {offers, reviews} = props;
+  const {reviews} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <MainScreen offers={offers} />
+          <MainScreen />
         </Route>
         <Route exact path="/login">
           <SignInScreen />
         </Route>
         <Route exact path="/favorites">
-          <FavoritesScreen offers={offers} />
+          <FavoritesScreen />
         </Route>
         <Route exact path="/offer/:id">
-          <OfferScreen offers={offers} reviews={reviews} />
+          <OfferScreen reviews={reviews} />
         </Route>
         <Route>
           <PageNotFoundScreen />

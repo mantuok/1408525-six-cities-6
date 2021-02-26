@@ -41,11 +41,11 @@ export default [{
   bedrooms: 1,
   city: {
     location: {
-      latitude: 52.370216,
-      longitude: 4.895168,
+      latitude: 48.861986,
+      longitude: 2.337575,
       zoom: 10
     },
-    name: `Amsterdam`
+    name: `Paris`
   },
   description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. `,
   goods: [`Heating`, `Kitchen`, `Washing machine`, `Dishwasher`],
@@ -62,11 +62,11 @@ export default [{
     `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/2.jpg`,
     `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/6.jpg`
   ],
-  isFavorite: false,
+  isFavorite: true,
   isPremium: false,
   location: {
-    latitude: 52.369553943508,
-    longitude: 4.85309666406198,
+    latitude: 48.87446537823792,
+    longitude: 2.3467644798843335,
     zoom: 8
   },
   maxAdults: 2,

@@ -1,10 +1,47 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../store/action';
+import {nanoid} from 'nanoid';
 import OfferCard from '../offer-card/offer-card';
-import {offersPropTypes} from '../../utils/props-validation';
+import {
+  offersPropTypes,
+  stringPropTypes,
+  functionPropTypes
+} from '../../utils/props-validation';
+import {City} from '../../const';
+import {getOffersPerCity} from '../../utils/common';
 
-const FavoritesScreen = ({offers}) => {
-  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+const renderFavoriteLocationItems = (offers) => {
+  return Object.keys(City).map((city) => {
+    const favoriteOffersPerCity = getOffersPerCity(offers, city);
+    if (favoriteOffersPerCity.length > 0) {
+      return (
+        <li className="favorites__locations-items" key={nanoid()}>
+          <div className="favorites__locations locations locations--current">
+            <div className="locations__item">
+              <a className="locations__item-link" href="#">
+                <span>{city}</span>
+              </a>
+            </div>
+          </div>
+          <div className="favorites__places">
+            {favoriteOffersPerCity.map((offer) => <OfferCard key={offer.id} offer={offer} />)}
+          </div>
+        </li>
+      );
+    } else {
+      return null;
+    }
+  });
+};
+
+const FavoritesScreen = (props) => {
+  const {offers, activeCity, onScreenRender} = props;
+
+  useEffect(()=> {
+    onScreenRender();
+  }, [activeCity]);
 
   return (
     <div className="page">
@@ -36,18 +73,7 @@ const FavoritesScreen = ({offers}) => {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <a className="locations__item-link" href="#">
-                      <span>Amsterdam</span>
-                    </a>
-                  </div>
-                </div>
-                <div className="favorites__places">
-                  {favoriteOffers.map((offer) => <OfferCard key={offer.id} offer={offer} />)}
-                </div>
-              </li>
+              {renderFavoriteLocationItems(offers)}
             </ul>
           </section>
         </div>
@@ -61,8 +87,21 @@ const FavoritesScreen = ({offers}) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+  activeCity: state.activeCity
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onScreenRender() {
+    dispatch(ActionCreator.setFavoriteOffers());
+  }
+});
+
 FavoritesScreen.propTypes = {
-  offers: offersPropTypes
+  offers: offersPropTypes,
+  activeCity: stringPropTypes,
+  onScreenRender: functionPropTypes
 };
 
-export default FavoritesScreen;
+export default connect(mapStateToProps, mapDispatchToProps)(FavoritesScreen);

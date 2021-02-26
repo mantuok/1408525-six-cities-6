@@ -1,21 +1,25 @@
 import React, {useRef, useEffect} from 'react';
 import leaflet from 'leaflet';
-import {offersPropTypes} from '../../utils/props-validation';
+import {connect} from 'react-redux';
+import {
+  offersPropTypes,
+  stringPropTypes
+} from '../../utils/props-validation';
+import {ZOOM} from '../../const';
+import {getCityCoordinates} from '../../utils/common';
 
 import "leaflet/dist/leaflet.css";
 
-const CITY = [52.38333, 4.9];
-const ZOOM = 12;
-
 const Map = (props) => {
-  const {offers} = props;
+  const {offers, activeCity} = props;
 
   const mapRef = useRef();
 
-  useEffect(() => {
+  const cityCoordinates = getCityCoordinates(activeCity);
 
+  useEffect(() => {
     mapRef.current = leaflet.map(`map`, {
-      center: CITY,
+      center: cityCoordinates,
       zoom: ZOOM,
       zoomControl: false,
       marker: true
@@ -27,7 +31,7 @@ const Map = (props) => {
       })
       .addTo(mapRef.current);
 
-    mapRef.current.setView(CITY, ZOOM);
+    mapRef.current.setView(cityCoordinates, ZOOM);
 
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
@@ -51,8 +55,14 @@ const Map = (props) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  activeCity: state.activeCity,
+  offers: state.offers
+});
+
 Map.propTypes = {
-  offers: offersPropTypes
+  offers: offersPropTypes,
+  activeCity: stringPropTypes
 };
 
-export default Map;
+export default connect(mapStateToProps, null)(Map);
