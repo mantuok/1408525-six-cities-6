@@ -35,6 +35,9 @@ const OfferScreen = (props) => {
   const {bedrooms, description, goods, isPremium, images, maxAdults, title, price, rating, type} = offer;
   const {avatarUrl, isPro, name} = offer.host;
 
+  const premiumMarkClass = classnames(`property__mark`, {"visually-hidden": !isPremium});
+  const avatarClass = classnames(`property__avatar-wrapper user__avatar-wrapper`, {"property__avatar-wrapper--pro": isPro});
+
   return (
     <div className="page">
       <header className="header">
@@ -69,7 +72,7 @@ const OfferScreen = (props) => {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              <div className={classnames(`property__mark`, {"visually-hidden": !isPremium})}>
+              <div className={premiumMarkClass}>
                 <span>Premium</span>
               </div>
               <div className="property__name-wrapper">
@@ -114,7 +117,7 @@ const OfferScreen = (props) => {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className={classnames(`property__avatar-wrapper user__avatar-wrapper`, {"property__avatar-wrapper--pro": isPro})}>
+                  <div className={avatarClass}>
                     <img className="property__avatar user__avatar" src={avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">

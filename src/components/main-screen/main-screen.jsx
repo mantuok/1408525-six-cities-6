@@ -2,9 +2,9 @@ import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
-import OffersList from '../offers-list/offers-list';
+import EmptyOffersListContainer from './empty-offers-list-container';
+import FullOffersListContianer from './full-offers-list-container';
 import CitiesList from '../cities-list/cities-list';
-import Map from '../map/map';
 import {
   offersPropTypes,
   stringPropTypes,
@@ -12,32 +12,10 @@ import {
 } from '../../utils/props-validation';
 import {isListEmpty} from '../../utils/common';
 
-const renderOffersListMapContainer = (emptyList) => {
-  if (emptyList) {
-    return (
-      <div className="cities__places-container container cities__places-container--empty">
-        <section className="cities__no-places">
-          <div className="cities__status-wrapper tabs__content">
-            <b className="cities__status">No places to stay available</b>
-            <p className="cities__status-description">We could not find any property available at the moment in Dusseldorf</p>
-          </div>
-        </section>
-        <div className="cities__right-section"></div>
-      </div>
-    );
-  } else {
-    return (
-      <div className="cities__places-container container">
-        <OffersList />
-        <div className="cities__right-section">
-          <section className="cities__map map">
-            <Map />
-          </section>
-        </div>
-      </div>
-    );
-  }
-};
+const getOffersListMapContainer = (emptyList) =>
+    emptyList ?
+    <EmptyOffersListContainer /> :
+    <FullOffersListContianer />;
 
 const MainScreen = (props) => {
   const {offers, activeCity, onScreenRender} = props;
@@ -78,7 +56,7 @@ const MainScreen = (props) => {
           </section>
         </div>
         <div className="cities">
-          {renderOffersListMapContainer(isListEmpty(offers))}
+          {getOffersListMapContainer(isListEmpty(offers))}
         </div>
       </main>
       <footer className="footer container">
