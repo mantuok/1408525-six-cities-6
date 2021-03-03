@@ -28,6 +28,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         offers: getFavoriteOffers(initialState.offers)
       };
+    case ActionType.LOAD_OFFERS:
+      return {
+        ...state,
+        offers: action.payload
+      }
+
   }
   return state;
 };
