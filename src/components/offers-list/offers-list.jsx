@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
+import {ActionCreator} from '../../store/action';
 import OfferCard from '../offer-card/offer-card';
 import {
   offersPropTypes,
@@ -7,15 +8,19 @@ import {
 } from '../../utils/props-validation';
 
 const OffersList = (props) => {
-  const {offers, activeCity} = props;
+  const {offersPerCity, activeCity, onFilterOffers} = props;
   const [activeCardId, setActiveCard] = useState(undefined);
 
   const isCardActive = (offer) => offer.id === activeCardId;
 
+  useEffect(() => {
+    onFilterOffers()
+  }, [activeCity])
+
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">{offers.length} places to stay in {activeCity}</b>
+      <b className="places__found">{offersPerCity.length} places to stay in {activeCity}</b>
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <span className="places__sorting-type" tabIndex="0">
@@ -32,7 +37,7 @@ const OffersList = (props) => {
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        {offers.map((offer) => <OfferCard
+        {offersPerCity.map((offer) => <OfferCard
           handleMouseOver={() => setActiveCard(offer.id)}
           isCardActive={isCardActive(offer)}
           key={offer.id}
@@ -44,13 +49,19 @@ const OffersList = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
+  offersPerCity: state.offersPerCity,
   activeCity: state.activeCity
 });
+
+const mapDispatchToProps = (dispatch) => ({
+  onFilterOffers() {
+    dispatch(ActionCreator.setOffersPerCity());
+  }
+})
 
 OffersList.propTypes = {
   offers: offersPropTypes,
   activeCity: stringPropTypes
 };
 
-export default connect(mapStateToProps, null)(OffersList);
+export default connect(mapStateToProps, mapDispatchToProps)(OffersList);

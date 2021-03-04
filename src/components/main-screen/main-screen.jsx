@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import {fetchOffers} from '../../store/api-actions';
 import EmptyOffersListContainer from './empty-offers-list-container';
 import FullOffersListContianer from './full-offers-list-container';
 import CitiesList from '../cities-list/cities-list';
@@ -11,18 +11,30 @@ import {
   functionPropTypes
 } from '../../utils/props-validation';
 import {isListEmpty} from '../../utils/common';
+import LoadingPlaceholder from '../loading-placeholder/loading-placeholder'
 
-const getOffersListMapContainer = (emptyList) =>
-    emptyList ?
-    <EmptyOffersListContainer /> :
-    <FullOffersListContianer />;
+
 
 const MainScreen = (props) => {
-  const {offers, activeCity, onScreenRender} = props;
+  const {offers, isDataLoaded, onLoadData} = props;
 
   useEffect(() => {
-    onScreenRender();
-  }, [activeCity]);
+    if (!isDataLoaded) {
+      onLoadData();
+    }
+  }, [isDataLoaded]);
+
+  const getOffersListMapContainer = () => {
+    if (!isDataLoaded) {
+      return <LoadingPlaceholder />
+    }
+
+    if (isListEmpty(offers)) {
+      return <EmptyOffersListContainer />
+    } else {
+      return <FullOffersListContianer />;
+    }
+  }
 
   return (
     <div className="page page--gray page--main">
@@ -56,7 +68,7 @@ const MainScreen = (props) => {
           </section>
         </div>
         <div className="cities">
-          {getOffersListMapContainer(isListEmpty(offers))}
+          {getOffersListMapContainer()}
         </div>
       </main>
       <footer className="footer container">
@@ -70,19 +82,20 @@ const MainScreen = (props) => {
 
 const mapStateToProps = (state) => ({
   offers: state.offers,
-  activeCity: state.activeCity
+  offersPerCity: state.offersPerCity,
+  activeCity: state.activeCity,
+  isDataLoaded: state.isDataLoaded
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onScreenRender() {
-    dispatch(ActionCreator.setOffersPerCity());
-  },
+  onLoadData() {
+    dispatch(fetchOffers());
+  }
 });
 
 MainScreen.propTypes = {
   offers: offersPropTypes,
   activeCity: stringPropTypes,
-  onScreenRender: functionPropTypes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);
