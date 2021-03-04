@@ -21,6 +21,7 @@ const reducer = (state = initialState, action) => {
         activeCity: action.payload
       };
     case ActionType.LOAD_OFFERS:
+      console.log(action.payload)
       return {
         ...state,
         offers: action.payload,
