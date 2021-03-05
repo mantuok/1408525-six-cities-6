@@ -9,18 +9,21 @@ import {
 } from '../../utils/props-validation';
 
 const OfferCard = (props) => {
-  const {handleMouseOver, isCardActive, offer} = props;
+  const {isNearbyOffer = false, handleMouseOver, isCardActive, offer} = props;
   const {id, isPremium, title, previewImage, price, rating, type} = offer;
 
   const cardClass = classnames(`cities__place-card place-card`, {"place-card--active": isCardActive});
   const premiumMarkClass = classnames(`place-card__mark`, {"visually-hidden": !isPremium});
+  const previewImageClass = classnames(`place-card__image-wrapper`,
+      {"near-places__image-wrapper": isNearbyOffer},
+      {"cities__image-wrapper": !isNearbyOffer});
 
   return (
     <article className={cardClass} onMouseOver={handleMouseOver}>
       <div className={premiumMarkClass}>
         <span>Premium</span>
       </div>
-      <div className="cities__image-wrapper place-card__image-wrapper" >
+      <div className={previewImageClass}>
         <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt={title} />
         </Link>

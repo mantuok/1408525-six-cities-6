@@ -1,8 +1,6 @@
-// import offers from '../mocks/offers';
 import {City} from '../const';
 import {ActionType} from './action';
 import {
-  // getFavoriteOffers,
   getOffersPerCity
 } from '../utils/common';
 
@@ -10,6 +8,7 @@ const initialState = {
   offers: [],
   offersPerCity: [],
   favoriteOffers: [],
+  nearbyOffers: [],
   activeCity: City.Paris.NAME,
   isDataLoaded: false
 };
@@ -37,6 +36,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         favoriteOffers: action.payload
       };
+    case ActionType.LOAD_NEARBY_OFFERS:
+      console.log(action.payload)
+      return {
+        ...state,
+        nearbyOffers: action.payload
+      }
   }
   return state;
 };

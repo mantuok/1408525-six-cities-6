@@ -3,7 +3,8 @@ export const ActionType = {
   SET_OFFERS_PER_CITY: `setOffersPerCity`,
   // SET_FAVORITE_OFFERS: `setFavoriteOffers`,
   LOAD_OFFERS: `loadOffers`,
-  LOAD_FAVORITE_OFFERS: `loadFavoriteOffers`
+  LOAD_FAVORITE_OFFERS: `loadFavoriteOffers`,
+  LOAD_NEARBY_OFFERS: `loadNearbyOffers`
 };
 
 export const ActionCreator = {
@@ -24,5 +25,9 @@ export const ActionCreator = {
   loadFavoriteOffers: (favoriteOffers) => ({
     type: ActionType.LOAD_FAVORITE_OFFERS,
     payload: favoriteOffers
+  }),
+  loadNearbyOffers: (nearbyOffers) => ({
+    type: ActionType.LOAD_NEARBY_OFFERS,
+    payload: nearbyOffers
   })
 };
