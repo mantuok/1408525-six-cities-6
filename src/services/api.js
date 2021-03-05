@@ -12,7 +12,7 @@ export const createApi = (onUnauthorized) => {
     baseURL: BACKEND_URL,
     timeout: REQUEST_TIMEOUT,
     withCredentials: true
-  })
+  });
 
   const onSuccess = (repsonse) => repsonse;
 
@@ -25,9 +25,9 @@ export const createApi = (onUnauthorized) => {
     }
 
     throw err;
-  }
+  };
 
   api.interceptors.response.use(onSuccess, onFail);
 
   return api;
-}
+};

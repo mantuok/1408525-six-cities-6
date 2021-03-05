@@ -8,12 +8,11 @@ import CitiesList from '../cities-list/cities-list';
 import {
   offersPropTypes,
   stringPropTypes,
-  functionPropTypes
+  functionPropTypes,
+  booleanPropTypes
 } from '../../utils/props-validation';
 import {isListEmpty} from '../../utils/common';
-import LoadingPlaceholder from '../loading-placeholder/loading-placeholder'
-
-
+import LoadingPlaceholder from '../loading-placeholder/loading-placeholder';
 
 const MainScreen = (props) => {
   const {offers, isDataLoaded, onLoadData} = props;
@@ -26,15 +25,15 @@ const MainScreen = (props) => {
 
   const getOffersListMapContainer = () => {
     if (!isDataLoaded) {
-      return <LoadingPlaceholder />
+      return <LoadingPlaceholder />;
     }
 
     if (isListEmpty(offers)) {
-      return <EmptyOffersListContainer />
+      return <EmptyOffersListContainer />;
     } else {
       return <FullOffersListContianer />;
     }
-  }
+  };
 
   return (
     <div className="page page--gray page--main">
@@ -96,6 +95,8 @@ const mapDispatchToProps = (dispatch) => ({
 MainScreen.propTypes = {
   offers: offersPropTypes,
   activeCity: stringPropTypes,
+  onLoadData: functionPropTypes,
+  isDataLoaded: booleanPropTypes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

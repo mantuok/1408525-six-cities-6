@@ -12,12 +12,12 @@ import reviews from './mocks/reviews';
 import {reducer} from './store/reducer';
 import {createApi} from './services/api';
 
-const api = createApi(() => console.log(`unauthorized access`))
+const api = createApi();
 
 const store = createStore(
     reducer,
     composeWithDevTools(
-      applyMiddleware(thunk.withExtraArgument(api))
+        applyMiddleware(thunk.withExtraArgument(api))
     )
 );
 

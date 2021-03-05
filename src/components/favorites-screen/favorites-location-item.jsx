@@ -36,7 +36,7 @@ const FavoritesLocationItem = (props) => {
   } else {
     return null;
   }
-}
+};
 
 const mapStateToProps = (state) => ({
   favoriteOffers: state.favoriteOffers

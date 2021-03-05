@@ -11,7 +11,7 @@ import {
   offersPropTypes,
   reviewsPropTypes
 } from '../../utils/props-validation';
-import NearbyOffersList from '../nearby-offers-list/nearby-offers-list'
+import NearbyOffersList from '../nearby-offers-list/nearby-offers-list';
 import OfferImage from './offer-image';
 import OfferGood from './offer-good';
 import OfferReview from './offer-review';

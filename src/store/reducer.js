@@ -25,7 +25,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         offers: action.payload,
         isDataLoaded: true
-      }
+      };
     case ActionType.SET_OFFERS_PER_CITY:
       return {
         ...state,
@@ -37,11 +37,10 @@ const reducer = (state = initialState, action) => {
         favoriteOffers: action.payload
       };
     case ActionType.LOAD_NEARBY_OFFERS:
-      console.log(action.payload)
       return {
         ...state,
         nearbyOffers: action.payload
-      }
+      };
   }
   return state;
 };

@@ -1,24 +1,20 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {useParams} from 'react-router-dom';
 import {fetchNearbyOffers} from '../../store/api-actions';
 import OfferCard from '../offer-card/offer-card';
 import {
   offersPropTypes,
-  stringPropTypes
+  functionPropTypes
 } from '../../utils/props-validation';
 
 const NearbyOffersList = (props) => {
-  const {nearbyOffers, onNearbyOffersLoad} = props
+  const {nearbyOffers, onNearbyOffersLoad} = props;
   const {id} = useParams();
 
-  console.log(id)
-
-  console.log(nearbyOffers)
-
   useEffect(() => {
-    onNearbyOffersLoad(id)
-  }, [id])
+    onNearbyOffersLoad(id);
+  }, [id]);
 
   return (
     <div className="container">
@@ -29,17 +25,22 @@ const NearbyOffersList = (props) => {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
 const mapStateToProps = (state) => ({
   nearbyOffers: state.nearbyOffers
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onNearbyOffersLoad(id) {
-    dispatch(fetchNearbyOffers(id))
+    dispatch(fetchNearbyOffers(id));
   }
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(NearbyOffersList)
+NearbyOffersList.propTypes = {
+  nearbyOffers: offersPropTypes,
+  onNearbyOffersLoad: functionPropTypes
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NearbyOffersList);

@@ -59,7 +59,8 @@ const OfferCard = (props) => {
 OfferCard.propTypes = {
   offer: offerPropTypes,
   handleMouseOver: functionPropTypesNotRequired,
-  isCardActive: booleanPropTypesNotRequired
+  isCardActive: booleanPropTypesNotRequired,
+  isNearbyOffer: booleanPropTypesNotRequired
 };
 
 export default OfferCard;

@@ -11,7 +11,7 @@ export const adaptOffersToClient = (offers) => {
       isPremium: offer.is_premium,
       maxAdults: offer.max_adults,
       previewImage: offer.preview_image
-    })
+    });
 
     delete adaptedOffer.host.avatar_url;
     delete adaptedOffer.host.is_pro;
@@ -21,7 +21,5 @@ export const adaptOffersToClient = (offers) => {
     delete adaptedOffer.preview_image;
 
     return adaptedOffer;
-  })
-}
-
-
+  });
+};

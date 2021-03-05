@@ -4,7 +4,8 @@ import {ActionCreator} from '../../store/action';
 import OfferCard from '../offer-card/offer-card';
 import {
   offersPropTypes,
-  stringPropTypes
+  stringPropTypes,
+  booleanPropTypes
 } from '../../utils/props-validation';
 
 const OffersList = (props) => {
@@ -14,8 +15,8 @@ const OffersList = (props) => {
   const isCardActive = (offer) => offer.id === activeCardId;
 
   useEffect(() => {
-    onFilterOffers()
-  }, [activeCity])
+    onFilterOffers();
+  }, [activeCity]);
 
   return (
     <section className="cities__places places">
@@ -57,11 +58,12 @@ const mapDispatchToProps = (dispatch) => ({
   onFilterOffers() {
     dispatch(ActionCreator.setOffersPerCity());
   }
-})
+});
 
 OffersList.propTypes = {
-  offers: offersPropTypes,
-  activeCity: stringPropTypes
+  offersPerCity: offersPropTypes,
+  activeCity: stringPropTypes,
+  onFilterOffers: booleanPropTypes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OffersList);

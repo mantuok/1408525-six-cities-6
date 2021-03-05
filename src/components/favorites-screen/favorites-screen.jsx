@@ -1,11 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {nanoid} from 'nanoid';
-import FavoritesLocationItem from './favorites-location-item'
-import {
-  stringPropTypes,
-  functionPropTypes
-} from '../../utils/props-validation';
+import FavoritesLocationItem from './favorites-location-item';
 import {City} from '../../const';
 
 const FavoritesScreen = () => {
@@ -52,10 +48,5 @@ const FavoritesScreen = () => {
     </div>
   );
 };
-
-// FavoritesScreen.propTypes = {
-//   activeCity: stringPropTypes,
-//   onScreenRender: functionPropTypes
-// };
 
 export default FavoritesScreen;
