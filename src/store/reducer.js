@@ -2,13 +2,14 @@
 import {City} from '../const';
 import {ActionType} from './action';
 import {
-  getFavoriteOffers,
+  // getFavoriteOffers,
   getOffersPerCity
 } from '../utils/common';
 
 const initialState = {
   offers: [],
   offersPerCity: [],
+  favoriteOffers: [],
   activeCity: City.Paris.NAME,
   isDataLoaded: false
 };
@@ -21,7 +22,6 @@ const reducer = (state = initialState, action) => {
         activeCity: action.payload
       };
     case ActionType.LOAD_OFFERS:
-      console.log(action.payload)
       return {
         ...state,
         offers: action.payload,
@@ -32,10 +32,10 @@ const reducer = (state = initialState, action) => {
         ...state,
         offersPerCity: getOffersPerCity(state.offers, state.activeCity)
       };
-    case ActionType.SET_FAVORITE_OFFERS:
+    case ActionType.LOAD_FAVORITE_OFFERS:
       return {
         ...state,
-        offers: getFavoriteOffers(initialState.offers)
+        favoriteOffers: action.payload
       };
   }
   return state;

@@ -1,7 +1,5 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
 import {nanoid} from 'nanoid';
 import FavoritesLocationItem from './favorites-location-item'
 import {
@@ -10,13 +8,7 @@ import {
 } from '../../utils/props-validation';
 import {City} from '../../const';
 
-const FavoritesScreen = (props) => {
-  const {activeCity, onScreenRender} = props;
-
-  useEffect(()=> {
-    onScreenRender();
-  }, [activeCity]);
-
+const FavoritesScreen = () => {
   return (
     <div className="page">
       <header className="header">
@@ -61,19 +53,9 @@ const FavoritesScreen = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  activeCity: state.activeCity
-});
+// FavoritesScreen.propTypes = {
+//   activeCity: stringPropTypes,
+//   onScreenRender: functionPropTypes
+// };
 
-const mapDispatchToProps = (dispatch) => ({
-  onScreenRender() {
-    dispatch(ActionCreator.setFavoriteOffers());
-  }
-});
-
-FavoritesScreen.propTypes = {
-  activeCity: stringPropTypes,
-  onScreenRender: functionPropTypes
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(FavoritesScreen);
+export default FavoritesScreen;

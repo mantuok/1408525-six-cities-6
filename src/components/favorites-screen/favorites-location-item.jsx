@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
+import {fetchFavoriteOffers} from '../../store/api-actions';
 import OfferCard from '../offer-card/offer-card';
 import {
   offersPropTypes,
@@ -8,9 +9,14 @@ import {
 import {getOffersPerCity} from '../../utils/common';
 
 const FavoritesLocationItem = (props) => {
-  const {city, offers} = props;
+  const {city, favoriteOffers, onLoadFavoriteOffers} = props;
 
-  const favoriteOffersPerCity = getOffersPerCity(offers, city);
+  useEffect(()=> {
+    onLoadFavoriteOffers();
+  }, [city]);
+
+
+  const favoriteOffersPerCity = getOffersPerCity(favoriteOffers, city);
 
   if (favoriteOffersPerCity.length > 0) {
     return (
@@ -33,7 +39,13 @@ const FavoritesLocationItem = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-  offers: state.offers
+  favoriteOffers: state.favoriteOffers
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoadFavoriteOffers() {
+    dispatch(fetchFavoriteOffers());
+  }
 });
 
 FavoritesLocationItem.propTypes = {
@@ -41,4 +53,4 @@ FavoritesLocationItem.propTypes = {
   city: stringPropTypes
 };
 
-export default connect(mapStateToProps, null)(FavoritesLocationItem);
+export default connect(mapStateToProps, mapDispatchToProps)(FavoritesLocationItem);
