@@ -30,9 +30,10 @@ const MainScreen = (props) => {
 
     if (isListEmpty(offers)) {
       return <EmptyOffersListContainer />;
-    } else {
-      return <FullOffersListContianer />;
     }
+
+    return <FullOffersListContianer />;
+
   };
 
   return (

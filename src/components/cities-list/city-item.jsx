@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import classnames from 'classnames';
 import {
   stringPropTypes,
-  functionPropTypes
+  functionPropTypes,
+  objectPropTypes
 } from '../../utils/props-validation';
 import {ActionCreator} from '../../store/action';
 
@@ -40,7 +41,7 @@ const mapDispatchToProps = (dispatch) => ({
 CityItem.propTypes = {
   activeCity: stringPropTypes,
   onCityClick: functionPropTypes,
-  city: stringPropTypes
+  city: objectPropTypes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CityItem);

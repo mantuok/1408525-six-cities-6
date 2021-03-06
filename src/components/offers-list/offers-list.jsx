@@ -5,7 +5,7 @@ import OfferCard from '../offer-card/offer-card';
 import {
   offersPropTypes,
   stringPropTypes,
-  booleanPropTypes
+  functionPropTypes
 } from '../../utils/props-validation';
 
 const OffersList = (props) => {
@@ -63,7 +63,7 @@ const mapDispatchToProps = (dispatch) => ({
 OffersList.propTypes = {
   offersPerCity: offersPropTypes,
   activeCity: stringPropTypes,
-  onFilterOffers: booleanPropTypes
+  onFilterOffers: functionPropTypes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OffersList);

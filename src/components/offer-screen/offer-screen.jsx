@@ -136,13 +136,13 @@ const OfferScreen = (props) => {
                 <ul className="reviews__list">
                   {renderReviews(reviews)}
                 </ul>
-                {<NewReview />}
+                <NewReview />
               </section>
             </div>
           </div>
           <section className="property__map map"></section>
         </section>
-        {<NearbyOffersList />}
+        <NearbyOffersList />
       </main>
       <footer className="footer container">
         <Link className="footer__logo-link" to="/">
