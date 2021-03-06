@@ -1,50 +1,39 @@
 import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
-import OffersList from '../offers-list/offers-list';
+import {fetchOffers} from '../../store/api-actions';
+import EmptyOffersListContainer from './empty-offers-list-container';
+import FullOffersListContianer from './full-offers-list-container';
 import CitiesList from '../cities-list/cities-list';
-import Map from '../map/map';
 import {
   offersPropTypes,
   stringPropTypes,
-  functionPropTypes
+  functionPropTypes,
+  booleanPropTypes
 } from '../../utils/props-validation';
 import {isListEmpty} from '../../utils/common';
-
-const renderOffersListMapContainer = (emptyList) => {
-  if (emptyList) {
-    return (
-      <div className="cities__places-container container cities__places-container--empty">
-        <section className="cities__no-places">
-          <div className="cities__status-wrapper tabs__content">
-            <b className="cities__status">No places to stay available</b>
-            <p className="cities__status-description">We could not find any property available at the moment in Dusseldorf</p>
-          </div>
-        </section>
-        <div className="cities__right-section"></div>
-      </div>
-    );
-  } else {
-    return (
-      <div className="cities__places-container container">
-        <OffersList />
-        <div className="cities__right-section">
-          <section className="cities__map map">
-            <Map />
-          </section>
-        </div>
-      </div>
-    );
-  }
-};
+import LoadingPlaceholder from '../loading-placeholder/loading-placeholder';
 
 const MainScreen = (props) => {
-  const {offers, activeCity, onScreenRender} = props;
+  const {offers, isDataLoaded, onLoadData} = props;
 
   useEffect(() => {
-    onScreenRender();
-  }, [activeCity]);
+    if (!isDataLoaded) {
+      onLoadData();
+    }
+  }, [isDataLoaded]);
+
+  const getOffersListMapContainer = () => {
+    if (!isDataLoaded) {
+      return <LoadingPlaceholder />;
+    }
+
+    if (isListEmpty(offers)) {
+      return <EmptyOffersListContainer />;
+    } else {
+      return <FullOffersListContianer />;
+    }
+  };
 
   return (
     <div className="page page--gray page--main">
@@ -78,7 +67,7 @@ const MainScreen = (props) => {
           </section>
         </div>
         <div className="cities">
-          {renderOffersListMapContainer(isListEmpty(offers))}
+          {getOffersListMapContainer()}
         </div>
       </main>
       <footer className="footer container">
@@ -92,19 +81,22 @@ const MainScreen = (props) => {
 
 const mapStateToProps = (state) => ({
   offers: state.offers,
-  activeCity: state.activeCity
+  offersPerCity: state.offersPerCity,
+  activeCity: state.activeCity,
+  isDataLoaded: state.isDataLoaded
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onScreenRender() {
-    dispatch(ActionCreator.setOffersPerCity());
-  },
+  onLoadData() {
+    dispatch(fetchOffers());
+  }
 });
 
 MainScreen.propTypes = {
   offers: offersPropTypes,
   activeCity: stringPropTypes,
-  onScreenRender: functionPropTypes
+  onLoadData: functionPropTypes,
+  isDataLoaded: booleanPropTypes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

@@ -1,14 +1,16 @@
-import offers from '../mocks/offers';
 import {City} from '../const';
 import {ActionType} from './action';
 import {
-  getFavoriteOffers,
   getOffersPerCity
 } from '../utils/common';
 
 const initialState = {
-  offers,
-  activeCity: City.Paris.NAME
+  offers: [],
+  offersPerCity: [],
+  favoriteOffers: [],
+  nearbyOffers: [],
+  activeCity: City.Paris.NAME,
+  isDataLoaded: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,15 +20,26 @@ const reducer = (state = initialState, action) => {
         ...state,
         activeCity: action.payload
       };
+    case ActionType.LOAD_OFFERS:
+      return {
+        ...state,
+        offers: action.payload,
+        isDataLoaded: true
+      };
     case ActionType.SET_OFFERS_PER_CITY:
       return {
         ...state,
-        offers: getOffersPerCity(initialState.offers, state.activeCity)
+        offersPerCity: getOffersPerCity(state.offers, state.activeCity)
       };
-    case ActionType.SET_FAVORITE_OFFERS:
+    case ActionType.LOAD_FAVORITE_OFFERS:
       return {
         ...state,
-        offers: getFavoriteOffers(initialState.offers)
+        favoriteOffers: action.payload
+      };
+    case ActionType.LOAD_NEARBY_OFFERS:
+      return {
+        ...state,
+        nearbyOffers: action.payload
       };
   }
   return state;
