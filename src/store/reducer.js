@@ -1,4 +1,7 @@
-import {City} from '../const';
+import {
+  City,
+  AuthorizationStatus
+} from '../const';
 import {ActionType} from './action';
 import {
   getOffersPerCity
@@ -10,11 +13,17 @@ const initialState = {
   favoriteOffers: [],
   nearbyOffers: [],
   activeCity: City.Paris.NAME,
-  isDataLoaded: false
+  isDataLoaded: false,
+  authorizationStatus: AuthorizationStatus.NO_AUTH
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ActionType.REQUIRED_AUTHORIZATION:
+      return {
+        ...state,
+        authorizationStatus: action.payload
+      };
     case ActionType.SET_CITY:
       return {
         ...state,

@@ -1,13 +1,17 @@
 export const ActionType = {
+  REQUIRED_AUTHORIZATION: `requiredAuthorization`,
   SET_CITY: `setCity`,
   SET_OFFERS_PER_CITY: `setOffersPerCity`,
-  // SET_FAVORITE_OFFERS: `setFavoriteOffers`,
   LOAD_OFFERS: `loadOffers`,
   LOAD_FAVORITE_OFFERS: `loadFavoriteOffers`,
   LOAD_NEARBY_OFFERS: `loadNearbyOffers`
 };
 
 export const ActionCreator = {
+  requireAuthorization: (status) => ({
+    type: ActionType.REQUIRED_AUTHORIZATION,
+    payload: status
+  }),
   setCity: (selectedCity) => ({
     type: ActionType.SET_CITY,
     payload: selectedCity,
@@ -15,9 +19,6 @@ export const ActionCreator = {
   setOffersPerCity: () => ({
     type: ActionType.SET_OFFERS_PER_CITY,
   }),
-  // setFavoriteOffers: () => ({
-  //   type: ActionType.SET_FAVORITE_OFFERS,
-  // }),
   loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,
     payload: offers
