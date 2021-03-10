@@ -1,10 +1,11 @@
 import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {fetchOffers} from '../../store/api-actions';
+import {fetchOffers, checkAuth} from '../../store/api-actions';
 import EmptyOffersListContainer from './empty-offers-list-container';
 import FullOffersListContianer from './full-offers-list-container';
 import CitiesList from '../cities-list/cities-list';
+import ProfileNavigation from '../profile-navigation/profile-navigation'
 import {
   offersPropTypes,
   stringPropTypes,
@@ -13,15 +14,21 @@ import {
 } from '../../utils/props-validation';
 import {isListEmpty} from '../../utils/common';
 import LoadingPlaceholder from '../loading-placeholder/loading-placeholder';
+import {AuthorizationStatus} from '../../const';
+
 
 const MainScreen = (props) => {
-  const {offers, isDataLoaded, onLoadData} = props;
+  const {offers, isDataLoaded, onLoadData, authorizationStatus, userEmail, onCheckAuthorization} = props;
 
   useEffect(() => {
     if (!isDataLoaded) {
       onLoadData();
     }
   }, [isDataLoaded]);
+
+  // useEffect(() => {
+  //   onCheckAuthorization()
+  // }, [authorizationStatus]);
 
   const getOffersListMapContainer = () => {
     if (!isDataLoaded) {
@@ -48,13 +55,14 @@ const MainScreen = (props) => {
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
-                <li className="header__nav-item user">
+                <ProfileNavigation />
+                {/* <li className="header__nav-item user">
                   <Link className="header__nav-link header__nav-link--profile" to="/favorites">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </nav>
           </div>
@@ -84,12 +92,17 @@ const mapStateToProps = (state) => ({
   offers: state.offers,
   offersPerCity: state.offersPerCity,
   activeCity: state.activeCity,
-  isDataLoaded: state.isDataLoaded
+  isDataLoaded: state.isDataLoaded,
+  authorizationStatus: state.authorizationStatus,
+  userEmail: state.userEmail
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onLoadData() {
     dispatch(fetchOffers());
+  },
+  onCheckAuthorization() {
+    dispatch(checkAuth())
   }
 });
 

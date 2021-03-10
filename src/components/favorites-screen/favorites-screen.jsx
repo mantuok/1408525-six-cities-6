@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {nanoid} from 'nanoid';
 import FavoritesLocationItem from './favorites-location-item';
+import ProfileNavigation from '../profile-navigation/profile-navigation';
 import {City} from '../../const';
 
 const FavoritesScreen = () => {
@@ -17,13 +18,7 @@ const FavoritesScreen = () => {
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <Link className="header__nav-link header__nav-link--profile" to="/favorites">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </Link>
-                </li>
+                <ProfileNavigation />
               </ul>
             </nav>
           </div>

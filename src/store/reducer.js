@@ -14,7 +14,9 @@ const initialState = {
   nearbyOffers: [],
   activeCity: City.Paris.NAME,
   isDataLoaded: false,
-  authorizationStatus: AuthorizationStatus.NO_AUTH
+  authorizationStatus: AuthorizationStatus.NO_AUTH,
+  userEmail: ``,
+  userAvatar: ``
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,6 +25,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         authorizationStatus: action.payload
+      };
+    case ActionType.SET_USER_DATA:
+      console.log(action.payload.email)
+      return {
+        ...state,
+        userEmail: action.payload.email,
+        userAvatar: action.payload.avatar_url
       };
     case ActionType.SET_CITY:
       return {
@@ -50,8 +59,9 @@ const reducer = (state = initialState, action) => {
         ...state,
         nearbyOffers: action.payload
       };
+    default:
+      return state;
   }
-  return state;
 };
 
 export {reducer};

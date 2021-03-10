@@ -4,7 +4,8 @@ export const ActionType = {
   SET_OFFERS_PER_CITY: `setOffersPerCity`,
   LOAD_OFFERS: `loadOffers`,
   LOAD_FAVORITE_OFFERS: `loadFavoriteOffers`,
-  LOAD_NEARBY_OFFERS: `loadNearbyOffers`
+  LOAD_NEARBY_OFFERS: `loadNearbyOffers`,
+  SET_USER_DATA: `setUserData`
 };
 
 export const ActionCreator = {
@@ -30,5 +31,9 @@ export const ActionCreator = {
   loadNearbyOffers: (nearbyOffers) => ({
     type: ActionType.LOAD_NEARBY_OFFERS,
     payload: nearbyOffers
+  }),
+  setUserData: (data) => ({
+    type: ActionType.SET_USER_DATA,
+    payload: data
   })
 };
