@@ -27,7 +27,6 @@ const reducer = (state = initialState, action) => {
         authorizationStatus: action.payload
       };
     case ActionType.SET_USER_DATA:
-      console.log(action.payload.email)
       return {
         ...state,
         userEmail: action.payload.email,

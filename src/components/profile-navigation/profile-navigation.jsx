@@ -11,8 +11,6 @@ const ProfileNavigation = (props) => {
     onCheckAuthorization()
   }, [authorizationStatus]);
 
-  console.log(userEmail)
-
   const handleLogoutClick = (evt) => {
     evt.preventDefault();
     onLogoutClick()

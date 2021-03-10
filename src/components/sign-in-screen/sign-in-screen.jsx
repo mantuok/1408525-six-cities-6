@@ -1,13 +1,12 @@
 import React, {useRef} from 'react';
-import {useHistory, Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux';
 import {login, logout} from '../../store/api-actions';
 
 const SignInScreen = (props) => {
-  const {onSubmit, onLogoutClick} = props;
+  const {onSubmit, onLogoutClick, onLoginSuccess} = props;
   const emailRef = useRef();
   const passwordRef= useRef();
-  const history = useHistory();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -17,7 +16,7 @@ const SignInScreen = (props) => {
       password: passwordRef.current.value
     })
 
-    history.push(`/`)
+    onLoginSuccess()
   }
 
   const handleLogoutClick = (evt) => {
