@@ -1,12 +1,13 @@
 import React, {useRef} from 'react';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {login, logout} from '../../store/api-actions';
+import {functionPropTypes} from '../../utils/props-validation';
 
 const SignInScreen = (props) => {
   const {onSubmit, onLogoutClick, onLoginSuccess} = props;
   const emailRef = useRef();
-  const passwordRef= useRef();
+  const passwordRef = useRef();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -14,16 +15,16 @@ const SignInScreen = (props) => {
     onSubmit({
       email: emailRef.current.value,
       password: passwordRef.current.value
-    })
+    });
 
-    onLoginSuccess()
-  }
+    onLoginSuccess();
+  };
 
   const handleLogoutClick = (evt) => {
     evt.preventDefault();
 
-    onLogoutClick()
-  }
+    onLogoutClick();
+  };
 
   return (
     <div className="page page--gray page--login">
@@ -113,11 +114,17 @@ const SignInScreen = (props) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit(authorizationData) {
-    dispatch(login(authorizationData))
+    dispatch(login(authorizationData));
   },
   onLogoutClick() {
-    dispatch(logout())
+    dispatch(logout());
   }
 });
+
+SignInScreen.propTypes = {
+  onLogoutClick: functionPropTypes,
+  onLoginSuccess: functionPropTypes,
+  onSubmit: functionPropTypes
+};
 
 export default connect(null, mapDispatchToProps)(SignInScreen);
