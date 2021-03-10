@@ -1,15 +1,16 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {logout, checkAuth} from '../../store/api-actions';
+import {logout} from '../../store/api-actions';
 import {AuthorizationStatus} from '../../const';
+import {
+  functionPropTypes,
+  stringPropTypesNotRequired,
+  stringPropTypes
+} from '../../utils/props-validation';
 
 const ProfileNavigation = (props) => {
-  const {userEmail, userAvatar, authorizationStatus, onLogoutClick, onCheckAuthorization} = props;
-
-  useEffect(() => {
-    onCheckAuthorization();
-  }, [authorizationStatus]);
+  const {userEmail, userAvatar, authorizationStatus, onLogoutClick} = props;
 
   const handleLogoutClick = (evt) => {
     evt.preventDefault();
@@ -51,10 +52,14 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onLogoutClick() {
     dispatch(logout());
-  },
-  onCheckAuthorization() {
-    dispatch(checkAuth());
   }
 });
+
+ProfileNavigation.propTypes = {
+  onLogoutClick: functionPropTypes,
+  authorizationStatus: stringPropTypes,
+  userEmail: stringPropTypesNotRequired,
+  userAvatar: stringPropTypesNotRequired
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileNavigation);
