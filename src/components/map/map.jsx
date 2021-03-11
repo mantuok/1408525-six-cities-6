@@ -3,7 +3,9 @@ import leaflet from 'leaflet';
 import {connect} from 'react-redux';
 import {
   offersPropTypes,
-  stringPropTypes
+  stringPropTypes,
+  numberPropTypesNotRequired,
+  objectPropTypesNotRequired
 } from '../../utils/props-validation';
 import {
   ZOOM,
@@ -20,42 +22,40 @@ const Map = (props) => {
   const getMapData = () => {
     if (mapType === MapType.MAIN) {
       return {
-        offers: offers,
+        offers,
         height: MapHeigth.MAIN
-      }
+      };
     }
-    if (mapType === MapType.NEARBY) {
-      return {
-        offers: nearbyOffers,
-        height: MapHeigth.NEARBY
-      }
-    }
-  }
+    return {
+      offers: nearbyOffers,
+      height: MapHeigth.NEARBY
+    };
+  };
 
   const getIconUrl = (offer) => {
     if (offer.id === activeCardId) {
-      return MapIconUrl.ACTIVE
+      return MapIconUrl.ACTIVE;
     }
-    return MapIconUrl.ALL
-  }
+    return MapIconUrl.ALL;
+  };
 
   const getIcon = (offer) => {
     const icon = leaflet.icon({
       iconUrl: getIconUrl(offer),
       iconSize: [27, 39]
-    })
+    });
     return icon;
-  }
+  };
 
   const renderMarker = (offer, icon) => {
-      const {latitude, longitude} = offer.location;
-      leaflet
+    const {latitude, longitude} = offer.location;
+    leaflet
         .marker([latitude, longitude], {icon})
         .addTo(mapRef.current);
-  }
+  };
 
   const mapOffers = getMapData().offers;
-  const mapHeight = getMapData().height
+  const mapHeight = getMapData().height;
 
   const mapRef = useRef();
 
@@ -77,23 +77,12 @@ const Map = (props) => {
 
     mapRef.current.setView(cityCoordinates, ZOOM);
 
-    // const Icon = {
-    //   ALL: leaflet.icon({
-    //     iconUrl: `img/pin.svg`,
-    //     iconSize: [27, 39]
-    //   }),
-    //   CURRENT: leaflet.icon({
-    //     iconUrl: `img/pin-active.svg`,
-    //     iconSize: [27, 39]
-    //   })
-    // }
-
     mapOffers.forEach((offer) => {
-        renderMarker(offer, getIcon(offer))
+      renderMarker(offer, getIcon(offer));
     });
 
     if (currentOffer) {
-      renderMarker(currentOffer, getIcon(currentOffer))
+      renderMarker(currentOffer, getIcon(currentOffer));
     }
 
     return () => {
@@ -115,7 +104,11 @@ const mapStateToProps = (state) => ({
 
 Map.propTypes = {
   offers: offersPropTypes,
-  activeCity: stringPropTypes
+  activeCity: stringPropTypes,
+  nearbyOffers: offersPropTypes,
+  activeCardId: numberPropTypesNotRequired,
+  mapType: stringPropTypes,
+  currentOffer: objectPropTypesNotRequired
 };
 
 export default connect(mapStateToProps, null)(Map);

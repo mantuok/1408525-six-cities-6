@@ -66,6 +66,6 @@ export const MapHeigth = {
 export const MapIconUrl = {
   ALL: `img/pin.svg`,
   ACTIVE: `img/pin-active.svg`
-}
+};
 
 export const ZOOM = 12;

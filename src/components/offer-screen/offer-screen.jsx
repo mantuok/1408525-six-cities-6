@@ -1,9 +1,8 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import {nanoid} from 'nanoid';
 import {Link, useParams} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {fetchNearbyOffers} from '../../store/api-actions';
 import {
   getRatingStarsWidth,
   getOfferById

@@ -32,9 +32,11 @@ const App = (props) => {
             );
           }}
         />
-        <PrivateRoute exact path="/favorites">
-          <FavoritesScreen />
-        </PrivateRoute>
+        <PrivateRoute
+          exact
+          path="/favorites"
+          render={() => <FavoritesScreen />}
+        />
         <Route exact path="/offer/:id">
           <OfferScreen reviews={reviews} />
         </Route>
