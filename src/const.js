@@ -53,4 +53,14 @@ export const AuthorizationStatus = {
   NO_AUTH: `NO_AUTH`
 };
 
+export const MapType = {
+  MAIN: `MAIN`,
+  NEARBY: `NEARBY`
+}
+
+export const MapHeigth = {
+  MAIN: 500,
+  NEARBY: 600
+}
+
 export const ZOOM = 12;

@@ -9,6 +9,7 @@ import {
 } from '../../utils/props-validation';
 
 const NearbyOffersList = (props) => {
+  // const {nearbyOffers} = props;
   const {nearbyOffers, onNearbyOffersLoad} = props;
   const {id} = useParams();
 
@@ -44,3 +45,4 @@ NearbyOffersList.propTypes = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NearbyOffersList);
+// export default NearbyOffersList;
