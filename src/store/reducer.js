@@ -1,4 +1,7 @@
-import {City} from '../const';
+import {
+  City,
+  AuthorizationStatus
+} from '../const';
 import {ActionType} from './action';
 import {
   getOffersPerCity
@@ -10,11 +13,25 @@ const initialState = {
   favoriteOffers: [],
   nearbyOffers: [],
   activeCity: City.Paris.NAME,
-  isDataLoaded: false
+  isDataLoaded: false,
+  authorizationStatus: AuthorizationStatus.NO_AUTH,
+  userEmail: ``,
+  userAvatar: ``
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ActionType.REQUIRED_AUTHORIZATION:
+      return {
+        ...state,
+        authorizationStatus: action.payload
+      };
+    case ActionType.SET_USER_DATA:
+      return {
+        ...state,
+        userEmail: action.payload.email,
+        userAvatar: action.payload.avatar_url
+      };
     case ActionType.SET_CITY:
       return {
         ...state,
@@ -41,8 +58,9 @@ const reducer = (state = initialState, action) => {
         ...state,
         nearbyOffers: action.payload
       };
+    default:
+      return state;
   }
-  return state;
 };
 
 export {reducer};

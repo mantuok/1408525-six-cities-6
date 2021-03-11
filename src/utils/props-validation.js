@@ -61,5 +61,7 @@ export const titlePropTypes = PropTypes.string.isRequired;
 export const functionPropTypes = PropTypes.func.isRequired;
 export const booleanPropTypes = PropTypes.bool.isRequired;
 export const stringPropTypes = PropTypes.string.isRequired;
+export const stringPropTypesNotRequired = PropTypes.string;
 export const functionPropTypesNotRequired = PropTypes.func;
 export const booleanPropTypesNotRequired = PropTypes.bool;
+export const objectPropTypes = PropTypes.object.isRequired;

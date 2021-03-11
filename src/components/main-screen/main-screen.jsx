@@ -5,6 +5,7 @@ import {fetchOffers} from '../../store/api-actions';
 import EmptyOffersListContainer from './empty-offers-list-container';
 import FullOffersListContianer from './full-offers-list-container';
 import CitiesList from '../cities-list/cities-list';
+import ProfileNavigation from '../profile-navigation/profile-navigation';
 import {
   offersPropTypes,
   stringPropTypes,
@@ -30,9 +31,9 @@ const MainScreen = (props) => {
 
     if (isListEmpty(offers)) {
       return <EmptyOffersListContainer />;
-    } else {
-      return <FullOffersListContianer />;
     }
+
+    return <FullOffersListContianer />;
   };
 
   return (
@@ -47,13 +48,7 @@ const MainScreen = (props) => {
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <Link className="header__nav-link header__nav-link--profile" to="/favorites">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </Link>
-                </li>
+                <ProfileNavigation />
               </ul>
             </nav>
           </div>
@@ -83,7 +78,7 @@ const mapStateToProps = (state) => ({
   offers: state.offers,
   offersPerCity: state.offersPerCity,
   activeCity: state.activeCity,
-  isDataLoaded: state.isDataLoaded
+  isDataLoaded: state.isDataLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -96,7 +91,7 @@ MainScreen.propTypes = {
   offers: offersPropTypes,
   activeCity: stringPropTypes,
   onLoadData: functionPropTypes,
-  isDataLoaded: booleanPropTypes
+  isDataLoaded: booleanPropTypes,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

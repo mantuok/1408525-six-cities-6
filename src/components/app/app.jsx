@@ -1,10 +1,12 @@
 import React from 'react';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {Router as BrowserRouter, Switch, Route} from 'react-router-dom';
+import PrivateRoute from '../private-route/private-route';
 import MainScreen from '../main-screen/main-screen';
 import OfferScreen from '../offer-screen/offer-screen';
 import FavoritesScreen from '../favorites-screen/favorites-screen';
 import SignInScreen from '../sign-in-screen/sign-in-screen';
 import PageNotFoundScreen from '../page-not-found-screen/page-not-found-screen';
+import browserHistory from '../../browser-history';
 import {
   offersPropTypes,
   reviewsPropTypes
@@ -14,17 +16,28 @@ const App = (props) => {
   const {reviews} = props;
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path="/">
           <MainScreen />
         </Route>
-        <Route exact path="/login">
-          <SignInScreen />
-        </Route>
-        <Route exact path="/favorites">
-          <FavoritesScreen />
-        </Route>
+        <Route
+          exact
+          path="/login"
+          render={({history}) => {
+            return (
+              <SignInScreen
+                onLoginSuccess={() => history.push(`/`)}
+              />
+            );
+          }}
+        />
+        <PrivateRoute
+          exact
+          path="/favorites"
+          render={() => <FavoritesScreen />}
+        >
+        </PrivateRoute>
         <Route exact path="/offer/:id">
           <OfferScreen reviews={reviews} />
         </Route>

@@ -12,6 +12,7 @@ import {
   reviewsPropTypes
 } from '../../utils/props-validation';
 import NearbyOffersList from '../nearby-offers-list/nearby-offers-list';
+import ProfileNavigation from '../profile-navigation/profile-navigation';
 import OfferImage from './offer-image';
 import OfferGood from './offer-good';
 import OfferReview from './offer-review';
@@ -51,13 +52,7 @@ const OfferScreen = (props) => {
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <Link className="header__nav-link header__nav-link--profile" to="/favorites">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </Link>
-                </li>
+                <ProfileNavigation />
               </ul>
             </nav>
           </div>
@@ -136,13 +131,13 @@ const OfferScreen = (props) => {
                 <ul className="reviews__list">
                   {renderReviews(reviews)}
                 </ul>
-                {<NewReview />}
+                <NewReview />
               </section>
             </div>
           </div>
           <section className="property__map map"></section>
         </section>
-        {<NearbyOffersList />}
+        <NearbyOffersList />
       </main>
       <footer className="footer container">
         <Link className="footer__logo-link" to="/">
