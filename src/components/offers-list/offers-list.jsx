@@ -9,7 +9,7 @@ import {
 } from '../../utils/props-validation';
 
 const OffersList = (props) => {
-  const {offersPerCity, activeCity, onFilterOffers} = props;
+  const {offersPerCity, activeCity, onFilterOffers, onSetActiveCard} = props;
   const [activeCardId, setActiveCard] = useState(undefined);
 
   const isCardActive = (offer) => offer.id === activeCardId;
@@ -39,7 +39,12 @@ const OffersList = (props) => {
       </form>
       <div className="cities__places-list places__list tabs__content">
         {offersPerCity.map((offer) => <OfferCard
-          handleMouseOver={() => setActiveCard(offer.id)}
+          handleMouseOver={() =>
+            {
+              setActiveCard(offer.id)
+              onSetActiveCard(offer.id)
+            }
+          }
           isCardActive={isCardActive(offer)}
           key={offer.id}
           offer={offer}
@@ -57,6 +62,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onFilterOffers() {
     dispatch(ActionCreator.setOffersPerCity());
+  },
+  onSetActiveCard(offerId) {
+    dispatch(ActionCreator.setActiveCard(offerId))
   }
 });
 

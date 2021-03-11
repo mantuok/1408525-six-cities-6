@@ -8,13 +8,14 @@ import {
 import {
   ZOOM,
   MapType,
-  MapHeigth
+  MapHeigth,
+  MapIconUrl
 } from '../../const';
 import {getCityCoordinates} from '../../utils/common';
 import "leaflet/dist/leaflet.css";
 
 const Map = (props) => {
-  const {offers, nearbyOffers, activeCity, mapType, currentOffer} = props;
+  const {offers, nearbyOffers, activeCity, activeCardId, mapType, currentOffer} = props;
 
   const getMapData = () => {
     if (mapType === MapType.MAIN) {
@@ -31,7 +32,22 @@ const Map = (props) => {
     }
   }
 
-  const renderIcon = (offer, icon) => {
+  const getIconUrl = (offer) => {
+    if (offer.id === activeCardId) {
+      return MapIconUrl.ACTIVE
+    }
+    return MapIconUrl.ALL
+  }
+
+  const getIcon = (offer) => {
+    const icon = leaflet.icon({
+      iconUrl: getIconUrl(offer),
+      iconSize: [27, 39]
+    })
+    return icon;
+  }
+
+  const renderMarker = (offer, icon) => {
       const {latitude, longitude} = offer.location;
       leaflet
         .marker([latitude, longitude], {icon})
@@ -61,23 +77,23 @@ const Map = (props) => {
 
     mapRef.current.setView(cityCoordinates, ZOOM);
 
-    const Icon = {
-      ALL: leaflet.icon({
-        iconUrl: `img/pin.svg`,
-        iconSize: [27, 39]
-      }),
-      CURRENT: leaflet.icon({
-        iconUrl: `img/pin-active.svg`,
-        iconSize: [27, 39]
-      })
-    }
+    // const Icon = {
+    //   ALL: leaflet.icon({
+    //     iconUrl: `img/pin.svg`,
+    //     iconSize: [27, 39]
+    //   }),
+    //   CURRENT: leaflet.icon({
+    //     iconUrl: `img/pin-active.svg`,
+    //     iconSize: [27, 39]
+    //   })
+    // }
 
     mapOffers.forEach((offer) => {
-        renderIcon(offer, Icon.ALL)
+        renderMarker(offer, getIcon(offer))
     });
 
     if (currentOffer) {
-      renderIcon(currentOffer, Icon.CURRENT)
+      renderMarker(currentOffer, getIcon(currentOffer))
     }
 
     return () => {
@@ -93,7 +109,8 @@ const Map = (props) => {
 const mapStateToProps = (state) => ({
   activeCity: state.activeCity,
   offers: state.offers,
-  nearbyOffers: state.nearbyOffers
+  nearbyOffers: state.nearbyOffers,
+  activeCardId: state.activeCardId
 });
 
 Map.propTypes = {

@@ -13,6 +13,7 @@ const initialState = {
   favoriteOffers: [],
   nearbyOffers: [],
   activeCity: City.Paris.NAME,
+  activeCardId: null,
   isDataLoaded: false,
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   userEmail: ``,
@@ -48,6 +49,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         offersPerCity: getOffersPerCity(state.offers, state.activeCity)
       };
+    case ActionType.SET_ACTIVE_CARD:
+      return {
+        ...state,
+        activeCardId: action.payload
+      };
     case ActionType.LOAD_FAVORITE_OFFERS:
       return {
         ...state,
@@ -62,5 +68,7 @@ const reducer = (state = initialState, action) => {
       return state;
   }
 };
+
+
 
 export {reducer};

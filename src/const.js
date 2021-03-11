@@ -56,11 +56,16 @@ export const AuthorizationStatus = {
 export const MapType = {
   MAIN: `MAIN`,
   NEARBY: `NEARBY`
-}
+};
 
 export const MapHeigth = {
   MAIN: 500,
   NEARBY: 600
+};
+
+export const MapIconUrl = {
+  ALL: `img/pin.svg`,
+  ACTIVE: `img/pin-active.svg`
 }
 
 export const ZOOM = 12;
