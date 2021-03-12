@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
-import SortingMenu from '../sorting-menu/sorting-menu'
+import SortingMenu from '../sorting-menu/sorting-menu';
 import OfferCard from '../offer-card/offer-card';
 import {applySorting} from '../../utils/offers-sorting';
 import {
@@ -60,7 +60,8 @@ OffersList.propTypes = {
   offersPerCity: offersPropTypes,
   activeCity: stringPropTypes,
   onFilterOffers: functionPropTypes,
-  onSetActiveCard: functionPropTypes
+  onSetActiveCard: functionPropTypes,
+  selectedSortingType: stringPropTypes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OffersList);

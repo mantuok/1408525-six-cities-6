@@ -75,4 +75,4 @@ export const SortingType = {
   PRICE_LOW_HIGH: `Price: low to high`,
   PRICE_HIGH_LOW: `Price: high to low`,
   TOPRATED: `Top rated first`
-}
+};

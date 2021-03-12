@@ -19,5 +19,4 @@ export const applySorting = (offers, selectedSortingType) => {
     default:
       return offers;
   }
-
-}
+};

@@ -52,7 +52,6 @@ const reducer = (state = initialState, action) => {
         offersPerCity: getOffersPerCity(state.offers, state.activeCity)
       };
     case ActionType.SET_SORTING:
-      console.log(action.payload)
       return {
         ...state,
         selectedSortingType: action.payload
