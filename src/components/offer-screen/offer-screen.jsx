@@ -11,12 +11,14 @@ import {
   offersPropTypes,
   reviewsPropTypes
 } from '../../utils/props-validation';
+import {MapType} from '../../const';
 import NearbyOffersList from '../nearby-offers-list/nearby-offers-list';
 import ProfileNavigation from '../profile-navigation/profile-navigation';
 import OfferImage from './offer-image';
 import OfferGood from './offer-good';
 import OfferReview from './offer-review';
 import NewReview from './new-review';
+import Map from '../map/map';
 
 const renderImages = (images, title) => {
   return images.map((image) => <OfferImage image={image} title={title} key={nanoid()}/>);
@@ -31,11 +33,16 @@ const renderReviews = (reviews) => {
 };
 
 const OfferScreen = (props) => {
+  // const {reviews, offers, nearbyOffers, onNearbyOffersLoad, activeCity} = props;
   const {reviews, offers} = props;
   const {id} = useParams();
   const offer = getOfferById(offers, id);
   const {bedrooms, description, goods, isPremium, images, maxAdults, title, price, rating, type} = offer;
   const {avatarUrl, isPro, name} = offer.host;
+
+  // useEffect(() => {
+  //   onNearbyOffersLoad(id);
+  // }, [id]);
 
   const premiumMarkClass = classnames(`property__mark`, {"visually-hidden": !isPremium});
   const avatarClass = classnames(`property__avatar-wrapper user__avatar-wrapper`, {"property__avatar-wrapper--pro": isPro});
@@ -135,8 +142,11 @@ const OfferScreen = (props) => {
               </section>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <section className="property__map map">
+            <Map mapType={MapType.NEARBY} currentOffer={offer} />
+          </section>
         </section>
+        {/* <NearbyOffersList nearbyOffers={nearbyOffers} /> */}
         <NearbyOffersList />
       </main>
       <footer className="footer container">
@@ -149,12 +159,21 @@ const OfferScreen = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers
+  offers: state.offers,
+  // nearbyOffers: state.nearbyOffers,
+  // activeCity: state.activeCity
 });
+
+// const mapDispatchToProps = (dispatch) => ({
+//   onNearbyOffersLoad(id) {
+//     dispatch(fetchNearbyOffers(id));
+//   }
+// });
 
 OfferScreen.propTypes = {
   offers: offersPropTypes,
   reviews: reviewsPropTypes
 };
 
+// export default connect(mapStateToProps, mapDispatchToProps)(OfferScreen);
 export default connect(mapStateToProps, null)(OfferScreen);

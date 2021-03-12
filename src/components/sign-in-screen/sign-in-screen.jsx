@@ -93,7 +93,6 @@ const SignInScreen = (props) => {
               <button
                 className="login__submit form__submit button"
                 type="submit"
-                // onClick={() => history.push(`/`)}
               >
                 Sign in
               </button>
