@@ -69,3 +69,10 @@ export const MapIconUrl = {
 };
 
 export const ZOOM = 12;
+
+export const SortingType = {
+  POPULAR: `Popular`,
+  PRICE_LOW_HIGH: `Price: low to high`,
+  PRICE_HIGH_LOW: `Price: high to low`,
+  TOPRATED: `Top rated first`
+}

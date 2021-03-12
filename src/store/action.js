@@ -3,6 +3,7 @@ export const ActionType = {
   SET_CITY: `setCity`,
   SET_OFFERS_PER_CITY: `setOffersPerCity`,
   SET_ACTIVE_CARD: `setActiveCard`,
+  SET_SORTING: `setSorting`,
   LOAD_OFFERS: `loadOffers`,
   LOAD_FAVORITE_OFFERS: `loadFavoriteOffers`,
   LOAD_NEARBY_OFFERS: `loadNearbyOffers`,
@@ -20,6 +21,10 @@ export const ActionCreator = {
   }),
   setOffersPerCity: () => ({
     type: ActionType.SET_OFFERS_PER_CITY,
+  }),
+  setSorting: (selectedSortingType) => ({
+    type: ActionType.SET_SORTING,
+    payload: selectedSortingType
   }),
   setActiveCard: (activeCardId) => ({
     type: ActionType.SET_ACTIVE_CARD,
