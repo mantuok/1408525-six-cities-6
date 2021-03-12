@@ -16,23 +16,23 @@ const SortingMebu = (props) => {
     {"places__options--opened": menuStateOpened},
   );
 
-  const getSortingMenuItemClass = (itemType) => {
+  const getSortingMenuItemClass = (sortingItemType) => {
     return (
       classnames(
         `places__option`,
-        {"places__option--active": selectedSortingType === itemType }
+        {"places__option--active": (selectedSortingType === sortingItemType) }
       )
     )
-   }
+  };
 
   const getSortingMenuItems = () => {
     return Object.keys(SortingType).map((type) => {
       return (
         <li
           key={nanoid()}
-          className={getSortingMenuItemClass(type)}
+          className={getSortingMenuItemClass(SortingType[type])}
           tabIndex="0">
-          {SortingType.type}
+          {SortingType[type]}
         </li>
       )
     })
@@ -40,8 +40,7 @@ const SortingMebu = (props) => {
 
   const handleSortingMenuClick = (evt) => {
     evt.preventDefault();
-    console.log(evt.target.textContent)
-    onSortingSelect(SortingType.TOPRATED)
+    onSortingSelect(evt.target.textContent)
   }
 
   return (
@@ -64,10 +63,6 @@ const SortingMebu = (props) => {
       onClick={handleSortingMenuClick}
     >
       {getSortingMenuItems()}
-      {/* <li className="places__option places__option--active" tabIndex="0">Popular</li>
-      <li className="places__option" tabIndex="0">Price: low to high</li>
-      <li className="places__option" tabIndex="0">Price: high to low</li>
-      <li className="places__option" tabIndex="0">Top rated first</li> */}
     </ul>
   </form>
   )
