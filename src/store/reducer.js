@@ -1,6 +1,7 @@
 import {
   City,
-  AuthorizationStatus
+  AuthorizationStatus,
+  SortingType
 } from '../const';
 import {ActionType} from './action';
 import {
@@ -9,6 +10,7 @@ import {
 
 const initialState = {
   offers: [],
+  selectedSortingType: SortingType.POPULAR,
   offersPerCity: [],
   favoriteOffers: [],
   nearbyOffers: [],
@@ -48,6 +50,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         offersPerCity: getOffersPerCity(state.offers, state.activeCity)
+      };
+    case ActionType.SET_SORTING:
+      return {
+        ...state,
+        selectedSortingType: action.payload
       };
     case ActionType.SET_ACTIVE_CARD:
       return {
