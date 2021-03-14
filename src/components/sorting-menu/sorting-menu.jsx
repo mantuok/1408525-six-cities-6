@@ -33,7 +33,7 @@ const SortingMenu = (props) => {
     return Object.keys(SortingType).map((type) => {
       return (
         <li
-          key={nanoid()}
+          key={type}
           className={getSortingMenuItemClass(SortingType[type])}
           tabIndex="0">
           {SortingType[type]}
@@ -41,6 +41,10 @@ const SortingMenu = (props) => {
       );
     });
   };
+
+  const handleMenuStateChange = () => {
+    toggleMenuState((currentMenuStateOpened) => !currentMenuStateOpened)
+  }
 
   const handleSortingMenuClick = (evt) => {
     evt.preventDefault();
@@ -52,8 +56,7 @@ const SortingMenu = (props) => {
       className="places__sorting"
       action="#"
       method="get"
-      onClick={() =>
-        toggleMenuState((currentMenuStateOpened) => !currentMenuStateOpened)}
+      onClick={handleMenuStateChange}
     >
       <span className="places__sorting-caption">Sort by </span>
       <span className="places__sorting-type" tabIndex="0">
