@@ -76,3 +76,11 @@ export const SortingType = {
   PRICE_HIGH_LOW: `Price: high to low`,
   TOPRATED: `Top rated first`
 };
+
+export const AppRoute = {
+  MAIN: `/`,
+  LOGIN: `/login`,
+  FAVORITES: `/favorites`,
+  OFFER: `/offer/:id`,
+  NOT_FOUND: `/page-not-found`
+}

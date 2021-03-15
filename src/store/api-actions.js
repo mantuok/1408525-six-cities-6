@@ -1,6 +1,11 @@
 import {ActionCreator} from './action';
-import {adaptOffersToClient} from '../utils/adapter';
-import {AuthorizationStatus} from '../const';
+import {
+  adaptOffersToClient,
+  adaptReviewsToClient
+} from '../utils/adapter';
+import {
+  AuthorizationStatus
+} from '../const';
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
@@ -29,6 +34,20 @@ export const fetchOffers = () => (dispatch, _getState, api) => (
   .then(({data}) => adaptOffersToClient(data))
   .then((data) => dispatch(ActionCreator.loadOffers(data)))
 );
+
+export const fetchOfferById = (id) => (
+  api.get(`hotels/${id}`)
+  .then(({data}) => {
+    console.log(`getOfferById`)
+    adaptOffersToClient(data)
+  })
+)
+
+export const fetchReviewsPerOffer = (id) => (
+  api.get(`comments/${id}`)
+  .then(({data}) => adaptReviewsToClient(data))
+  .then((data) => dispatch(ActionCreator.loadReviewsPerOffer(data)))
+)
 
 export const fetchNearbyOffers = (offerId) => (dispatch, _getState, api) => (
   api.get(`hotels/${offerId}/nearby`)

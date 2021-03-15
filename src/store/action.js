@@ -5,6 +5,7 @@ export const ActionType = {
   SET_ACTIVE_CARD: `setActiveCard`,
   SET_SORTING: `setSorting`,
   LOAD_OFFERS: `loadOffers`,
+  LOAD_REVIEWS_PER_OFFER: `loadReviewsPerOffer`,
   LOAD_FAVORITE_OFFERS: `loadFavoriteOffers`,
   LOAD_NEARBY_OFFERS: `loadNearbyOffers`,
   SET_USER_DATA: `setUserData`
@@ -41,6 +42,10 @@ export const ActionCreator = {
   loadNearbyOffers: (nearbyOffers) => ({
     type: ActionType.LOAD_NEARBY_OFFERS,
     payload: nearbyOffers
+  }),
+  loadReviewsPerOffer: (reviewsPerOffer) => ({
+    type: ActionType.LOAD_REVIEWS_PER_OFFER,
+    payload: reviewsPerOffer
   }),
   setUserData: (data) => ({
     type: ActionType.SET_USER_DATA,

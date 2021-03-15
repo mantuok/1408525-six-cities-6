@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import classnames from 'classnames';
 import {nanoid} from 'nanoid';
-import {Link, useParams} from 'react-router-dom';
+import {Link, useParams, useHistory} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {
+  fetchOfferById,
+  fetchReviewsPerOffer
+} from '../../store/api-actions';
 import {
   getRatingStarsWidth,
   getOfferById
@@ -11,7 +15,10 @@ import {
   offersPropTypes,
   reviewsPropTypes
 } from '../../utils/props-validation';
-import {MapType} from '../../const';
+import {
+  MapType,
+  AppRoute
+} from '../../const';
 import NearbyOffersList from '../nearby-offers-list/nearby-offers-list';
 import ProfileNavigation from '../profile-navigation/profile-navigation';
 import OfferImage from './offer-image';
@@ -33,17 +40,26 @@ const renderReviews = (reviews) => {
 };
 
 const OfferScreen = (props) => {
-  // const {reviews, offers, nearbyOffers, onNearbyOffersLoad, activeCity} = props;
-  const {reviews, offers} = props;
+  // const {reviews, offers} = props;
+  const {reviewsPerOffer} = props;
+  const [isDataPerOfferLoaded, setDataPerOfferLoaded] = useState(false)
+  const [currentOffer, setCurrentOffer] = useState(undefined)
   const {id} = useParams();
-  const offer = getOfferById(offers, id);
-  const {bedrooms, description, goods, isPremium, images, maxAdults, title, price, rating, type} = offer;
-  const {avatarUrl, isPro, name} = offer.host;
+  const history = useHistory();
+  // const offer = getOfferById(offers, id);
 
-  // useEffect(() => {
-  //   onNearbyOffersLoad(id);
-  // }, [id]);
+  useEffect(() => {
+    if (!isDataPerOfferLoaded) {
+      fetchOfferById(id)
+        .then(({offerData}) => setCurrentOffer(offerData))
+        .then(() => setDataPerOfferLoaded(true))
+        .catch(() => history.push(AppRoute.NOT_FOUND));
+      onReviewsPerOfferLoad(id)
+    }
+  }, [isDataPerOfferLoaded])
 
+  const {bedrooms, description, goods, isPremium, images, maxAdults, title, price, rating, type} = currentOffer;
+  const {avatarUrl, isPro, name} = currentOffer.host;
   const premiumMarkClass = classnames(`property__mark`, {"visually-hidden": !isPremium});
   const avatarClass = classnames(`property__avatar-wrapper user__avatar-wrapper`, {"property__avatar-wrapper--pro": isPro});
 
@@ -134,9 +150,9 @@ const OfferScreen = (props) => {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviewsPerOffer.length}</span></h2>
                 <ul className="reviews__list">
-                  {renderReviews(reviews)}
+                  {renderReviews(reviewsPerOffer)}
                 </ul>
                 <NewReview />
               </section>
@@ -159,21 +175,22 @@ const OfferScreen = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
-  // nearbyOffers: state.nearbyOffers,
+  isDataLoaded: state.isDataLoaded,
+  reviewsPerOffer: state.reviewsPerOffer
+  // offers: state.offers,
+  // reviewsPerOffer: state.reviewsPerOffer,
   // activeCity: state.activeCity
 });
 
-// const mapDispatchToProps = (dispatch) => ({
-//   onNearbyOffersLoad(id) {
-//     dispatch(fetchNearbyOffers(id));
-//   }
-// });
+const mapDispatchToProps = (dispatch) => ({
+  onReviewsPerOfferLoad(id) {
+    dispatch(fetchReviewsPerOffer(id));
+  }
+});
 
 OfferScreen.propTypes = {
   offers: offersPropTypes,
   reviews: reviewsPropTypes
 };
 
-// export default connect(mapStateToProps, mapDispatchToProps)(OfferScreen);
-export default connect(mapStateToProps, null)(OfferScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(OfferScreen);

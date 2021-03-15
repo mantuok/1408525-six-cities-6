@@ -14,6 +14,7 @@ const initialState = {
   offersPerCity: [],
   favoriteOffers: [],
   nearbyOffers: [],
+  reviewsPerOffer: [],
   activeCity: City.Paris.NAME,
   activeCardId: null,
   isDataLoaded: false,
@@ -71,6 +72,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         nearbyOffers: action.payload
       };
+    case ActionType.LOAD_REVIEWS_PER_OFFER:
+    return {
+      ...state,
+      reviewsPerOffer: action.payload
+    }
     default:
       return state;
   }
