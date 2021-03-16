@@ -54,8 +54,6 @@ const OfferScreen = (props) => {
   const {id} = useParams();
   const history = useHistory();
 
-  console.log(authorizationStatus)
-
   useEffect(() => {
     if (!isDataPerOfferLoaded) {
       fetchOfferById(id)

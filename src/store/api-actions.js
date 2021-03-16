@@ -44,10 +44,14 @@ export const fetchOfferById = (id) => {
 export const fetchReviewsPerOffer = (id) => (dispatch, _getState, api) => (
   api.get(`comments/${id}`)
   .then(({data}) => adaptReviewsToClient(data))
-  .then((data) => {
-    dispatch(ActionCreator.loadReviewsPerOffer(data))
-  })
+  .then((data) => dispatch(ActionCreator.loadReviewsPerOffer(data)))
 );
+
+export const postReview = (id, {comment, rating}) => (dispatch, _getState, api) => (
+  api.post(`comments/${id}`, {comment, rating})
+  .then(({data}) => adaptReviewsToClient(data))
+  .then((data) => dispatch(ActionCreator.loadReviewsPerOffer(data)))
+)
 
 export const fetchNearbyOffers = (offerId) => (dispatch, _getState, api) => (
   api.get(`hotels/${offerId}/nearby`)
