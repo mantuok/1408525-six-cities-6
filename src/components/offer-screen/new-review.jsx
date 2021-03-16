@@ -29,6 +29,8 @@ const NewReview = (props) => {
       comment: ``,
       rating: 0
     });
+
+    evt.target.reset();
   };
 
   return (
@@ -79,7 +81,7 @@ const NewReview = (props) => {
         id="review"
         name="comment"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value={reviewForm.comment}>
+      >
       </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
