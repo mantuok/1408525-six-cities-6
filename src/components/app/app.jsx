@@ -13,9 +13,7 @@ import {
 } from '../../utils/props-validation';
 import {AppRoute} from '../../const';
 
-const App = (props) => {
-  const {reviews} = props;
-
+const App = () => {
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
@@ -39,7 +37,7 @@ const App = (props) => {
           render={() => <FavoritesScreen />}
         />
         <Route exact path={AppRoute.OFFER}>
-          <OfferScreen reviews={reviews} />
+          <OfferScreen />
         </Route>
         <Route>
           <PageNotFoundScreen />

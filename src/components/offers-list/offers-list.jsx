@@ -17,7 +17,6 @@ const OffersList = (props) => {
   const isCardActive = (offer) => offer.id === activeCardId;
 
   useEffect(() => {
-    console.log(activeCity)
     onFilterOffers();
   }, [activeCity]);
 
