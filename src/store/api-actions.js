@@ -6,6 +6,7 @@ import {
 import {
   AuthorizationStatus
 } from '../const';
+import {api} from '../index';
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
@@ -35,19 +36,18 @@ export const fetchOffers = () => (dispatch, _getState, api) => (
   .then((data) => dispatch(ActionCreator.loadOffers(data)))
 );
 
-export const fetchOfferById = (id) => (
-  api.get(`hotels/${id}`)
-  .then(({data}) => {
-    console.log(`getOfferById`)
-    adaptOffersToClient(data)
-  })
-)
+export const fetchOfferById = (id) => {
+  return api.get(`hotels/${id}`)
+  .then(({data}) => adaptOffersToClient(data))
+};
 
-export const fetchReviewsPerOffer = (id) => (
+export const fetchReviewsPerOffer = (id) => (dispatch, _getState, api) => (
   api.get(`comments/${id}`)
   .then(({data}) => adaptReviewsToClient(data))
-  .then((data) => dispatch(ActionCreator.loadReviewsPerOffer(data)))
-)
+  .then((data) => {
+    dispatch(ActionCreator.loadReviewsPerOffer(data))
+  })
+);
 
 export const fetchNearbyOffers = (offerId) => (dispatch, _getState, api) => (
   api.get(`hotels/${offerId}/nearby`)

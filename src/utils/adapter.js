@@ -30,18 +30,16 @@ export const adaptOffersToClient = (data) => {
 };
 
 export const adaptReviewsToClient = (reviews) => {
-  reviews.mpa((review) => {
+  return reviews.map((review) => {
     const adaptedReview = ({
       ...review,
-      date: new Date(review.date),
       user: {
-        ...user,
+        ...review.user,
         avatarUrl: review.user.avatar_url,
         isPro: review.user.is_pro
       }
     })
 
-    delete adaptedReview.date,
     delete adaptedReview.user.avatar_url,
     delete adaptedReview.user.is_pro
 

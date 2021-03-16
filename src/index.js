@@ -15,7 +15,7 @@ import {ActionCreator} from './store/action';
 import {AuthorizationStatus} from './const';
 import {checkAuth} from './store/api-actions';
 
-const api = createApi(
+export const api = createApi(
     () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH))
 );
 

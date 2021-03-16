@@ -8,17 +8,17 @@ import {
   fetchReviewsPerOffer
 } from '../../store/api-actions';
 import {
-  getRatingStarsWidth,
-  getOfferById
+  getRatingStarsWidth
 } from '../../utils/common';
 import {
-  offersPropTypes,
-  reviewsPropTypes
+  reviewsPropTypes,
+  functionPropTypes
 } from '../../utils/props-validation';
 import {
   MapType,
   AppRoute
 } from '../../const';
+import LoadingPlaceholder, {} from '../loading-placeholder/loading-placeholder'
 import NearbyOffersList from '../nearby-offers-list/nearby-offers-list';
 import ProfileNavigation from '../profile-navigation/profile-navigation';
 import OfferImage from './offer-image';
@@ -40,23 +40,27 @@ const renderReviews = (reviews) => {
 };
 
 const OfferScreen = (props) => {
-  // const {reviews, offers} = props;
-  const {reviewsPerOffer} = props;
+  const {reviewsPerOffer, onReviewsPerOfferLoad} = props;
   const [isDataPerOfferLoaded, setDataPerOfferLoaded] = useState(false)
-  const [currentOffer, setCurrentOffer] = useState(undefined)
+  const [currentOffer, setCurrentOffer] = useState({})
   const {id} = useParams();
   const history = useHistory();
-  // const offer = getOfferById(offers, id);
 
   useEffect(() => {
     if (!isDataPerOfferLoaded) {
       fetchOfferById(id)
-        .then(({offerData}) => setCurrentOffer(offerData))
+        .then((offerData) => setCurrentOffer(offerData))
+        .then(() => {onReviewsPerOfferLoad(id)})
         .then(() => setDataPerOfferLoaded(true))
         .catch(() => history.push(AppRoute.NOT_FOUND));
-      onReviewsPerOfferLoad(id)
     }
   }, [isDataPerOfferLoaded])
+
+  if (!isDataPerOfferLoaded) {
+    return (
+      <LoadingPlaceholder />
+    )
+  }
 
   const {bedrooms, description, goods, isPremium, images, maxAdults, title, price, rating, type} = currentOffer;
   const {avatarUrl, isPro, name} = currentOffer.host;
@@ -159,7 +163,7 @@ const OfferScreen = (props) => {
             </div>
           </div>
           <section className="property__map map">
-            <Map mapType={MapType.NEARBY} currentOffer={offer} />
+            <Map mapType={MapType.NEARBY} currentOffer={currentOffer} />
           </section>
         </section>
         {/* <NearbyOffersList nearbyOffers={nearbyOffers} /> */}
@@ -175,11 +179,7 @@ const OfferScreen = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  isDataLoaded: state.isDataLoaded,
   reviewsPerOffer: state.reviewsPerOffer
-  // offers: state.offers,
-  // reviewsPerOffer: state.reviewsPerOffer,
-  // activeCity: state.activeCity
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -189,8 +189,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 OfferScreen.propTypes = {
-  offers: offersPropTypes,
-  reviews: reviewsPropTypes
+  reviewsPerOffer: reviewsPropTypes,
+  onReviewsPerOfferLoad: functionPropTypes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OfferScreen);
