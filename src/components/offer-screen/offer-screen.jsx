@@ -13,7 +13,6 @@ import {
 import {
   reviewsPropTypes,
   functionPropTypes,
-  booleanPropTypes,
   stringPropTypes
 } from '../../utils/props-validation';
 import {
@@ -21,7 +20,7 @@ import {
   AppRoute,
   AuthorizationStatus
 } from '../../const';
-import LoadingPlaceholder, {} from '../loading-placeholder/loading-placeholder'
+import LoadingPlaceholder, {} from '../loading-placeholder/loading-placeholder';
 import NearbyOffersList from '../nearby-offers-list/nearby-offers-list';
 import ProfileNavigation from '../profile-navigation/profile-navigation';
 import OfferImage from './offer-image';
@@ -43,14 +42,14 @@ const renderReviews = (reviews) => {
 };
 
 const getNewReviewForm = (authorizationStatus) =>
-    authorizationStatus === AuthorizationStatus.AUTH ?
+  authorizationStatus === AuthorizationStatus.AUTH ?
     <NewReview /> :
     ``;
 
 const OfferScreen = (props) => {
   const {reviewsPerOffer, onReviewsPerOfferLoad, authorizationStatus} = props;
-  const [isDataPerOfferLoaded, setDataPerOfferLoaded] = useState(false)
-  const [currentOffer, setCurrentOffer] = useState({})
+  const [isDataPerOfferLoaded, setDataPerOfferLoaded] = useState(false);
+  const [currentOffer, setCurrentOffer] = useState({});
   const {id} = useParams();
   const history = useHistory();
 
@@ -58,16 +57,16 @@ const OfferScreen = (props) => {
     if (!isDataPerOfferLoaded) {
       fetchOfferById(id)
         .then((offerData) => setCurrentOffer(offerData))
-        .then(() => {onReviewsPerOfferLoad(id)})
+        .then(() => onReviewsPerOfferLoad(id))
         .then(() => setDataPerOfferLoaded(true))
         .catch(() => history.push(AppRoute.NOT_FOUND));
     }
-  }, [isDataPerOfferLoaded])
+  }, [isDataPerOfferLoaded]);
 
   if (!isDataPerOfferLoaded) {
     return (
       <LoadingPlaceholder />
-    )
+    );
   }
 
   const {bedrooms, description, goods, isPremium, images, maxAdults, title, price, rating, type} = currentOffer;

@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {nanoid} from 'nanoid';
 import {ActionCreator} from '../../store/action';
 import classnames from 'classnames';
 import {SortingType} from '../../const';
@@ -43,8 +42,8 @@ const SortingMenu = (props) => {
   };
 
   const handleMenuStateChange = () => {
-    toggleMenuState((currentMenuStateOpened) => !currentMenuStateOpened)
-  }
+    toggleMenuState((currentMenuStateOpened) => !currentMenuStateOpened);
+  };
 
   const handleSortingMenuClick = (evt) => {
     evt.preventDefault();

@@ -2,17 +2,17 @@ import React, {useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {postReview} from '../../store/api-actions';
+import {functionPropTypes} from '../../utils/props-validation';
 
 const NewReview = (props) => {
   const {onReivewPost} = props;
-  const {id} = useParams()
+  const {id} = useParams();
   const [reviewForm, setReviewForm] = useState({
     comment: ``,
     rating: 0
   });
 
   const handleFieldChange = (evt) => {
-    console.log(evt.target)
     const {name, value} = evt.target;
     setReviewForm({
       ...reviewForm,
@@ -20,21 +20,15 @@ const NewReview = (props) => {
     });
   };
 
-  console.log(reviewForm)
-
   const submitReviewHandler = (evt) => {
     evt.preventDefault();
     onReivewPost(id, reviewForm);
-
-    // debugger
 
     setReviewForm({
       ...reviewForm,
       comment: ``,
       rating: 0
-    })
-
-    console.log(reviewForm)
+    });
   };
 
   return (
@@ -99,8 +93,12 @@ const NewReview = (props) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onReivewPost(id, reviewData) {
-    dispatch(postReview(id, reviewData))
+    dispatch(postReview(id, reviewData));
   }
-})
+});
+
+NewReview.propTypes = {
+  onReivewPost: functionPropTypes
+};
 
 export default connect(null, mapDispatchToProps)(NewReview);

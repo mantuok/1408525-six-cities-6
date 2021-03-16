@@ -6,7 +6,7 @@ import {
 import {
   AuthorizationStatus
 } from '../const';
-import {api} from '../index';
+import {api as importedApi} from '../index';
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
@@ -37,8 +37,8 @@ export const fetchOffers = () => (dispatch, _getState, api) => (
 );
 
 export const fetchOfferById = (id) => {
-  return api.get(`hotels/${id}`)
-  .then(({data}) => adaptOffersToClient(data))
+  return importedApi.get(`hotels/${id}`)
+  .then(({data}) => adaptOffersToClient(data));
 };
 
 export const fetchReviewsPerOffer = (id) => (dispatch, _getState, api) => (
@@ -51,7 +51,7 @@ export const postReview = (id, {comment, rating}) => (dispatch, _getState, api) 
   api.post(`comments/${id}`, {comment, rating})
   .then(({data}) => adaptReviewsToClient(data))
   .then((data) => dispatch(ActionCreator.loadReviewsPerOffer(data)))
-)
+);
 
 export const fetchNearbyOffers = (offerId) => (dispatch, _getState, api) => (
   api.get(`hotels/${offerId}/nearby`)

@@ -83,4 +83,4 @@ export const AppRoute = {
   FAVORITES: `/favorites`,
   OFFER: `/offer/:id`,
   NOT_FOUND: `/page-not-found`
-}
+};

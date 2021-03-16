@@ -24,9 +24,9 @@ const getAdaptedOffer = (offer) => {
 
 export const adaptOffersToClient = (data) => {
   if (Array.isArray(data)) {
-  return data.map((offer) => getAdaptedOffer(offer))
+    return data.map((offer) => getAdaptedOffer(offer));
   }
-  return getAdaptedOffer(data)
+  return getAdaptedOffer(data);
 };
 
 export const adaptReviewsToClient = (reviews) => {
@@ -38,11 +38,11 @@ export const adaptReviewsToClient = (reviews) => {
         avatarUrl: review.user.avatar_url,
         isPro: review.user.is_pro
       }
-    })
+    });
 
-    delete adaptedReview.user.avatar_url,
-    delete adaptedReview.user.is_pro
+    delete adaptedReview.user.avatar_url;
+    delete adaptedReview.user.is_pro;
 
     return adaptedReview;
-  })
-}
+  });
+};
