@@ -12,11 +12,14 @@ import {
 } from '../../utils/common';
 import {
   reviewsPropTypes,
-  functionPropTypes
+  functionPropTypes,
+  booleanPropTypes,
+  stringPropTypes
 } from '../../utils/props-validation';
 import {
   MapType,
-  AppRoute
+  AppRoute,
+  AuthorizationStatus
 } from '../../const';
 import LoadingPlaceholder, {} from '../loading-placeholder/loading-placeholder'
 import NearbyOffersList from '../nearby-offers-list/nearby-offers-list';
@@ -39,12 +42,19 @@ const renderReviews = (reviews) => {
   return reviews.map((review) => <OfferReview review={review} key={review.id} />);
 };
 
+const getNewReviewForm = (authorizationStatus) =>
+    authorizationStatus === AuthorizationStatus.AUTH ?
+    <NewReview /> :
+    ``;
+
 const OfferScreen = (props) => {
-  const {reviewsPerOffer, onReviewsPerOfferLoad} = props;
+  const {reviewsPerOffer, onReviewsPerOfferLoad, authorizationStatus} = props;
   const [isDataPerOfferLoaded, setDataPerOfferLoaded] = useState(false)
   const [currentOffer, setCurrentOffer] = useState({})
   const {id} = useParams();
   const history = useHistory();
+
+  console.log(authorizationStatus)
 
   useEffect(() => {
     if (!isDataPerOfferLoaded) {
@@ -158,7 +168,7 @@ const OfferScreen = (props) => {
                 <ul className="reviews__list">
                   {renderReviews(reviewsPerOffer)}
                 </ul>
-                <NewReview />
+                {getNewReviewForm(authorizationStatus)}
               </section>
             </div>
           </div>
@@ -166,7 +176,7 @@ const OfferScreen = (props) => {
             <Map mapType={MapType.NEARBY} currentOffer={currentOffer} />
           </section>
         </section>
-        {/* <NearbyOffersList nearbyOffers={nearbyOffers} /> */}
+
         <NearbyOffersList />
       </main>
       <footer className="footer container">
@@ -179,7 +189,8 @@ const OfferScreen = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  reviewsPerOffer: state.reviewsPerOffer
+  reviewsPerOffer: state.reviewsPerOffer,
+  authorizationStatus: state.authorizationStatus
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -190,6 +201,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 OfferScreen.propTypes = {
   reviewsPerOffer: reviewsPropTypes,
+  authorizationStatus: stringPropTypes,
   onReviewsPerOfferLoad: functionPropTypes
 };
 
