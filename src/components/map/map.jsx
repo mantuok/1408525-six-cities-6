@@ -91,7 +91,7 @@ const Map = (props) => {
   });
 
   return (
-    <div id="map" style={{height: `${mapHeight}px`}} ref={mapRef}></div>
+    <div id="map" style={{height: `${mapHeight}px`}}></div>
   );
 };
 

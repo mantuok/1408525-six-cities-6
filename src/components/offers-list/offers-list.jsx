@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 import SortingMenu from '../sorting-menu/sorting-menu';
@@ -64,4 +64,4 @@ OffersList.propTypes = {
   selectedSortingType: stringPropTypes
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OffersList);
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(OffersList));

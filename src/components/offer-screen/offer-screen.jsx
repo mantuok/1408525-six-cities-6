@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import classnames from 'classnames';
 import {nanoid} from 'nanoid';
-import {Link, useParams, useHistory} from 'react-router-dom';
+import {useParams, useHistory} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {
   fetchOfferById,
@@ -22,12 +22,13 @@ import {
 } from '../../const';
 import LoadingPlaceholder, {} from '../loading-placeholder/loading-placeholder';
 import NearbyOffersList from '../nearby-offers-list/nearby-offers-list';
-import ProfileNavigation from '../profile-navigation/profile-navigation';
 import OfferImage from './offer-image';
 import OfferGood from './offer-good';
 import OfferReview from './offer-review';
 import NewReview from './new-review';
 import Map from '../map/map';
+import Header from '../header/header';
+import Footer from '../footer/footer';
 
 const renderImages = (images, title) => {
   return images.map((image) => <OfferImage image={image} title={title} key={nanoid()}/>);
@@ -76,23 +77,7 @@ const OfferScreen = (props) => {
 
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Link className="header__logo-link" to="/">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </Link>
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <ProfileNavigation />
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
-
+      <Header />
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
@@ -176,11 +161,7 @@ const OfferScreen = (props) => {
 
         <NearbyOffersList />
       </main>
-      <footer className="footer container">
-        <Link className="footer__logo-link" to="/">
-          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-        </Link>
-      </footer>
+      <Footer />
     </div>
   );
 };

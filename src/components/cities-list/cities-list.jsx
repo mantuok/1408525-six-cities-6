@@ -17,4 +17,4 @@ const CitiesList = () => {
   );
 };
 
-export default CitiesList;
+export default React.memo(CitiesList);

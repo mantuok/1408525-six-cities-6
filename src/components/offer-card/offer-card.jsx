@@ -63,4 +63,4 @@ OfferCard.propTypes = {
   isNearbyOffer: booleanPropTypesNotRequired
 };
 
-export default OfferCard;
+export default React.memo(OfferCard);
