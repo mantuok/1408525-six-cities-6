@@ -10,12 +10,12 @@ import {City} from '../../const';
 import {getOffersPerCity} from '../../utils/common';
 import {
   offersPropTypes,
-  functionPropTypes
+  functionPropTypes,
+  booleanPropTypes
 } from '../../utils/props-validation';
 
 const FavoritesScreen = (props) => {
-  const {favoriteOffers, onLoadFavoriteOffers} = props;
-  const [isDataPerOfferLoaded, setDataPerOfferLoaded] = useState(false);
+  const {favoriteOffers, onLoadFavoriteOffers, isFavoriteDataLoaded} = props;
 
   const getFavoritwOffersListItems = () => {
     Object.keys(City).map((city) => {
@@ -30,13 +30,12 @@ const FavoritesScreen = (props) => {
   }
 
   useEffect(()=> {
-    if (!isDataPerOfferLoaded) {
+    if (!isFavoriteDataLoaded) {
       onLoadFavoriteOffers();
-      setDataPerOfferLoaded(true);
     }
-  }, [isDataPerOfferLoaded]);
+  }, [isFavoriteDataLoaded]);
 
-  if (!isDataPerOfferLoaded) {
+  if (!isFavoriteDataLoaded) {
     return (
       <LoadingPlaceholder />
     );
@@ -61,7 +60,8 @@ const FavoritesScreen = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  favoriteOffers: state.favoriteOffers
+  favoriteOffers: state.favoriteOffers,
+  isFavoriteDataLoaded: state.isFavoriteDataLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -72,7 +72,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 FavoritesScreen.propTypes = {
   offers: offersPropTypes,
-  onLoadFavoriteOffers: functionPropTypes
+  onLoadFavoriteOffers: functionPropTypes,
+  isFavoriteDataLoaded: booleanPropTypes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FavoritesScreen);

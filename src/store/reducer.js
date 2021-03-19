@@ -18,6 +18,7 @@ const initialState = {
   activeCity: City.Paris.NAME,
   activeCardId: null,
   isDataLoaded: false,
+  isFavoriteDataLoaded: false,
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   userEmail: ``,
   userAvatar: ``
@@ -65,7 +66,8 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_FAVORITE_OFFERS:
       return {
         ...state,
-        favoriteOffers: action.payload
+        favoriteOffers: action.payload,
+        isFavoriteDataLoaded: true
       };
     case ActionType.LOAD_NEARBY_OFFERS:
       return {
