@@ -1,24 +1,13 @@
-import React, {useEffect} from 'react';
-import {connect} from 'react-redux';
-import {fetchFavoriteOffers} from '../../store/api-actions';
+import React from 'react';
 import OfferCard from '../offer-card/offer-card';
 import {
   offersPropTypes,
   stringPropTypes
 } from '../../utils/props-validation';
-import {getOffersPerCity} from '../../utils/common';
 
 const FavoritesLocationItem = (props) => {
   const {city, favoriteOffersPerCity} = props;
 
-  // useEffect(()=> {
-  //   onLoadFavoriteOffers();
-  // }, [city]);
-
-
-  // const favoriteOffersPerCity = getOffersPerCity(favoriteOffers, city);
-
-  // if (favoriteOffersPerCity.length > 0) {
     return (
       <li className="favorites__locations-items">
         <div className="favorites__locations locations locations--current">
@@ -33,20 +22,7 @@ const FavoritesLocationItem = (props) => {
         </div>
       </li>
     );
-  // } else {
-  //   return null;
-  // }
 };
-
-// const mapStateToProps = (state) => ({
-//   favoriteOffers: state.favoriteOffers
-// });
-
-// const mapDispatchToProps = (dispatch) => ({
-//   onLoadFavoriteOffers() {
-//     dispatch(fetchFavoriteOffers());
-//   }
-// });
 
 FavoritesLocationItem.propTypes = {
   favoriteOffersPerCity: offersPropTypes,
@@ -54,4 +30,3 @@ FavoritesLocationItem.propTypes = {
 };
 
 export default (FavoritesLocationItem);
-// export default connect(mapStateToProps, mapDispatchToProps)(FavoritesLocationItem);
