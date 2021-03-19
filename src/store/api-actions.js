@@ -1,6 +1,12 @@
 import {ActionCreator} from './action';
-import {adaptOffersToClient} from '../utils/adapter';
-import {AuthorizationStatus} from '../const';
+import {
+  adaptOffersToClient,
+  adaptReviewsToClient
+} from '../utils/adapter';
+import {
+  AuthorizationStatus
+} from '../const';
+import {api as importedApi} from '../index';
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
@@ -28,6 +34,23 @@ export const fetchOffers = () => (dispatch, _getState, api) => (
   api.get(`/hotels`)
   .then(({data}) => adaptOffersToClient(data))
   .then((data) => dispatch(ActionCreator.loadOffers(data)))
+);
+
+export const fetchOfferById = (id) => {
+  return importedApi.get(`hotels/${id}`)
+  .then(({data}) => adaptOffersToClient(data));
+};
+
+export const fetchReviewsPerOffer = (id) => (dispatch, _getState, api) => (
+  api.get(`comments/${id}`)
+  .then(({data}) => adaptReviewsToClient(data))
+  .then((data) => dispatch(ActionCreator.loadReviewsPerOffer(data)))
+);
+
+export const postReview = (id, {comment, rating}) => (dispatch, _getState, api) => (
+  api.post(`comments/${id}`, {comment, rating})
+  .then(({data}) => adaptReviewsToClient(data))
+  .then((data) => dispatch(ActionCreator.loadReviewsPerOffer(data)))
 );
 
 export const fetchNearbyOffers = (offerId) => (dispatch, _getState, api) => (

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import ProfileNavigation from '../profile-navigation/profile-navigation';
 
 const PageNotFoundScreen = () => {
   return (
@@ -14,20 +15,14 @@ const PageNotFoundScreen = () => {
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <Link className="header__nav-link header__nav-link--profile" to="/favorites">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </Link>
-                </li>
+                <ProfileNavigation />
               </ul>
             </nav>
           </div>
         </div>
       </header>
 
-      <h1>Unfortunately page not found</h1>
+      <h1 style={{marginLeft: `25px`}}>Unfortunately page not found</h1>
 
 
       <footer className="footer container">

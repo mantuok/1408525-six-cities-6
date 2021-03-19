@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {nanoid} from 'nanoid';
 import {ActionCreator} from '../../store/action';
 import classnames from 'classnames';
 import {SortingType} from '../../const';
@@ -33,13 +32,17 @@ const SortingMenu = (props) => {
     return Object.keys(SortingType).map((type) => {
       return (
         <li
-          key={nanoid()}
+          key={type}
           className={getSortingMenuItemClass(SortingType[type])}
           tabIndex="0">
           {SortingType[type]}
         </li>
       );
     });
+  };
+
+  const handleMenuStateChange = () => {
+    toggleMenuState((currentMenuStateOpened) => !currentMenuStateOpened);
   };
 
   const handleSortingMenuClick = (evt) => {
@@ -52,8 +55,7 @@ const SortingMenu = (props) => {
       className="places__sorting"
       action="#"
       method="get"
-      onClick={() =>
-        toggleMenuState((currentMenuStateOpened) => !currentMenuStateOpened)}
+      onClick={handleMenuStateChange}
     >
       <span className="places__sorting-caption">Sort by </span>
       <span className="places__sorting-type" tabIndex="0">

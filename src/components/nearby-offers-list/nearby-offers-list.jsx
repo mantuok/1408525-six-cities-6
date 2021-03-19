@@ -9,7 +9,6 @@ import {
 } from '../../utils/props-validation';
 
 const NearbyOffersList = (props) => {
-  // const {nearbyOffers} = props;
   const {nearbyOffers, onNearbyOffersLoad} = props;
   const {id} = useParams();
 

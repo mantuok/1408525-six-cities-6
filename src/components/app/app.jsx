@@ -11,34 +11,33 @@ import {
   offersPropTypes,
   reviewsPropTypes
 } from '../../utils/props-validation';
+import {AppRoute} from '../../const';
 
-const App = (props) => {
-  const {reviews} = props;
-
+const App = () => {
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
-        <Route exact path="/">
+        <Route exact path={AppRoute.MAIN}>
           <MainScreen />
         </Route>
         <Route
           exact
-          path="/login"
+          path={AppRoute.LOGIN}
           render={({history}) => {
             return (
               <SignInScreen
-                onLoginSuccess={() => history.push(`/`)}
+                onLoginSuccess={() => history.push(AppRoute.MAIN)}
               />
             );
           }}
         />
         <PrivateRoute
           exact
-          path="/favorites"
+          path={AppRoute.FAVORITES}
           render={() => <FavoritesScreen />}
         />
-        <Route exact path="/offer/:id">
-          <OfferScreen reviews={reviews} />
+        <Route exact path={AppRoute.OFFER}>
+          <OfferScreen />
         </Route>
         <Route>
           <PageNotFoundScreen />

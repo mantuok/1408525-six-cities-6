@@ -1,10 +1,15 @@
 import React, {useState} from 'react';
+import {useParams} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {postReview} from '../../store/api-actions';
+import {functionPropTypes} from '../../utils/props-validation';
 
-const NewReview = () => {
-
+const NewReview = (props) => {
+  const {onReivewPost} = props;
+  const {id} = useParams();
   const [reviewForm, setReviewForm] = useState({
-    rating: 0,
-    comment: ``
+    comment: ``,
+    rating: 0
   });
 
   const handleFieldChange = (evt) => {
@@ -15,8 +20,24 @@ const NewReview = () => {
     });
   };
 
+  const submitReviewHandler = (evt) => {
+    evt.preventDefault();
+    onReivewPost(id, reviewForm);
+
+    setReviewForm({
+      ...reviewForm,
+      comment: ``,
+      rating: 0
+    });
+
+    evt.target.reset();
+  };
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      className="reviews__form form"
+      action=""
+      onSubmit={submitReviewHandler}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating" onChange={handleFieldChange}>
         <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" />
@@ -54,7 +75,14 @@ const NewReview = () => {
           </svg>
         </label>
       </div>
-      <textarea className="reviews__textarea form__textarea" onChange={handleFieldChange} id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
+      <textarea
+        className="reviews__textarea form__textarea"
+        onChange={handleFieldChange}
+        id="review"
+        name="comment"
+        placeholder="Tell how was your stay, what you like and what can be improved"
+      >
+      </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
@@ -65,4 +93,14 @@ const NewReview = () => {
   );
 };
 
-export default NewReview;
+const mapDispatchToProps = (dispatch) => ({
+  onReivewPost(id, reviewData) {
+    dispatch(postReview(id, reviewData));
+  }
+});
+
+NewReview.propTypes = {
+  onReivewPost: functionPropTypes
+};
+
+export default connect(null, mapDispatchToProps)(NewReview);
