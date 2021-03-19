@@ -9,16 +9,16 @@ import {
 import {getOffersPerCity} from '../../utils/common';
 
 const FavoritesLocationItem = (props) => {
-  const {city, favoriteOffers, onLoadFavoriteOffers} = props;
+  const {city, favoriteOffersPerCity} = props;
 
-  useEffect(()=> {
-    onLoadFavoriteOffers();
-  }, [city]);
+  // useEffect(()=> {
+  //   onLoadFavoriteOffers();
+  // }, [city]);
 
 
-  const favoriteOffersPerCity = getOffersPerCity(favoriteOffers, city);
+  // const favoriteOffersPerCity = getOffersPerCity(favoriteOffers, city);
 
-  if (favoriteOffersPerCity.length > 0) {
+  // if (favoriteOffersPerCity.length > 0) {
     return (
       <li className="favorites__locations-items">
         <div className="favorites__locations locations locations--current">
@@ -33,24 +33,25 @@ const FavoritesLocationItem = (props) => {
         </div>
       </li>
     );
-  } else {
-    return null;
-  }
+  // } else {
+  //   return null;
+  // }
 };
 
-const mapStateToProps = (state) => ({
-  favoriteOffers: state.favoriteOffers
-});
+// const mapStateToProps = (state) => ({
+//   favoriteOffers: state.favoriteOffers
+// });
 
-const mapDispatchToProps = (dispatch) => ({
-  onLoadFavoriteOffers() {
-    dispatch(fetchFavoriteOffers());
-  }
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   onLoadFavoriteOffers() {
+//     dispatch(fetchFavoriteOffers());
+//   }
+// });
 
 FavoritesLocationItem.propTypes = {
-  offers: offersPropTypes,
+  favoriteOffersPerCity: offersPropTypes,
   city: stringPropTypes
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FavoritesLocationItem);
+export default (FavoritesLocationItem);
+// export default connect(mapStateToProps, mapDispatchToProps)(FavoritesLocationItem);
