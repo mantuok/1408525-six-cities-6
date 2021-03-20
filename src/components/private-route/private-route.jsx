@@ -7,6 +7,7 @@ import {
   functionPropTypes,
   booleanPropTypes
 } from '../../utils/props-validation';
+import {getAuthorizationStatus} from '../../store/user/selectors';
 
 const PrivateRoute = (props) => {
   const {render, path, exact, authorizationStatus} = props;

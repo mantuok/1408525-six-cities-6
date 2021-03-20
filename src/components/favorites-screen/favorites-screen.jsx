@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {fetchFavoriteOffers} from '../../store/api-actions';
 import {nanoid} from 'nanoid';
@@ -7,7 +7,11 @@ import LoadingPlaceholder, {} from '../loading-placeholder/loading-placeholder';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import {City} from '../../const';
-import {getOffersPerCity, getFavoriteOffers} from '../../utils/common';
+import {
+  getFavoriteOffers,
+  getIsFavoriteDataLoaded
+} from '../../store/data-load/selectors';
+import {getOffersPerCity} from '../../utils/common';
 import {
   offersPropTypes,
   functionPropTypes,
@@ -22,12 +26,11 @@ const FavoritesScreen = (props) => {
       const favoriteOffersPerCity = getOffersPerCity(favoriteOffers);
       if (favoriteOffersPerCity > 0) {
         return <FavoritesLocationItem city={city} key={nanoid()} offers={favoriteOffersPerCity} />;
-      }
-      else {
+      } else {
         return null;
       }
-    })
-  }
+    });
+  };
 
   useEffect(()=> {
     if (!isFavoriteDataLoaded) {

@@ -7,21 +7,20 @@ import {
 
 const FavoritesLocationItem = (props) => {
   const {city, favoriteOffersPerCity} = props;
-
-    return (
-      <li className="favorites__locations-items">
-        <div className="favorites__locations locations locations--current">
-          <div className="locations__item">
-            <a className="locations__item-link" href="#">
-              <span>{city}</span>
-            </a>
-          </div>
+  return (
+    <li className="favorites__locations-items">
+      <div className="favorites__locations locations locations--current">
+        <div className="locations__item">
+          <a className="locations__item-link" href="#">
+            <span>{city}</span>
+          </a>
         </div>
-        <div className="favorites__places">
-          {favoriteOffersPerCity.map((offer) => <OfferCard key={offer.id} offer={offer} />)}
-        </div>
-      </li>
-    );
+      </div>
+      <div className="favorites__places">
+        {favoriteOffersPerCity.map((offer) => <OfferCard key={offer.id} offer={offer} />)}
+      </div>
+    </li>
+  );
 };
 
 FavoritesLocationItem.propTypes = {

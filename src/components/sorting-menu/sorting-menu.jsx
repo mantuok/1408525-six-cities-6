@@ -7,7 +7,7 @@ import {
   stringPropTypes,
   functionPropTypes
 } from '../../utils/props-validation';
-import { getSelectedSortingType } from '../../store/data-set/selectors';
+import {getSelectedSortingType} from '../../store/data-set/selectors';
 
 const SortingMenu = (props) => {
   const {selectedSortingType, onSortingSelect} = props;

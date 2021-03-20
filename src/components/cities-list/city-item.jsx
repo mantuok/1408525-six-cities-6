@@ -7,7 +7,7 @@ import {
   objectPropTypes
 } from '../../utils/props-validation';
 import {ActionCreator} from '../../store/action';
-import { getActiveCity } from '../../store/data-set/selectors';
+import {getActiveCity} from '../../store/data-set/selectors';
 
 const CityItem = (props) => {
   const {city, activeCity, onCityClick} = props;

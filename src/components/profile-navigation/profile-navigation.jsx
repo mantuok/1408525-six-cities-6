@@ -8,7 +8,11 @@ import {
   stringPropTypesNotRequired,
   stringPropTypes
 } from '../../utils/props-validation';
-import { getAuthorizationStatus, getUserEmail, getUserAvatar } from '../../store/user/selectors';
+import {
+  getAuthorizationStatus,
+  getUserEmail,
+  getUserAvatar
+} from '../../store/user/selectors';
 
 const ProfileNavigation = (props) => {
   const {userEmail, userAvatar, authorizationStatus, onLogoutClick} = props;

@@ -7,7 +7,7 @@ import {
   offersPropTypes,
   functionPropTypes
 } from '../../utils/props-validation';
-import { getNearbyOffers } from '../../store/data-load/selectors';
+import {getNearbyOffers} from '../../store/data-load/selectors';
 
 const NearbyOffersList = (props) => {
   const {nearbyOffers, onNearbyOffersLoad} = props;

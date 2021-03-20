@@ -29,7 +29,8 @@ import NewReview from './new-review';
 import Map from '../map/map';
 import Header from '../header/header';
 import Footer from '../footer/footer';
-import { getReviewsPerOffer } from '../../store/data-load/selectors';
+import {getReviewsPerOffer} from '../../store/data-load/selectors';
+import {getAuthorizationStatus} from '../../store/user/selectors';
 
 const renderImages = (images, title) => {
   return images.map((image) => <OfferImage image={image} title={title} key={nanoid()}/>);

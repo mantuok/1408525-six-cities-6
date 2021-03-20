@@ -8,14 +8,15 @@ import Header from '../header/header';
 import Footer from '../footer/footer';
 import {
   offersPropTypes,
-  stringPropTypes,
   functionPropTypes,
   booleanPropTypes
 } from '../../utils/props-validation';
 import {isListEmpty} from '../../utils/common';
 import LoadingPlaceholder from '../loading-placeholder/loading-placeholder';
-import { getOffers, getIsDataLoaded } from '../../store/data-load/selectors';
-import { getActiveCity } from '../../store/data-set/selectors';
+import {
+  getOffers,
+  getIsDataLoaded
+} from '../../store/data-load/selectors';
 
 const MainScreen = (props) => {
   const {offers, isDataLoaded, onLoadData} = props;

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 import SortingMenu from '../sorting-menu/sorting-menu';
@@ -9,7 +9,11 @@ import {
   stringPropTypes,
   functionPropTypes
 } from '../../utils/props-validation';
-import { getOffersPerCity } from '../../utils/common';
+import {
+  getOffersPerCityList,
+  getActiveCity,
+  getSelectedSortingType
+} from '../../store/data-set/selectors';
 
 const OffersList = (props) => {
   const {offersPerCity, activeCity, onFilterOffers, onSetActiveCard, selectedSortingType} = props;

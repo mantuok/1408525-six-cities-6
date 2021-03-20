@@ -7,10 +7,6 @@ import FavoritesScreen from '../favorites-screen/favorites-screen';
 import SignInScreen from '../sign-in-screen/sign-in-screen';
 import PageNotFoundScreen from '../page-not-found-screen/page-not-found-screen';
 import browserHistory from '../../browser-history';
-import {
-  offersPropTypes,
-  reviewsPropTypes
-} from '../../utils/props-validation';
 import {AppRoute} from '../../const';
 
 const App = () => {

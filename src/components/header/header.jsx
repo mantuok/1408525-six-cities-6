@@ -20,7 +20,7 @@ const Header = () => {
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
 
 export default React.memo(Header);
