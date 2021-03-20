@@ -8,6 +8,7 @@ import {
   stringPropTypesNotRequired,
   stringPropTypes
 } from '../../utils/props-validation';
+import { getAuthorizationStatus, getUserEmail, getUserAvatar } from '../../store/user/selectors';
 
 const ProfileNavigation = (props) => {
   const {userEmail, userAvatar, authorizationStatus, onLogoutClick} = props;
@@ -43,9 +44,9 @@ const ProfileNavigation = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
-  userEmail: state.userEmail,
-  userAvatar: state.userAvatar
+  authorizationStatus: getAuthorizationStatus(state),
+  userEmail: getUserEmail(state),
+  userAvatar: getUserAvatar(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

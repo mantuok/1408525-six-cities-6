@@ -7,7 +7,7 @@ import LoadingPlaceholder, {} from '../loading-placeholder/loading-placeholder';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import {City} from '../../const';
-import {getOffersPerCity} from '../../utils/common';
+import {getOffersPerCity, getFavoriteOffers} from '../../utils/common';
 import {
   offersPropTypes,
   functionPropTypes,
@@ -60,8 +60,8 @@ const FavoritesScreen = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  favoriteOffers: state.favoriteOffers,
-  isFavoriteDataLoaded: state.isFavoriteDataLoaded,
+  favoriteOffers: getFavoriteOffers(state),
+  isFavoriteDataLoaded: getIsFavoriteDataLoaded(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -71,7 +71,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 FavoritesScreen.propTypes = {
-  offers: offersPropTypes,
+  favoriteOffers: offersPropTypes,
   onLoadFavoriteOffers: functionPropTypes,
   isFavoriteDataLoaded: booleanPropTypes
 };

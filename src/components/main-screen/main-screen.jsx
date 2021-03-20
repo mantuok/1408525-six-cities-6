@@ -14,6 +14,8 @@ import {
 } from '../../utils/props-validation';
 import {isListEmpty} from '../../utils/common';
 import LoadingPlaceholder from '../loading-placeholder/loading-placeholder';
+import { getOffers, getIsDataLoaded } from '../../store/data-load/selectors';
+import { getActiveCity } from '../../store/data-set/selectors';
 
 const MainScreen = (props) => {
   const {offers, isDataLoaded, onLoadData} = props;
@@ -56,10 +58,8 @@ const MainScreen = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
-  offersPerCity: state.offersPerCity,
-  activeCity: state.activeCity,
-  isDataLoaded: state.isDataLoaded,
+  offers: getOffers(state),
+  isDataLoaded: getIsDataLoaded(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -70,7 +70,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 MainScreen.propTypes = {
   offers: offersPropTypes,
-  activeCity: stringPropTypes,
   onLoadData: functionPropTypes,
   isDataLoaded: booleanPropTypes,
 };

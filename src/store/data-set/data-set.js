@@ -1,4 +1,4 @@
-import {ActionType} from './action';
+import {ActionType} from '../action';
 import {getOffersPerCity} from '../../utils/common';
 import {
   SortingType,
@@ -35,6 +35,7 @@ const dataSet = (state = initialState, action) => {
         activeCardId: action.payload
       };
   }
+  return state;
 };
 
 export {dataSet};

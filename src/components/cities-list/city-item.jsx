@@ -7,6 +7,7 @@ import {
   objectPropTypes
 } from '../../utils/props-validation';
 import {ActionCreator} from '../../store/action';
+import { getActiveCity } from '../../store/data-set/selectors';
 
 const CityItem = (props) => {
   const {city, activeCity, onCityClick} = props;
@@ -29,7 +30,7 @@ const CityItem = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  activeCity: state.activeCity,
+  activeCity: getActiveCity(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

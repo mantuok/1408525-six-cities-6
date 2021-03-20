@@ -1,6 +1,6 @@
 
-import {ActionType} from './action';
-import {AuthorizationStatus} from '../const';
+import {ActionType} from '../action';
+import {AuthorizationStatus} from '../../const';
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -22,7 +22,6 @@ const user = (state = initialState, action) => {
         userAvatar: action.payload.avatar_url
       };
   }
-
   return state;
 };
 

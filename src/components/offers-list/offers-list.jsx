@@ -9,6 +9,7 @@ import {
   stringPropTypes,
   functionPropTypes
 } from '../../utils/props-validation';
+import { getOffersPerCity } from '../../utils/common';
 
 const OffersList = (props) => {
   const {offersPerCity, activeCity, onFilterOffers, onSetActiveCard, selectedSortingType} = props;
@@ -42,9 +43,9 @@ const OffersList = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  offersPerCity: state.offersPerCity,
-  activeCity: state.activeCity,
-  selectedSortingType: state.selectedSortingType
+  offersPerCity: getOffersPerCityList(state),
+  activeCity: getActiveCity(state),
+  selectedSortingType: getSelectedSortingType(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

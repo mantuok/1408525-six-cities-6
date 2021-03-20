@@ -15,6 +15,8 @@ import {
 } from '../../const';
 import {getCityCoordinates} from '../../utils/common';
 import "leaflet/dist/leaflet.css";
+import { getOffers, getNearbyOffers } from '../../store/data-load/selectors';
+import { getActiveCity, getActiveCardId } from '../../store/data-set/selectors';
 
 const Map = (props) => {
   const {offers, nearbyOffers, activeCity, activeCardId, mapType, currentOffer} = props;
@@ -96,10 +98,10 @@ const Map = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  activeCity: state.activeCity,
-  offers: state.offers,
-  nearbyOffers: state.nearbyOffers,
-  activeCardId: state.activeCardId
+  offers: getOffers(state),
+  nearbyOffers: getNearbyOffers(state),
+  activeCity: getActiveCity(state),
+  activeCardId: getActiveCardId(state)
 });
 
 Map.propTypes = {

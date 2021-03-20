@@ -7,6 +7,7 @@ import {
   stringPropTypes,
   functionPropTypes
 } from '../../utils/props-validation';
+import { getSelectedSortingType } from '../../store/data-set/selectors';
 
 const SortingMenu = (props) => {
   const {selectedSortingType, onSortingSelect} = props;
@@ -75,7 +76,7 @@ const SortingMenu = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  selectedSortingType: state.selectedSortingType
+  selectedSortingType: getSelectedSortingType(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

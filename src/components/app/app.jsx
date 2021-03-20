@@ -47,9 +47,4 @@ const App = () => {
   );
 };
 
-App.propTypes = {
-  offers: offersPropTypes,
-  reviews: reviewsPropTypes
-};
-
 export default App;

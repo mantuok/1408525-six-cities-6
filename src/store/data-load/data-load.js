@@ -1,5 +1,5 @@
 
-import {ActionType} from './action';
+import {ActionType} from '../action';
 
 const initialState = {
   offers: [],
@@ -35,6 +35,7 @@ const dataLoad = (state = initialState, action) => {
         reviewsPerOffer: action.payload
       };
   }
+  return state;
 };
 
 export {dataLoad};

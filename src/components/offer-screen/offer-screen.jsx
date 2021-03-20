@@ -29,6 +29,7 @@ import NewReview from './new-review';
 import Map from '../map/map';
 import Header from '../header/header';
 import Footer from '../footer/footer';
+import { getReviewsPerOffer } from '../../store/data-load/selectors';
 
 const renderImages = (images, title) => {
   return images.map((image) => <OfferImage image={image} title={title} key={nanoid()}/>);
@@ -167,8 +168,8 @@ const OfferScreen = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  reviewsPerOffer: state.reviewsPerOffer,
-  authorizationStatus: state.authorizationStatus
+  reviewsPerOffer: getReviewsPerOffer(state),
+  authorizationStatus: getAuthorizationStatus(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
