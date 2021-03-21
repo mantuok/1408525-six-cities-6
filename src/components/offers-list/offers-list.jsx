@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 import SortingMenu from '../sorting-menu/sorting-menu';
@@ -16,14 +16,10 @@ import {
 } from '../../store/data-set/selectors';
 
 const OffersList = (props) => {
-  const {offersPerCity, activeCity, onFilterOffers, onSetActiveCard, selectedSortingType} = props;
+  const {offersPerCity, activeCity, onSetActiveCard, selectedSortingType} = props;
   const [activeCardId, setActiveCard] = useState(undefined);
 
   const isCardActive = (offer) => offer.id === activeCardId;
-
-  // useEffect(() => {
-  //   onFilterOffers();
-  // }, [activeCity]);
 
   return (
     <section className="cities__places places">
@@ -53,9 +49,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // onFilterOffers() {
-  //   dispatch(ActionCreator.setOffersPerCity());
-  // },
   onSetActiveCard(offerId) {
     dispatch(ActionCreator.setActiveCard(offerId));
   }
@@ -64,7 +57,6 @@ const mapDispatchToProps = (dispatch) => ({
 OffersList.propTypes = {
   offersPerCity: offersPropTypes,
   activeCity: stringPropTypes,
-  // onFilterOffers: functionPropTypes,
   onSetActiveCard: functionPropTypes,
   selectedSortingType: stringPropTypes
 };

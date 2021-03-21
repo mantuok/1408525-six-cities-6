@@ -65,8 +65,8 @@ export const fetchFavoriteOffers = () => (dispatch, _getState, api) => (
   .then((data) => dispatch(ActionCreator.loadFavoriteOffers(data)))
 );
 
-export const updateFavoriteOfferStatus = (offerId, status) => (
+export const updateFavoriteOfferStatus = (offerId, status) => (dispatch, _getState, api) => (
   api.post(`/favorite/${offerId}/${status}`)
   .then(({data}) => adaptOffersToClient(data))
   .then((data) => dispatch(ActionCreator.updateFavoriteOfferStatus(data)))
-)
+);

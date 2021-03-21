@@ -39,7 +39,7 @@ const dataLoad = (state = initialState, action) => {
       return {
         ...state,
         favoriteOffers: updateOfferInList(action.payload, state.offers)
-      }
+      };
   }
   return state;
 };

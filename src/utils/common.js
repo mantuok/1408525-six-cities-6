@@ -19,10 +19,10 @@ export const getOffersPerCity = (offers, selectedCity) => {
 };
 
 export const updateOfferInList = (updatedOffer, offers) => {
-  const offerIndex = offers.findIndex((offer) => offer.id === offerId);
+  const offerIndex = offers.findIndex((offer) => offer.id === updatedOffer.id);
   return [
     ...offers.slice(0, offerIndex),
     updatedOffer,
     ...offers.slice(offerIndex + 1)
-  ]
-}
+  ];
+};
