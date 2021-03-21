@@ -17,3 +17,12 @@ export const getFavoriteOffers = (offers) => offers.filter((offer) => offer.isFa
 export const getOffersPerCity = (offers, selectedCity) => {
   return offers.filter((offer) => offer.city.name === selectedCity);
 };
+
+export const updateOfferInList = (updatedOffer, offers) => {
+  const offerIndex = offers.findIndex((offer) => offer.id === offerId);
+  return [
+    ...offers.slice(0, offerIndex),
+    updatedOffer,
+    ...offers.slice(offerIndex + 1)
+  ]
+}

@@ -21,9 +21,9 @@ const OffersList = (props) => {
 
   const isCardActive = (offer) => offer.id === activeCardId;
 
-  useEffect(() => {
-    onFilterOffers();
-  }, [activeCity]);
+  // useEffect(() => {
+  //   onFilterOffers();
+  // }, [activeCity]);
 
   return (
     <section className="cities__places places">
@@ -53,9 +53,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onFilterOffers() {
-    dispatch(ActionCreator.setOffersPerCity());
-  },
+  // onFilterOffers() {
+  //   dispatch(ActionCreator.setOffersPerCity());
+  // },
   onSetActiveCard(offerId) {
     dispatch(ActionCreator.setActiveCard(offerId));
   }
@@ -64,7 +64,7 @@ const mapDispatchToProps = (dispatch) => ({
 OffersList.propTypes = {
   offersPerCity: offersPropTypes,
   activeCity: stringPropTypes,
-  onFilterOffers: functionPropTypes,
+  // onFilterOffers: functionPropTypes,
   onSetActiveCard: functionPropTypes,
   selectedSortingType: stringPropTypes
 };

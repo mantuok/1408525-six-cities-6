@@ -7,6 +7,7 @@ export const ActionType = {
   LOAD_OFFERS: `loadOffers`,
   LOAD_REVIEWS_PER_OFFER: `loadReviewsPerOffer`,
   LOAD_FAVORITE_OFFERS: `loadFavoriteOffers`,
+  UPDATE_FAVORITE_OFFER_STATUS: `updateFavoriteOfferStatus`,
   LOAD_NEARBY_OFFERS: `loadNearbyOffers`,
   SET_USER_DATA: `setUserData`
 };
@@ -38,6 +39,10 @@ export const ActionCreator = {
   loadFavoriteOffers: (favoriteOffers) => ({
     type: ActionType.LOAD_FAVORITE_OFFERS,
     payload: favoriteOffers
+  }),
+  updateFavoriteOfferStatus: (offer) => ({
+    type: ActionType.UPDATE_FAVORITE_OFFER_STATUS,
+    payload: offer
   }),
   loadNearbyOffers: (nearbyOffers) => ({
     type: ActionType.LOAD_NEARBY_OFFERS,

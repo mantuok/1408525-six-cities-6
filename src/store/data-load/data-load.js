@@ -1,5 +1,6 @@
 
 import {ActionType} from '../action';
+import {updateOfferInList} from '../../utils/common';
 
 const initialState = {
   offers: [],
@@ -34,6 +35,11 @@ const dataLoad = (state = initialState, action) => {
         ...state,
         reviewsPerOffer: action.payload
       };
+    case ActionType.UPDATE_FAVORITE_OFFER_STATUS:
+      return {
+        ...state,
+        favoriteOffers: updateOfferInList(action.payload, state.offers)
+      }
   }
   return state;
 };

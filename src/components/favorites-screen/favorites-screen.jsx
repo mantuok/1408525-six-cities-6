@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {fetchFavoriteOffers} from '../../store/api-actions';
 import {nanoid} from 'nanoid';
 import FavoritesLocationItem from './favorites-location-item';
-import LoadingPlaceholder, {} from '../loading-placeholder/loading-placeholder';
+import LoadingPlaceholder from '../loading-placeholder/loading-placeholder';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import {City} from '../../const';
