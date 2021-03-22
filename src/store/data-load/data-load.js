@@ -1,4 +1,3 @@
-
 import {ActionType} from '../action';
 import {
   updateOfferInList,

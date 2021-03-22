@@ -1,16 +1,35 @@
 import React from 'react';
 import classnames from 'classnames';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {getRatingStarsWidth} from '../../utils/common';
 import {
   offerPropTypes,
   functionPropTypesNotRequired,
   booleanPropTypesNotRequired
 } from '../../utils/props-validation';
+import {connect} from 'react-redux';
+import {updateFavoriteOfferStatus} from '../../store/api-actions';
+import {isUserAuthorized} from '../../utils/common';
+import {getAuthorizationStatus} from '../../store/user/selectors';
+import {
+  AppRoute,
+  FavoriteStatus
+} from '../../const';
+
+const getUpdatedFavoriteStatus = (isCurrentlyFavorite) => isCurrentlyFavorite ? FavoriteStatus.REMOVE : FavoriteStatus.ADD
 
 const OfferCard = (props) => {
-  const {isNearbyOffer = false, handleMouseOver, isCardActive, offer} = props;
+  const {isNearbyOffer = false, handleMouseOver, isCardActive, offer, onFavoriteButtonClick, authorizationStatus} = props;
   const {id, isPremium, title, previewImage, price, rating, type} = offer;
+  const history = useHistory();
+
+  const handleFavoriteButtonClick = (evt) => {
+    if (isUserAuthorized(authorizationStatus)) {
+      onFavoriteButtonClick(id, getUpdatedFavoriteStatus(offer.isFavorite))
+    } else {
+      history.push(AppRoute.LOGIN)
+    }
+  }
 
   const cardClass = classnames(`cities__place-card place-card`, {"place-card--active": isCardActive});
   const premiumMarkClass = classnames(`place-card__mark`, {"visually-hidden": !isPremium});
@@ -37,6 +56,7 @@ const OfferCard = (props) => {
           <button
             className="place-card__bookmark-button button"
             type="button"
+            onClick={handleFavoriteButtonClick}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
@@ -59,6 +79,16 @@ const OfferCard = (props) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onFavoriteButtonClick(id, favoriteStatus) {
+    dispatch(updateFavoriteOfferStatus(id, favoriteStatus))
+  }
+});
+
 OfferCard.propTypes = {
   offer: offerPropTypes,
   handleMouseOver: functionPropTypesNotRequired,
@@ -66,4 +96,4 @@ OfferCard.propTypes = {
   isNearbyOffer: booleanPropTypesNotRequired
 };
 
-export default React.memo(OfferCard);
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(OfferCard));

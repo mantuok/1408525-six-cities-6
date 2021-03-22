@@ -10,7 +10,7 @@ import {
 } from '../../store/api-actions';
 import {
   getRatingStarsWidth,
-  isUserAuthorizaed
+  isUserAuthorized
 } from '../../utils/common';
 import {
   reviewsPropTypes,
@@ -46,15 +46,9 @@ const renderReviews = (reviews) => {
   return reviews.map((review) => <OfferReview review={review} key={review.id} />);
 };
 
-// const getNewReviewForm = (authorizationStatus) =>
-//   authorizationStatus === AuthorizationStatus.AUTH ?
-//     <NewReview /> :
-//     ``;
-
-const getNewReviewForm = (authorizationStatus) => isUserAuthorizaed(authorizationStatus) ? <NewReview /> : ``;
+const getNewReviewForm = (authorizationStatus) => isUserAuthorized(authorizationStatus) ? <NewReview /> : ``;
 
 const getUpdatedFavoriteStatus = (isCurrentlyFavorite) => isCurrentlyFavorite ? FavoriteStatus.REMOVE : FavoriteStatus.ADD
-
 
 const OfferScreen = (props) => {
   const {reviewsPerOffer, onReviewsPerOfferLoad, onFavoriteButtonClick, authorizationStatus} = props;
@@ -85,7 +79,7 @@ const OfferScreen = (props) => {
   const avatarClass = classnames(`property__avatar-wrapper user__avatar-wrapper`, {"property__avatar-wrapper--pro": isPro});
 
   const handleFavoriteButtonClick = (evt) => {
-    if (isUserAuthorizaed(authorizationStatus)) {
+    if (isUserAuthorized(authorizationStatus)) {
       onFavoriteButtonClick(id, getUpdatedFavoriteStatus(currentOffer.isFavorite))
     } else {
       history.push(AppRoute.LOGIN)
@@ -121,6 +115,7 @@ const OfferScreen = (props) => {
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
                 </button>
+
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">

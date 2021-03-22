@@ -40,4 +40,4 @@ export const updateFavoriteOfferInList = (updatedOffer, favoriteOffers) => {
   return favoriteOffers;
 };
 
-export const isUserAuthorizaed = (status) => status === AuthorizationStatus.AUTH
+export const isUserAuthorized = (status) => status === AuthorizationStatus.AUTH
