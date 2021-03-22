@@ -5,10 +5,12 @@ import {useParams, useHistory} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {
   fetchOfferById,
-  fetchReviewsPerOffer
+  fetchReviewsPerOffer,
+  updateFavoriteOfferStatus
 } from '../../store/api-actions';
 import {
-  getRatingStarsWidth
+  getRatingStarsWidth,
+  isUserAuthorizaed
 } from '../../utils/common';
 import {
   reviewsPropTypes,
@@ -18,7 +20,7 @@ import {
 import {
   MapType,
   AppRoute,
-  AuthorizationStatus
+  FavoriteStatus
 } from '../../const';
 import LoadingPlaceholder, {} from '../loading-placeholder/loading-placeholder';
 import NearbyOffersList from '../nearby-offers-list/nearby-offers-list';
@@ -44,13 +46,18 @@ const renderReviews = (reviews) => {
   return reviews.map((review) => <OfferReview review={review} key={review.id} />);
 };
 
-const getNewReviewForm = (authorizationStatus) =>
-  authorizationStatus === AuthorizationStatus.AUTH ?
-    <NewReview /> :
-    ``;
+// const getNewReviewForm = (authorizationStatus) =>
+//   authorizationStatus === AuthorizationStatus.AUTH ?
+//     <NewReview /> :
+//     ``;
+
+const getNewReviewForm = (authorizationStatus) => isUserAuthorizaed(authorizationStatus) ? <NewReview /> : ``;
+
+const getUpdatedFavoriteStatus = (isCurrentlyFavorite) => isCurrentlyFavorite ? FavoriteStatus.REMOVE : FavoriteStatus.ADD
+
 
 const OfferScreen = (props) => {
-  const {reviewsPerOffer, onReviewsPerOfferLoad, authorizationStatus} = props;
+  const {reviewsPerOffer, onReviewsPerOfferLoad, onFavoriteButtonClick, authorizationStatus} = props;
   const [isDataPerOfferLoaded, setDataPerOfferLoaded] = useState(false);
   const [currentOffer, setCurrentOffer] = useState({});
   const {id} = useParams();
@@ -77,6 +84,14 @@ const OfferScreen = (props) => {
   const premiumMarkClass = classnames(`property__mark`, {"visually-hidden": !isPremium});
   const avatarClass = classnames(`property__avatar-wrapper user__avatar-wrapper`, {"property__avatar-wrapper--pro": isPro});
 
+  const handleFavoriteButtonClick = (evt) => {
+    if (isUserAuthorizaed(authorizationStatus)) {
+      onFavoriteButtonClick(id, getUpdatedFavoriteStatus(currentOffer.isFavorite))
+    } else {
+      history.push(AppRoute.LOGIN)
+    }
+  }
+
   return (
     <div className="page">
       <Header />
@@ -96,7 +111,11 @@ const OfferScreen = (props) => {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
+                <button
+                  className="property__bookmark-button button"
+                  type="button"
+                  onClick={handleFavoriteButtonClick}
+                >
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -176,6 +195,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onReviewsPerOfferLoad(id) {
     dispatch(fetchReviewsPerOffer(id));
+  },
+  onFavoriteButtonClick(id, favoriteStatus) {
+    dispatch(updateFavoriteOfferStatus(id, favoriteStatus))
   }
 });
 

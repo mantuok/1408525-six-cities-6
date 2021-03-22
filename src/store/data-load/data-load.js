@@ -1,6 +1,9 @@
 
 import {ActionType} from '../action';
-import {updateOfferInList} from '../../utils/common';
+import {
+  updateOfferInList,
+  updateFavoriteOfferInList
+} from '../../utils/common';
 
 const initialState = {
   offers: [],
@@ -26,6 +29,7 @@ const dataLoad = (state = initialState, action) => {
         isFavoriteDataLoaded: true
       };
     case ActionType.LOAD_NEARBY_OFFERS:
+      console.log(state.favoriteOffers)
       return {
         ...state,
         nearbyOffers: action.payload
@@ -38,7 +42,8 @@ const dataLoad = (state = initialState, action) => {
     case ActionType.UPDATE_FAVORITE_OFFER_STATUS:
       return {
         ...state,
-        favoriteOffers: updateOfferInList(action.payload, state.offers)
+        offers: updateOfferInList(action.payload, state.offers),
+        favoriteOffers: updateFavoriteOfferInList(action.payload, state.favoriteOffers)
       };
   }
   return state;

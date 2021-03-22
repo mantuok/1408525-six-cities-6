@@ -28,4 +28,4 @@ FavoritesLocationItem.propTypes = {
   city: stringPropTypes
 };
 
-export default (FavoritesLocationItem);
+export default FavoritesLocationItem;

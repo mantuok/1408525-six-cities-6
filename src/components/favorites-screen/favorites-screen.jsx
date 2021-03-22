@@ -21,11 +21,13 @@ import {
 const FavoritesScreen = (props) => {
   const {favoriteOffers, onLoadFavoriteOffers, isFavoriteDataLoaded} = props;
 
-  const getFavoritwOffersListItems = () => {
-    Object.keys(City).map((city) => {
-      const favoriteOffersPerCity = getOffersPerCity(favoriteOffers);
-      if (favoriteOffersPerCity > 0) {
-        return <FavoritesLocationItem city={city} key={nanoid()} offers={favoriteOffersPerCity} />;
+  console.log(favoriteOffers)
+
+  const getFavoriteOffersListItems = () => {
+    return Object.keys(City).map((city) => {
+      const favoriteOffersPerCity = getOffersPerCity(favoriteOffers, city);
+      if (favoriteOffersPerCity.length > 0) {
+        return <FavoritesLocationItem city={city} favoriteOffersPerCity={favoriteOffersPerCity} key={nanoid()} />;
       } else {
         return null;
       }
@@ -52,7 +54,7 @@ const FavoritesScreen = (props) => {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              {getFavoritwOffersListItems()}
+              {getFavoriteOffersListItems()}
             </ul>
           </section>
         </div>
