@@ -5,33 +5,43 @@ import {getRatingStarsWidth} from '../../utils/common';
 import {
   offerPropTypes,
   functionPropTypesNotRequired,
-  booleanPropTypesNotRequired
+  booleanPropTypesNotRequired,
+  functionPropTypes,
+  stringPropTypes
 } from '../../utils/props-validation';
 import {connect} from 'react-redux';
 import {updateFavoriteOfferStatus} from '../../store/api-actions';
 import {isUserAuthorized} from '../../utils/common';
 import {getAuthorizationStatus} from '../../store/user/selectors';
-import {getFavoriteOffers} from '../../store/data-load/selectors';
 import {
   AppRoute,
   FavoriteStatus
 } from '../../const';
 
-const getUpdatedFavoriteStatus = (isCurrentlyFavorite) => isCurrentlyFavorite ? FavoriteStatus.REMOVE : FavoriteStatus.ADD
+const getUpdatedFavoriteStatus = (isCurrentlyFavorite) =>
+  isCurrentlyFavorite ?
+    FavoriteStatus.REMOVE :
+    FavoriteStatus.ADD;
 
 const OfferCard = (props) => {
-  const {isNearbyOffer = false, handleMouseOver, isCardActive, offer, onFavoriteButtonClick, authorizationStatus, favoriteOffers} = props;
+  const {
+    isNearbyOffer = false,
+    handleMouseOver,
+    isCardActive,
+    offer,
+    onFavoriteButtonClick,
+    authorizationStatus
+  } = props;
   const {id, isPremium, title, previewImage, price, rating, type} = offer;
   const history = useHistory();
 
-  const handleFavoriteButtonClick = (evt) => {
+  const handleFavoriteButtonClick = () => {
     if (isUserAuthorized(authorizationStatus)) {
-      console.log(favoriteOffers)
-      onFavoriteButtonClick(id, getUpdatedFavoriteStatus(offer.isFavorite))
+      onFavoriteButtonClick(id, getUpdatedFavoriteStatus(offer.isFavorite));
     } else {
-      history.push(AppRoute.LOGIN)
+      history.push(AppRoute.LOGIN);
     }
-  }
+  };
 
   const cardClass = classnames(`cities__place-card place-card`, {"place-card--active": isCardActive});
   const premiumMarkClass = classnames(`place-card__mark`, {"visually-hidden": !isPremium});
@@ -64,7 +74,7 @@ const OfferCard = (props) => {
               className="place-card__bookmark-icon"
               width="18"
               height="19"
-              style={offer.isFavorite ? {stroke:`#4481c3`} : {}}
+              style={offer.isFavorite ? {stroke: `#4481c3`} : {}}
             >
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -87,13 +97,12 @@ const OfferCard = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  authorizationStatus: getAuthorizationStatus(state),
-  favoriteOffers: getFavoriteOffers(state)
+  authorizationStatus: getAuthorizationStatus(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onFavoriteButtonClick(id, favoriteStatus) {
-    dispatch(updateFavoriteOfferStatus(id, favoriteStatus))
+    dispatch(updateFavoriteOfferStatus(id, favoriteStatus));
   }
 });
 
@@ -101,7 +110,9 @@ OfferCard.propTypes = {
   offer: offerPropTypes,
   handleMouseOver: functionPropTypesNotRequired,
   isCardActive: booleanPropTypesNotRequired,
-  isNearbyOffer: booleanPropTypesNotRequired
+  isNearbyOffer: booleanPropTypesNotRequired,
+  onFavoriteButtonClick: functionPropTypes,
+  authorizationStatus: stringPropTypes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(OfferCard));

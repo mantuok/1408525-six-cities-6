@@ -19,7 +19,7 @@ export const getOffersPerCity = (offers, selectedCity) => {
   return offers.filter((offer) => offer.city.name === selectedCity);
 };
 
-export const getItemIndex = (item, array) => array.findIndex((arrayItem) => arrayItem.id === item.id)
+export const getItemIndex = (item, array) => array.findIndex((arrayItem) => arrayItem.id === item.id);
 
 export const updateOfferInList = (updatedOffer, offers) => {
   const offerIndex = getItemIndex(updatedOffer, offers);
@@ -39,4 +39,4 @@ export const updateFavoriteOfferInList = (updatedOffer, favoriteOffers) => {
   return favoriteOffers;
 };
 
-export const isUserAuthorized = (status) => status === AuthorizationStatus.AUTH
+export const isUserAuthorized = (status) => status === AuthorizationStatus.AUTH;

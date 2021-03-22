@@ -28,7 +28,6 @@ const dataLoad = (state = initialState, action) => {
         isFavoriteDataLoaded: true
       };
     case ActionType.LOAD_NEARBY_OFFERS:
-      console.log(state.favoriteOffers)
       return {
         ...state,
         nearbyOffers: action.payload

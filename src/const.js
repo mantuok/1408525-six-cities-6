@@ -88,4 +88,4 @@ export const AppRoute = {
 export const FavoriteStatus = {
   REMOVE: 0,
   ADD: 1
-}
+};

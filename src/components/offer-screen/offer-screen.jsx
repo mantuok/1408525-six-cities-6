@@ -48,7 +48,10 @@ const renderReviews = (reviews) => {
 
 const getNewReviewForm = (authorizationStatus) => isUserAuthorized(authorizationStatus) ? <NewReview /> : ``;
 
-const getUpdatedFavoriteStatus = (isCurrentlyFavorite) => isCurrentlyFavorite ? FavoriteStatus.REMOVE : FavoriteStatus.ADD
+const getUpdatedFavoriteStatus = (isCurrentlyFavorite) =>
+  isCurrentlyFavorite ?
+    FavoriteStatus.REMOVE :
+    FavoriteStatus.ADD;
 
 const OfferScreen = (props) => {
   const {reviewsPerOffer, onReviewsPerOfferLoad, onFavoriteButtonClick, authorizationStatus} = props;
@@ -78,13 +81,13 @@ const OfferScreen = (props) => {
   const premiumMarkClass = classnames(`property__mark`, {"visually-hidden": !isPremium});
   const avatarClass = classnames(`property__avatar-wrapper user__avatar-wrapper`, {"property__avatar-wrapper--pro": isPro});
 
-  const handleFavoriteButtonClick = (evt) => {
+  const handleFavoriteButtonClick = () => {
     if (isUserAuthorized(authorizationStatus)) {
-      onFavoriteButtonClick(id, getUpdatedFavoriteStatus(currentOffer.isFavorite))
+      onFavoriteButtonClick(id, getUpdatedFavoriteStatus(currentOffer.isFavorite));
     } else {
-      history.push(AppRoute.LOGIN)
+      history.push(AppRoute.LOGIN);
     }
-  }
+  };
 
   return (
     <div className="page">
@@ -114,7 +117,7 @@ const OfferScreen = (props) => {
                     className="property__bookmark-icon"
                     width="31"
                     height="33"
-                    style={currentOffer.isFavorite ? {stroke:`#4481c3`} : {}}
+                    style={currentOffer.isFavorite ? {stroke: `#4481c3`} : {}}
                   >
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -197,14 +200,15 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchReviewsPerOffer(id));
   },
   onFavoriteButtonClick(id, favoriteStatus) {
-    dispatch(updateFavoriteOfferStatus(id, favoriteStatus))
+    dispatch(updateFavoriteOfferStatus(id, favoriteStatus));
   }
 });
 
 OfferScreen.propTypes = {
   reviewsPerOffer: reviewsPropTypes,
   authorizationStatus: stringPropTypes,
-  onReviewsPerOfferLoad: functionPropTypes
+  onReviewsPerOfferLoad: functionPropTypes,
+  onFavoriteButtonClick: functionPropTypes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OfferScreen);

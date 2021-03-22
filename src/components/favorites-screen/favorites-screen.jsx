@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {fetchFavoriteOffers} from '../../store/api-actions';
 import {nanoid} from 'nanoid';
