@@ -11,6 +11,7 @@ import {connect} from 'react-redux';
 import {updateFavoriteOfferStatus} from '../../store/api-actions';
 import {isUserAuthorized} from '../../utils/common';
 import {getAuthorizationStatus} from '../../store/user/selectors';
+import {getFavoriteOffers} from '../../store/data-load/selectors';
 import {
   AppRoute,
   FavoriteStatus
@@ -19,12 +20,13 @@ import {
 const getUpdatedFavoriteStatus = (isCurrentlyFavorite) => isCurrentlyFavorite ? FavoriteStatus.REMOVE : FavoriteStatus.ADD
 
 const OfferCard = (props) => {
-  const {isNearbyOffer = false, handleMouseOver, isCardActive, offer, onFavoriteButtonClick, authorizationStatus} = props;
+  const {isNearbyOffer = false, handleMouseOver, isCardActive, offer, onFavoriteButtonClick, authorizationStatus, favoriteOffers} = props;
   const {id, isPremium, title, previewImage, price, rating, type} = offer;
   const history = useHistory();
 
   const handleFavoriteButtonClick = (evt) => {
     if (isUserAuthorized(authorizationStatus)) {
+      console.log(favoriteOffers)
       onFavoriteButtonClick(id, getUpdatedFavoriteStatus(offer.isFavorite))
     } else {
       history.push(AppRoute.LOGIN)
@@ -58,7 +60,12 @@ const OfferCard = (props) => {
             type="button"
             onClick={handleFavoriteButtonClick}
           >
-            <svg className="place-card__bookmark-icon" width="18" height="19">
+            <svg
+              className="place-card__bookmark-icon"
+              width="18"
+              height="19"
+              style={offer.isFavorite ? {stroke:`#4481c3`} : {}}
+            >
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
             <span className="visually-hidden">To bookmarks</span>
@@ -80,7 +87,8 @@ const OfferCard = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  authorizationStatus: getAuthorizationStatus(state)
+  authorizationStatus: getAuthorizationStatus(state),
+  favoriteOffers: getFavoriteOffers(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

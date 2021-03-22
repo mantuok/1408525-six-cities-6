@@ -110,7 +110,12 @@ const OfferScreen = (props) => {
                   type="button"
                   onClick={handleFavoriteButtonClick}
                 >
-                  <svg className="property__bookmark-icon" width="31" height="33">
+                  <svg
+                    className="property__bookmark-icon"
+                    width="31"
+                    height="33"
+                    style={currentOffer.isFavorite ? {stroke:`#4481c3`} : {}}
+                  >
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>

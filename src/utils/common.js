@@ -22,7 +22,6 @@ export const getOffersPerCity = (offers, selectedCity) => {
 export const getItemIndex = (item, array) => array.findIndex((arrayItem) => arrayItem.id === item.id)
 
 export const updateOfferInList = (updatedOffer, offers) => {
-  // const offerIndex = offers.findIndex((offer) => offer.id === updatedOffer.id);
   const offerIndex = getItemIndex(updatedOffer, offers);
   return [
     ...offers.slice(0, offerIndex),

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {fetchFavoriteOffers} from '../../store/api-actions';
 import {nanoid} from 'nanoid';
@@ -20,8 +20,6 @@ import {
 
 const FavoritesScreen = (props) => {
   const {favoriteOffers, onLoadFavoriteOffers, isFavoriteDataLoaded} = props;
-
-  console.log(favoriteOffers)
 
   const getFavoriteOffersListItems = () => {
     return Object.keys(City).map((city) => {
@@ -45,6 +43,7 @@ const FavoritesScreen = (props) => {
       <LoadingPlaceholder />
     );
   }
+
 
   return (
     <div className="page">
