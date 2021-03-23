@@ -115,4 +115,4 @@ OfferCard.propTypes = {
   authorizationStatus: stringPropTypes
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(OfferCard));
+export default connect(mapStateToProps, mapDispatchToProps)(OfferCard);

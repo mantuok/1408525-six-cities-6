@@ -66,4 +66,4 @@ ProfileNavigation.propTypes = {
   userAvatar: stringPropTypesNotRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(ProfileNavigation));
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileNavigation);

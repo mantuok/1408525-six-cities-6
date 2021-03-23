@@ -61,4 +61,4 @@ OffersList.propTypes = {
   selectedSortingType: stringPropTypes
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(OffersList));
+export default connect(mapStateToProps, mapDispatchToProps)(OffersList);
