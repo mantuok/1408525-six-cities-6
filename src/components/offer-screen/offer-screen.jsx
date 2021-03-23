@@ -76,14 +76,40 @@ const OfferScreen = (props) => {
     );
   }
 
-  const {bedrooms, description, goods, isPremium, images, maxAdults, title, price, rating, type} = currentOffer;
-  const {avatarUrl, isPro, name} = currentOffer.host;
-  const premiumMarkClass = classnames(`property__mark`, {"visually-hidden": !isPremium});
-  const avatarClass = classnames(`property__avatar-wrapper user__avatar-wrapper`, {"property__avatar-wrapper--pro": isPro});
+  const {
+    bedrooms,
+    description,
+    goods,
+    isPremium,
+    isFavorite,
+    images,
+    maxAdults,
+    title,
+    price,
+    rating,
+    type
+  } = currentOffer;
+  const {
+    avatarUrl,
+    isPro,
+    name
+  } = currentOffer.host;
+  
+  const premiumMarkClass = classnames(
+    `property__mark`, {"visually-hidden": !isPremium}
+  );
+  const avatarClass = classnames(
+    `property__avatar-wrapper user__avatar-wrapper`, {"property__avatar-wrapper--pro": isPro}
+  );
+  const getFavoriteButtonColor = () => isFavorite ? `#4481c3` : `#b8b8b8`;
 
   const handleFavoriteButtonClick = () => {
     if (isUserAuthorized(authorizationStatus)) {
       onFavoriteButtonClick(id, getUpdatedFavoriteStatus(currentOffer.isFavorite));
+      setCurrentOffer({
+        ...currentOffer,
+        isFavorite: !currentOffer.isFavorite
+      })
     } else {
       history.push(AppRoute.LOGIN);
     }
@@ -117,7 +143,7 @@ const OfferScreen = (props) => {
                     className="property__bookmark-icon"
                     width="31"
                     height="33"
-                    style={currentOffer.isFavorite ? {stroke: `#4481c3`} : {}}
+                    style={{stroke: `${getFavoriteButtonColor()}`}}
                   >
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>

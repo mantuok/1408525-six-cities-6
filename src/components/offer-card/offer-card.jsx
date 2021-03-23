@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import classnames from 'classnames';
 import {Link, useHistory} from 'react-router-dom';
 import {getRatingStarsWidth} from '../../utils/common';
@@ -32,12 +32,25 @@ const OfferCard = (props) => {
     onFavoriteButtonClick,
     authorizationStatus
   } = props;
-  const {id, isPremium, title, previewImage, price, rating, type} = offer;
+  const {
+    id,
+    isPremium,
+    isFavorite,
+    title,
+    previewImage,
+    price,
+    rating,
+    type
+  } = offer;
+
+  const [currentFavoriteStatus, setCurrentFavoriteStatus] = useState(isFavorite)
+
   const history = useHistory();
 
   const handleFavoriteButtonClick = () => {
     if (isUserAuthorized(authorizationStatus)) {
       onFavoriteButtonClick(id, getUpdatedFavoriteStatus(offer.isFavorite));
+      setCurrentFavoriteStatus(!currentFavoriteStatus);
     } else {
       history.push(AppRoute.LOGIN);
     }
@@ -48,6 +61,7 @@ const OfferCard = (props) => {
   const previewImageClass = classnames(`place-card__image-wrapper`,
       {"near-places__image-wrapper": isNearbyOffer},
       {"cities__image-wrapper": !isNearbyOffer});
+  const getFavoriteButtonColor = () => currentFavoriteStatus ? `#4481c3` : `#b8b8b8`;
 
   return (
     <article className={cardClass} onMouseOver={handleMouseOver}>
@@ -74,7 +88,7 @@ const OfferCard = (props) => {
               className="place-card__bookmark-icon"
               width="18"
               height="19"
-              style={offer.isFavorite ? {stroke: `#4481c3`} : {}}
+              style={{stroke: `${getFavoriteButtonColor()}`}}
             >
               <use xlinkHref="#icon-bookmark"></use>
             </svg>

@@ -36,14 +36,13 @@ const FavoritesScreen = (props) => {
     if (!isFavoriteDataLoaded) {
       onLoadFavoriteOffers();
     }
-  }, [isFavoriteDataLoaded]);
+  }, []);
 
   if (!isFavoriteDataLoaded) {
     return (
       <LoadingPlaceholder />
     );
   }
-
 
   return (
     <div className="page">
