@@ -1,5 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+import {getActiveCity} from '../../store/data-set/selectors';
+import {stringPropTypes} from '../../utils/props-validation';
 
 const EmptyOffersListContainer = (props) => {
   const {activeCity} = props;
@@ -20,5 +22,9 @@ const EmptyOffersListContainer = (props) => {
 const mapStateToProps = (state) => ({
   activeCity: getActiveCity(state)
 });
+
+EmptyOffersListContainer.propTypes = {
+  activeCity: stringPropTypes
+};
 
 export default connect(mapStateToProps, null)(EmptyOffersListContainer);
