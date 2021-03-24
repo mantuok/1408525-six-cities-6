@@ -7,7 +7,7 @@ import {
 } from '../../utils/props-validation';
 
 const FavoritesLocationItem = (props) => {
-  const {city, favoriteOffersPerCity, onFavoriteListUpdate} = props;
+  const {city, favoriteOffersPerCity} = props;
 
   return (
     <li className="favorites__locations-items">
@@ -23,7 +23,6 @@ const FavoritesLocationItem = (props) => {
           <OfferCard
             key={offer.id}
             offer={offer}
-            onFavoriteListUpdate={onFavoriteListUpdate}
           />)}
       </div>
     </li>
@@ -31,7 +30,6 @@ const FavoritesLocationItem = (props) => {
 };
 
 FavoritesLocationItem.propTypes = {
-  onFavoriteListUpdate: functionPropTypes,
   favoriteOffersPerCity: offersPropTypes,
   city: stringPropTypes
 };

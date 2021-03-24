@@ -20,14 +20,8 @@ import {
 
 const FavoritesScreen = (props) => {
   const {favoriteOffers, onLoadFavoriteOffers, isFavoriteDataLoaded} = props;
-  const [favoriteListUpdate, setFavoriteListUpdate] = useState(false);
-
-  const handleFavoriteListUpdate = () => {
-    setFavoriteListUpdate(!favoriteListUpdate);
-  };
 
   const getFavoriteOffersListItems = () => {
-    // console.log(favoriteListUpdate);
     return Object.keys(City).map((city) => {
       const favoriteOffersPerCity = getOffersPerCity(favoriteOffers, city);
       if (favoriteOffersPerCity.length > 0) {
@@ -35,7 +29,6 @@ const FavoritesScreen = (props) => {
           city={city}
           favoriteOffersPerCity={favoriteOffersPerCity}
           key={nanoid()}
-          onFavoriteListUpdate={handleFavoriteListUpdate}
         />;
       } else {
         return null;

@@ -41,7 +41,7 @@ const dataLoad = (state = initialState, action) => {
       return {
         ...state,
         offers: updateOfferInList(action.payload, state.offers),
-        favoriteOffers: updateFavoriteOfferInList(action.payload, state.favoriteOffers)
+        favoriteOffers: [...updateFavoriteOfferInList(action.payload, state.favoriteOffers)]
       };
   }
   return state;
