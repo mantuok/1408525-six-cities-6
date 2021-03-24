@@ -1,40 +1,45 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {fetchFavoriteOffers} from '../../store/api-actions';
-import {nanoid} from 'nanoid';
-import FavoritesLocationItem from './favorites-location-item';
+// import {nanoid} from 'nanoid';
+// import FavoritesLocationItem from './favorites-location-item';
 import LoadingPlaceholder from '../loading-placeholder/loading-placeholder';
 import Header from '../header/header';
 import Footer from '../footer/footer';
-import {City} from '../../const';
+// import {City} from '../../const';
 import {
   getFavoriteOffers,
   getIsFavoriteDataLoaded
 } from '../../store/data-load/selectors';
-import {getOffersPerCity} from '../../utils/common';
+import {
+  // getOffersPerCity,
+  isListEmpty
+} from '../../utils/common';
 import {
   offersPropTypes,
   functionPropTypes,
   booleanPropTypes
 } from '../../utils/props-validation';
+import EmptyFavoritesList from './empty-favorites-list';
+import FullFavoritesList from './full-favorites-list';
 
 const FavoritesScreen = (props) => {
   const {favoriteOffers, onLoadFavoriteOffers, isFavoriteDataLoaded} = props;
 
-  const getFavoriteOffersListItems = () => {
-    return Object.keys(City).map((city) => {
-      const favoriteOffersPerCity = getOffersPerCity(favoriteOffers, city);
-      if (favoriteOffersPerCity.length > 0) {
-        return <FavoritesLocationItem
-          city={city}
-          favoriteOffersPerCity={favoriteOffersPerCity}
-          key={nanoid()}
-        />;
-      } else {
-        return null;
-      }
-    });
-  };
+  // const getFavoriteOffersListItems = () => {
+  //   return Object.keys(City).map((city) => {
+  //     const favoriteOffersPerCity = getOffersPerCity(favoriteOffers, city);
+  //     if (favoriteOffersPerCity.length > 0) {
+  //       return <FavoritesLocationItem
+  //         city={city}
+  //         favoriteOffersPerCity={favoriteOffersPerCity}
+  //         key={nanoid()}
+  //       />;
+  //     } else {
+  //       return null;
+  //     }
+  //   });
+  // };
 
   useEffect(()=> {
     if (!isFavoriteDataLoaded) {
@@ -42,23 +47,31 @@ const FavoritesScreen = (props) => {
     }
   }, [isFavoriteDataLoaded]);
 
-  if (!isFavoriteDataLoaded) {
-    return (
-      <LoadingPlaceholder />
-    );
-  }
+  const getFavoriteOffersList = () => {
+    if (!isFavoriteDataLoaded) {
+      return (
+        <LoadingPlaceholder />
+      );
+    }
+
+    if (isListEmpty(favoriteOffers)) {
+      return <EmptyFavoritesList />;
+    }
+    return <FullFavoritesList favoriteOffers={favoriteOffers} />;
+  };
 
   return (
     <div className="page">
       <Header />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
-          <section className="favorites">
+          {getFavoriteOffersList()}
+          {/* <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
               {getFavoriteOffersListItems()}
             </ul>
-          </section>
+          </section> */}
         </div>
       </main>
       <Footer />
