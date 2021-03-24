@@ -20,14 +20,14 @@ import {
 
 const FavoritesScreen = (props) => {
   const {favoriteOffers, onLoadFavoriteOffers, isFavoriteDataLoaded} = props;
-  const [favoriteListUpdate, setFavoriteListUpdate] = useState(0);
+  const [favoriteListUpdate, setFavoriteListUpdate] = useState(false);
 
   const handleFavoriteListUpdate = () => {
-    setFavoriteListUpdate(prevState => prevState + 1);
-  }
+    setFavoriteListUpdate(!favoriteListUpdate);
+  };
 
   const getFavoriteOffersListItems = () => {
-    console.log(favoriteListUpdate)
+    // console.log(favoriteListUpdate);
     return Object.keys(City).map((city) => {
       const favoriteOffersPerCity = getOffersPerCity(favoriteOffers, city);
       if (favoriteOffersPerCity.length > 0) {

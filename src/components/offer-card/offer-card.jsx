@@ -44,7 +44,7 @@ const OfferCard = (props) => {
     type
   } = offer;
 
-  const [currentFavoriteStatus, setCurrentFavoriteStatus] = useState(isFavorite)
+  const [currentFavoriteStatus, setCurrentFavoriteStatus] = useState(isFavorite);
 
   const history = useHistory();
 

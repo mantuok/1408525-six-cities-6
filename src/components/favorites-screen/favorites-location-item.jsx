@@ -2,7 +2,8 @@ import React from 'react';
 import OfferCard from '../offer-card/offer-card';
 import {
   offersPropTypes,
-  stringPropTypes
+  stringPropTypes,
+  functionPropTypes
 } from '../../utils/props-validation';
 
 const FavoritesLocationItem = (props) => {
@@ -30,6 +31,7 @@ const FavoritesLocationItem = (props) => {
 };
 
 FavoritesLocationItem.propTypes = {
+  onFavoriteListUpdate: functionPropTypes,
   favoriteOffersPerCity: offersPropTypes,
   city: stringPropTypes
 };

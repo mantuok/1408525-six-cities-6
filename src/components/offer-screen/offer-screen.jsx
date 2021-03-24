@@ -94,12 +94,12 @@ const OfferScreen = (props) => {
     isPro,
     name
   } = currentOffer.host;
-  
+
   const premiumMarkClass = classnames(
-    `property__mark`, {"visually-hidden": !isPremium}
+      `property__mark`, {"visually-hidden": !isPremium}
   );
   const avatarClass = classnames(
-    `property__avatar-wrapper user__avatar-wrapper`, {"property__avatar-wrapper--pro": isPro}
+      `property__avatar-wrapper user__avatar-wrapper`, {"property__avatar-wrapper--pro": isPro}
   );
   const getFavoriteButtonColor = () => isFavorite ? `#4481c3` : `#b8b8b8`;
 
@@ -109,7 +109,7 @@ const OfferScreen = (props) => {
       setCurrentOffer({
         ...currentOffer,
         isFavorite: !currentOffer.isFavorite
-      })
+      });
     } else {
       history.push(AppRoute.LOGIN);
     }
