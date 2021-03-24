@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {fetchFavoriteOffers} from '../../store/api-actions';
 import {nanoid} from 'nanoid';
@@ -20,12 +20,23 @@ import {
 
 const FavoritesScreen = (props) => {
   const {favoriteOffers, onLoadFavoriteOffers, isFavoriteDataLoaded} = props;
+  const [favoriteListUpdate, setFavoriteListUpdate] = useState(0);
+
+  const handleFavoriteListUpdate = () => {
+    setFavoriteListUpdate(prevState => prevState + 1);
+  }
 
   const getFavoriteOffersListItems = () => {
+    console.log(favoriteListUpdate)
     return Object.keys(City).map((city) => {
       const favoriteOffersPerCity = getOffersPerCity(favoriteOffers, city);
       if (favoriteOffersPerCity.length > 0) {
-        return <FavoritesLocationItem city={city} favoriteOffersPerCity={favoriteOffersPerCity} key={nanoid()} />;
+        return <FavoritesLocationItem
+          city={city}
+          favoriteOffersPerCity={favoriteOffersPerCity}
+          key={nanoid()}
+          onFavoriteListUpdate={handleFavoriteListUpdate}
+        />;
       } else {
         return null;
       }
@@ -36,7 +47,7 @@ const FavoritesScreen = (props) => {
     if (!isFavoriteDataLoaded) {
       onLoadFavoriteOffers();
     }
-  }, []);
+  }, [isFavoriteDataLoaded]);
 
   if (!isFavoriteDataLoaded) {
     return (

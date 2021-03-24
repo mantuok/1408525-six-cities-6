@@ -6,7 +6,8 @@ import {
 } from '../../utils/props-validation';
 
 const FavoritesLocationItem = (props) => {
-  const {city, favoriteOffersPerCity} = props;
+  const {city, favoriteOffersPerCity, onFavoriteListUpdate} = props;
+
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
@@ -17,7 +18,12 @@ const FavoritesLocationItem = (props) => {
         </div>
       </div>
       <div className="favorites__places">
-        {favoriteOffersPerCity.map((offer) => <OfferCard key={offer.id} offer={offer} />)}
+        {favoriteOffersPerCity.map((offer) =>
+          <OfferCard
+            key={offer.id}
+            offer={offer}
+            onFavoriteListUpdate={onFavoriteListUpdate}
+          />)}
       </div>
     </li>
   );

@@ -30,7 +30,8 @@ const OfferCard = (props) => {
     isCardActive,
     offer,
     onFavoriteButtonClick,
-    authorizationStatus
+    authorizationStatus,
+    onFavoriteListUpdate
   } = props;
   const {
     id,
@@ -47,10 +48,14 @@ const OfferCard = (props) => {
 
   const history = useHistory();
 
-  const handleFavoriteButtonClick = () => {
+  const handleFavoriteButtonClick = (evt) => {
+    evt.preventDefault();
     if (isUserAuthorized(authorizationStatus)) {
       onFavoriteButtonClick(id, getUpdatedFavoriteStatus(offer.isFavorite));
       setCurrentFavoriteStatus(!currentFavoriteStatus);
+      if (onFavoriteListUpdate) {
+        onFavoriteListUpdate();
+      }
     } else {
       history.push(AppRoute.LOGIN);
     }
@@ -126,7 +131,8 @@ OfferCard.propTypes = {
   isCardActive: booleanPropTypesNotRequired,
   isNearbyOffer: booleanPropTypesNotRequired,
   onFavoriteButtonClick: functionPropTypes,
-  authorizationStatus: stringPropTypes
+  authorizationStatus: stringPropTypes,
+  onFavoriteListUpdate: functionPropTypesNotRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OfferCard);
