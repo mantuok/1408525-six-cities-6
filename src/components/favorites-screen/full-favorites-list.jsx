@@ -10,8 +10,11 @@ import {
 const FullFavoritesList = (props) => {
   const {favoriteOffers} = props;
 
-  const getFavoriteLocationItem = (favoriteOffersPerCity, city) => {
+  const getFavoritesLocationItem = (favoriteOffersPerCity, city) => {
+    console.log(favoriteOffersPerCity)
+
     if (favoriteOffersPerCity.length > 0) {
+      console.log(city)
       return <FavoritesLocationItem
         city={city}
         favoriteOffersPerCity={favoriteOffersPerCity}
@@ -28,7 +31,7 @@ const FullFavoritesList = (props) => {
       <ul className="favorites__list">
         {Object.keys(City).map((city) => {
           const favoriteOffersPerCity = getOffersPerCity(favoriteOffers, city);
-          getFavoriteLocationItem(favoriteOffersPerCity, city)
+          getFavoritesLocationItem(favoriteOffersPerCity, city)
         })}
       </ul>
     </section>

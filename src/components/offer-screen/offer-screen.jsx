@@ -33,6 +33,7 @@ import Header from '../header/header';
 import Footer from '../footer/footer';
 import {getReviewsPerOffer} from '../../store/data-load/selectors';
 import {getAuthorizationStatus} from '../../store/user/selectors';
+import {getActiveOffer} from '../../store/data-set/selectors';
 
 const renderImages = (images, title) => {
   return images.map((image) => <OfferImage image={image} title={title} key={nanoid()}/>);
@@ -54,7 +55,7 @@ const getUpdatedFavoriteStatus = (isCurrentlyFavorite) =>
     FavoriteStatus.ADD;
 
 const OfferScreen = (props) => {
-  const {reviewsPerOffer, onReviewsPerOfferLoad, onFavoriteButtonClick, authorizationStatus} = props;
+  const {reviewsPerOffer, onReviewsPerOfferLoad, onFavoriteButtonClick, authorizationStatus, activeOffer} = props;
   const [isDataPerOfferLoaded, setDataPerOfferLoaded] = useState(false);
   const [currentOffer, setCurrentOffer] = useState({});
   const {id} = useParams();
@@ -101,15 +102,17 @@ const OfferScreen = (props) => {
   const avatarClass = classnames(
       `property__avatar-wrapper user__avatar-wrapper`, {"property__avatar-wrapper--pro": isPro}
   );
-  const getFavoriteButtonColor = () => isFavorite ? `#4481c3` : `#b8b8b8`;
+  // const getFavoriteButtonColor = () => isFavorite ? `#4481c3` : `#b8b8b8`;
+  const getFavoriteButtonColor = () => activeOffer.isFavorite ? `#4481c3` : `#b8b8b8`;
+
 
   const handleFavoriteButtonClick = () => {
     if (isUserAuthorized(authorizationStatus)) {
-      onFavoriteButtonClick(id, getUpdatedFavoriteStatus(currentOffer.isFavorite));
-      setCurrentOffer({
-        ...currentOffer,
-        isFavorite: !currentOffer.isFavorite
-      });
+      onFavoriteButtonClick(id, getUpdatedFavoriteStatus(activeOffer.isFavorite));
+      // setCurrentOffer({
+      //   ...currentOffer,
+      //   isFavorite: activeOffer.isFavorite
+      // });
     } else {
       history.push(AppRoute.LOGIN);
     }
@@ -218,7 +221,8 @@ const OfferScreen = (props) => {
 
 const mapStateToProps = (state) => ({
   reviewsPerOffer: getReviewsPerOffer(state),
-  authorizationStatus: getAuthorizationStatus(state)
+  authorizationStatus: getAuthorizationStatus(state),
+  activeOffer: getActiveOffer(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
