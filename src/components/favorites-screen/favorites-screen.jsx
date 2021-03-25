@@ -26,7 +26,7 @@ const FavoritesScreen = (props) => {
     }
   }, [isFavoriteDataLoaded]);
 
-  const getFavoriteыOffersList = () => {
+  const getFavoriteOffersList = () => {
     if (!isFavoriteDataLoaded) {
       return (
         <LoadingPlaceholder />
@@ -44,7 +44,7 @@ const FavoritesScreen = (props) => {
       <Header />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
-          {getFavoriteыOffersList()}
+          {getFavoriteOffersList()}
         </div>
       </main>
       <Footer />
