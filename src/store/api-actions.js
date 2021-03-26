@@ -73,5 +73,5 @@ export const updateFavoriteOfferStatus = (offerId, status) => (dispatch, _getSta
 
 export const updateLocalFavoriteOfferStatus = (offerId, status) => {
   return importedApi.post(`/favorite/${offerId}/${status}`, {offerId, status})
-  .then(({data}) => adaptOffersToClient(data))
-}
+  .then(({data}) => adaptOffersToClient(data));
+};

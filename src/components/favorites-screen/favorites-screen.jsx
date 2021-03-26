@@ -6,7 +6,6 @@ import Header from '../header/header';
 import Footer from '../footer/footer';
 import {
   getFavoriteOffers,
-  getIsFavoriteDataLoaded,
   getIsDataLoaded
 } from '../../store/data-load/selectors';
 import {isListEmpty} from '../../utils/common';
@@ -23,7 +22,7 @@ const FavoritesScreen = (props) => {
   const {favoriteOffers, onLoadFavoriteOffers, isDataLoaded, onResetDataLoadStatus} = props;
 
   useEffect(()=> {
-    onResetDataLoadStatus()
+    onResetDataLoadStatus();
     onLoadFavoriteOffers();
   }, []);
 
@@ -62,13 +61,14 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchFavoriteOffers());
   },
   onResetDataLoadStatus() {
-    dispatch(ActionCreator.resetDataLoadStatus())
+    dispatch(ActionCreator.resetDataLoadStatus());
   }
 });
 
 FavoritesScreen.propTypes = {
   favoriteOffers: offersPropTypes,
   onLoadFavoriteOffers: functionPropTypes,
+  onResetDataLoadStatus: functionPropTypes,
   isDataLoaded: booleanPropTypes
 };
 

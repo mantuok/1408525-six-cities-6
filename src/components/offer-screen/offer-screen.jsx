@@ -34,7 +34,6 @@ import Header from '../header/header';
 import Footer from '../footer/footer';
 import {getReviewsPerOffer} from '../../store/data-load/selectors';
 import {getAuthorizationStatus} from '../../store/user/selectors';
-import {getActiveOffer} from '../../store/data-set/selectors';
 
 const renderImages = (images, title) => {
   return images.map((image) => <OfferImage image={image} title={title} key={nanoid()}/>);
@@ -56,7 +55,7 @@ const getUpdatedFavoriteStatus = (isCurrentlyFavorite) =>
     FavoriteStatus.ADD;
 
 const OfferScreen = (props) => {
-  const {reviewsPerOffer, onReviewsPerOfferLoad, onFavoriteButtonClick, authorizationStatus, activeOffer} = props;
+  const {reviewsPerOffer, onReviewsPerOfferLoad, authorizationStatus} = props;
   const [isDataPerOfferLoaded, setDataPerOfferLoaded] = useState(false);
   const [currentOffer, setCurrentOffer] = useState({});
   const {id} = useParams();
@@ -111,7 +110,7 @@ const OfferScreen = (props) => {
       .then((offerData) => setCurrentOffer({
         ...currentOffer,
         isFavorite: offerData.isFavorite
-      }))
+      }));
 
     } else {
       history.push(AppRoute.LOGIN);
@@ -221,8 +220,7 @@ const OfferScreen = (props) => {
 
 const mapStateToProps = (state) => ({
   reviewsPerOffer: getReviewsPerOffer(state),
-  authorizationStatus: getAuthorizationStatus(state),
-  activeOffer: getActiveOffer(state)
+  authorizationStatus: getAuthorizationStatus(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -238,8 +236,7 @@ const mapDispatchToProps = (dispatch) => ({
 OfferScreen.propTypes = {
   reviewsPerOffer: reviewsPropTypes,
   authorizationStatus: stringPropTypes,
-  onReviewsPerOfferLoad: functionPropTypes,
-  onFavoriteButtonClick: functionPropTypes
+  onReviewsPerOfferLoad: functionPropTypes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OfferScreen);

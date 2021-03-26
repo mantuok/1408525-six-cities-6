@@ -28,7 +28,7 @@ const FullFavoritesList = (props) => {
       <ul className="favorites__list">
         {Object.keys(City).map((city) => {
           const favoriteOffersPerCity = getOffersPerCity(favoriteOffers, city);
-          return getFavoritesLocationItem(favoriteOffersPerCity, city)
+          return getFavoritesLocationItem(favoriteOffersPerCity, city);
         })}
       </ul>
     </section>

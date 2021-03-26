@@ -24,7 +24,7 @@ const MainScreen = (props) => {
 
   useEffect(() => {
     onResetDataLoadStatus();
-    onLoadData()
+    onLoadData();
   }, []);
 
   const getOffersListMapContainer = () => {
@@ -66,14 +66,15 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchOffers());
   },
   onResetDataLoadStatus() {
-    dispatch(ActionCreator.resetDataLoadStatus())
+    dispatch(ActionCreator.resetDataLoadStatus());
   }
 });
 
 MainScreen.propTypes = {
   offers: offersPropTypes,
   onLoadData: functionPropTypes,
-  isDataLoaded: booleanPropTypes,
+  onResetDataLoadStatus: functionPropTypes,
+  isDataLoaded: booleanPropTypes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

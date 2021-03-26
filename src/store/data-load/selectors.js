@@ -5,4 +5,3 @@ export const getFavoriteOffers = (state) => state[NameSpace.DATA_LOAD].favoriteO
 export const getNearbyOffers = (state) => state[NameSpace.DATA_LOAD].nearbyOffers;
 export const getReviewsPerOffer = (state) => state[NameSpace.DATA_LOAD].reviewsPerOffer;
 export const getIsDataLoaded = (state) => state[NameSpace.DATA_LOAD].isDataLoaded;
-export const getIsFavoriteDataLoaded = (state) => state[NameSpace.DATA_LOAD].isFavoriteDataLoaded;
