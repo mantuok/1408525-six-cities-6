@@ -37,7 +37,7 @@ export const ActionCreator = {
     type: ActionType.LOAD_OFFERS,
     payload: offers
   }),
-  resetDataLoadStatus: ()=> ({
+  resetDataLoadStatus: () => ({
     type: ActionType.RESET_DATA_LOAD_STATUS
   }),
   loadFavoriteOffers: (favoriteOffers) => ({

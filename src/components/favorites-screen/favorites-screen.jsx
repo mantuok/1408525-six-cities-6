@@ -6,7 +6,8 @@ import Header from '../header/header';
 import Footer from '../footer/footer';
 import {
   getFavoriteOffers,
-  getIsFavoriteDataLoaded
+  getIsFavoriteDataLoaded,
+  getIsDataLoaded
 } from '../../store/data-load/selectors';
 import {isListEmpty} from '../../utils/common';
 import {
@@ -16,23 +17,22 @@ import {
 } from '../../utils/props-validation';
 import EmptyFavoritesList from './empty-favorites-list';
 import FullFavoritesList from './full-favorites-list';
+import {ActionCreator} from '../../store/action';
 
 const FavoritesScreen = (props) => {
-  const {favoriteOffers, onLoadFavoriteOffers, isFavoriteDataLoaded} = props;
+  const {favoriteOffers, onLoadFavoriteOffers, isDataLoaded, onResetDataLoadStatus} = props;
 
   useEffect(()=> {
-    if (!isFavoriteDataLoaded) {
-      onLoadFavoriteOffers();
-    }
-  }, [isFavoriteDataLoaded]);
+    onResetDataLoadStatus()
+    onLoadFavoriteOffers();
+  }, []);
 
   const getFavoriteOffersList = () => {
-    if (!isFavoriteDataLoaded) {
+    if (!isDataLoaded) {
       return (
         <LoadingPlaceholder />
       );
     }
-
     if (isListEmpty(favoriteOffers)) {
       return <EmptyFavoritesList />;
     }
@@ -54,19 +54,22 @@ const FavoritesScreen = (props) => {
 
 const mapStateToProps = (state) => ({
   favoriteOffers: getFavoriteOffers(state),
-  isFavoriteDataLoaded: getIsFavoriteDataLoaded(state),
+  isDataLoaded: getIsDataLoaded(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onLoadFavoriteOffers() {
     dispatch(fetchFavoriteOffers());
+  },
+  onResetDataLoadStatus() {
+    dispatch(ActionCreator.resetDataLoadStatus())
   }
 });
 
 FavoritesScreen.propTypes = {
   favoriteOffers: offersPropTypes,
   onLoadFavoriteOffers: functionPropTypes,
-  isFavoriteDataLoaded: booleanPropTypes
+  isDataLoaded: booleanPropTypes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FavoritesScreen);

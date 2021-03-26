@@ -232,6 +232,7 @@ const mapDispatchToProps = (dispatch) => ({
   onFavoriteButtonClick(id, favoriteStatus) {
     dispatch(updateFavoriteOfferStatus(id, favoriteStatus));
   }
+  
 });
 
 OfferScreen.propTypes = {

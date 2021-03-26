@@ -9,8 +9,7 @@ const initialState = {
   favoriteOffers: [],
   nearbyOffers: [],
   reviewsPerOffer: [],
-  isDataLoaded: false,
-  isFavoriteDataLoaded: false,
+  isDataLoaded: false
 };
 
 const dataLoad = (state = initialState, action) => {
@@ -21,16 +20,16 @@ const dataLoad = (state = initialState, action) => {
         offers: action.payload,
         isDataLoaded: true
       };
-    case ActionType.RESET_DATA_LOAD_STATUS:
-      return {
-        ...state,
-        isDataLoaded: false
-      }
     case ActionType.LOAD_FAVORITE_OFFERS:
       return {
         ...state,
         favoriteOffers: action.payload,
-        isFavoriteDataLoaded: true
+        isDataLoaded: true
+      };
+    case ActionType.RESET_DATA_LOAD_STATUS:
+      return {
+        ...state,
+        isDataLoaded: false
       };
     case ActionType.LOAD_NEARBY_OFFERS:
       return {
