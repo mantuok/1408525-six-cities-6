@@ -7,6 +7,7 @@ export const ActionType = {
   LOAD_OFFERS: `loadOffers`,
   LOAD_REVIEWS_PER_OFFER: `loadReviewsPerOffer`,
   LOAD_FAVORITE_OFFERS: `loadFavoriteOffers`,
+  RESET_DATA_LOAD_STATUS: `resetDataLoadStatus`,
   UPDATE_FAVORITE_OFFER_STATUS: `updateFavoriteOfferStatus`,
   LOAD_NEARBY_OFFERS: `loadNearbyOffers`,
   SET_USER_DATA: `setUserData`
@@ -35,6 +36,9 @@ export const ActionCreator = {
   loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,
     payload: offers
+  }),
+  resetDataLoadStatus: ()=> ({
+    type: ActionType.RESET_DATA_LOAD_STATUS
   }),
   loadFavoriteOffers: (favoriteOffers) => ({
     type: ActionType.LOAD_FAVORITE_OFFERS,

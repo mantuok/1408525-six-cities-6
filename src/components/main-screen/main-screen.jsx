@@ -17,25 +17,23 @@ import {
   getOffers,
   getIsDataLoaded
 } from '../../store/data-load/selectors';
+import {ActionCreator} from '../../store/action';
 
 const MainScreen = (props) => {
-  const {offers, isDataLoaded, onLoadData} = props;
+  const {offers, isDataLoaded, onLoadData, onResetDataLoadStatus} = props;
 
   useEffect(() => {
-    if (!isDataLoaded) {
-      onLoadData();
-    }
-  }, [isDataLoaded]);
+    onResetDataLoadStatus();
+    onLoadData()
+  }, []);
 
   const getOffersListMapContainer = () => {
     if (!isDataLoaded) {
       return <LoadingPlaceholder />;
     }
-
     if (isListEmpty(offers)) {
       return <EmptyOffersListContainer />;
     }
-
     return <FullOffersListContianer />;
   };
 
@@ -66,6 +64,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onLoadData() {
     dispatch(fetchOffers());
+  },
+  onResetDataLoadStatus() {
+    dispatch(ActionCreator.resetDataLoadStatus())
   }
 });
 

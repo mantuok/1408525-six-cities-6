@@ -21,6 +21,11 @@ const dataLoad = (state = initialState, action) => {
         offers: action.payload,
         isDataLoaded: true
       };
+    case ActionType.RESET_DATA_LOAD_STATUS:
+      return {
+        ...state,
+        isDataLoaded: false
+      }
     case ActionType.LOAD_FAVORITE_OFFERS:
       return {
         ...state,
