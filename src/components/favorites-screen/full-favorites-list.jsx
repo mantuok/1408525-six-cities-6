@@ -2,7 +2,7 @@ import React from 'react';
 import {City} from '../../const';
 import {nanoid} from 'nanoid';
 import FavoritesLocationItem from './favorites-location-item';
-import {getOffersPerCity} from '../../utils/common';
+import {getOffersPerCity, getFavoriteOffers} from '../../utils/common';
 import {
   offersPropTypes
 } from '../../utils/props-validation';
@@ -11,17 +11,14 @@ const FullFavoritesList = (props) => {
   const {favoriteOffers} = props;
 
   const getFavoritesLocationItem = (favoriteOffersPerCity, city) => {
-    console.log(favoriteOffersPerCity)
-
     if (favoriteOffersPerCity.length > 0) {
-      console.log(city)
       return <FavoritesLocationItem
         city={city}
         favoriteOffersPerCity={favoriteOffersPerCity}
         key={nanoid()}
       />;
     } else {
-      return null;
+      return ``;
     }
   };
 
@@ -31,7 +28,7 @@ const FullFavoritesList = (props) => {
       <ul className="favorites__list">
         {Object.keys(City).map((city) => {
           const favoriteOffersPerCity = getOffersPerCity(favoriteOffers, city);
-          getFavoritesLocationItem(favoriteOffersPerCity, city)
+          return getFavoritesLocationItem(favoriteOffersPerCity, city)
         })}
       </ul>
     </section>
