@@ -6,7 +6,8 @@ import {connect} from 'react-redux';
 import {
   fetchOfferById,
   fetchReviewsPerOffer,
-  updateFavoriteOfferStatus
+  updateFavoriteOfferStatus,
+  updateLocalFavoriteOfferStatus
 } from '../../store/api-actions';
 import {
   getRatingStarsWidth,
@@ -102,17 +103,16 @@ const OfferScreen = (props) => {
   const avatarClass = classnames(
       `property__avatar-wrapper user__avatar-wrapper`, {"property__avatar-wrapper--pro": isPro}
   );
-  // const getFavoriteButtonColor = () => isFavorite ? `#4481c3` : `#b8b8b8`;
-  const getFavoriteButtonColor = () => activeOffer.isFavorite ? `#4481c3` : `#b8b8b8`;
-
+  const getFavoriteButtonColor = () => isFavorite ? `#4481c3` : `#b8b8b8`;
 
   const handleFavoriteButtonClick = () => {
     if (isUserAuthorized(authorizationStatus)) {
-      onFavoriteButtonClick(id, getUpdatedFavoriteStatus(activeOffer.isFavorite));
-      // setCurrentOffer({
-      //   ...currentOffer,
-      //   isFavorite: activeOffer.isFavorite
-      // });
+      updateLocalFavoriteOfferStatus(id, getUpdatedFavoriteStatus(isFavorite))
+      .then((offerData) => setCurrentOffer({
+        ...currentOffer,
+        isFavorite: offerData.isFavorite
+      }))
+
     } else {
       history.push(AppRoute.LOGIN);
     }
@@ -232,7 +232,7 @@ const mapDispatchToProps = (dispatch) => ({
   onFavoriteButtonClick(id, favoriteStatus) {
     dispatch(updateFavoriteOfferStatus(id, favoriteStatus));
   }
-  
+
 });
 
 OfferScreen.propTypes = {
