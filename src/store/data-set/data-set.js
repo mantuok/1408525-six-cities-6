@@ -30,7 +30,6 @@ const dataSet = (state = initialState, action) => {
         selectedSortingType: action.payload
       };
     case ActionType.SET_ACTIVE_CARD:
-
       return {
         ...state,
         activeCardId: action.payload
