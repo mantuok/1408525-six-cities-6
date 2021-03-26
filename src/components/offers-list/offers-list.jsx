@@ -15,9 +15,9 @@ import {
 
 const OffersList = (props) => {
   const {activeCity, onSetActiveCard, sortedOffersPerCity} = props;
-  const [activeCardId, setActiveCard] = useState(undefined);
+  const [currentCardId, setCurrentCard] = useState(undefined);
 
-  const isCardActive = (offer) => offer.id === activeCardId;
+  const isCardActive = (offer) => offer.id === currentCardId;
 
   return (
     <section className="cities__places places">
@@ -27,7 +27,7 @@ const OffersList = (props) => {
       <div className="cities__places-list places__list tabs__content">
         {sortedOffersPerCity.map((offer) => <OfferCard
           handleMouseOver={() => {
-            setActiveCard(offer.id);
+            setCurrentCard(offer.id);
             onSetActiveCard(offer.id);
           }
           }

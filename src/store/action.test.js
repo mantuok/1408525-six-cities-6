@@ -73,20 +73,20 @@ describe(`Action creators work correctly`, () => {
     const expectedAction = {
       type: ActionType.SET_USER_DATA,
       payload: {
-        avatarUrl: "img/1.png",
-        email: "Oliver.conner@gmail.com",
+        avatarUrl: `img/1.png`,
+        email: `Oliver.conner@gmail.com`,
         id: 1,
         isPro: false,
-        name: "Oliver.conner"
+        name: `Oliver.conner`
       }
     };
 
     const userData = {
-      avatarUrl: "img/1.png",
-      email: "Oliver.conner@gmail.com",
+      avatarUrl: `img/1.png`,
+      email: `Oliver.conner@gmail.com`,
       id: 1,
       isPro: false,
-      name: "Oliver.conner"
+      name: `Oliver.conner`
     };
 
     expect(setUserData(userData)).toEqual(expectedAction);

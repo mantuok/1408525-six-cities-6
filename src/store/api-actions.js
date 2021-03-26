@@ -6,7 +6,7 @@ import {
   loadNearbyOffers,
   loadFavoriteOffers,
   changeFavoriteOfferStatus,
-} from './action'
+} from './action';
 import {
   adaptOffersToClient,
   adaptReviewsToClient
