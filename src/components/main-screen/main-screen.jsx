@@ -17,7 +17,7 @@ import {
   getOffers,
   getIsDataLoaded
 } from '../../store/data-load/selectors';
-import {ActionCreator} from '../../store/action';
+import {resetDataLoadStatus} from '../../store/action';
 
 const MainScreen = (props) => {
   const {offers, isDataLoaded, onLoadData, onResetDataLoadStatus} = props;
@@ -66,7 +66,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchOffers());
   },
   onResetDataLoadStatus() {
-    dispatch(ActionCreator.resetDataLoadStatus());
+    dispatch(resetDataLoadStatus());
   }
 });
 

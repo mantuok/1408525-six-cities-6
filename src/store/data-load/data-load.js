@@ -41,7 +41,7 @@ const dataLoad = (state = initialState, action) => {
         ...state,
         reviewsPerOffer: action.payload
       };
-    case ActionType.UPDATE_FAVORITE_OFFER_STATUS:
+    case ActionType.CHANGE_FAVORITE_OFFER_STATUS:
       return {
         ...state,
         offers: [...updateOfferInList(action.payload, state.offers)],

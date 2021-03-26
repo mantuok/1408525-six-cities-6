@@ -16,7 +16,7 @@ import {
 } from '../../utils/props-validation';
 import EmptyFavoritesList from './empty-favorites-list';
 import FullFavoritesList from './full-favorites-list';
-import {ActionCreator} from '../../store/action';
+import {resetDataLoadStatus} from '../../store/action';
 
 const FavoritesScreen = (props) => {
   const {favoriteOffers, onLoadFavoriteOffers, isDataLoaded, onResetDataLoadStatus} = props;
@@ -61,7 +61,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchFavoriteOffers());
   },
   onResetDataLoadStatus() {
-    dispatch(ActionCreator.resetDataLoadStatus());
+    dispatch(resetDataLoadStatus());
   }
 });
 

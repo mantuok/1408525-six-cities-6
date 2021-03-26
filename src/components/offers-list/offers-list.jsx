@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import {setActiveCard} from '../../store/action';
 import SortingMenu from '../sorting-menu/sorting-menu';
 import OfferCard from '../offer-card/offer-card';
 import {
@@ -47,7 +47,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onSetActiveCard(offerId) {
-    dispatch(ActionCreator.setActiveCard(offerId));
+    dispatch(setActiveCard(offerId));
   }
 });
 
