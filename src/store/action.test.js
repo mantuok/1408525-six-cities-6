@@ -6,7 +6,6 @@ import {
 import {
   ActionType,
   setCity,
-  setOffersPerCity,
   setSorting,
   setActiveCard,
   resetDataLoadStatus,
