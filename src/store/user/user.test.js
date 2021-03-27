@@ -2,16 +2,14 @@ import MockAdapter from 'axios-mock-adapter';
 import {createApi} from '../../services/api';
 import {user} from './user';
 import {ActionType} from '../action';
-// import {} from '../api-actions';
-// import {
-//   checkAuth,
-//   login,
-//   logout
-// } from '../api-actions';
+import {
+  checkAuth,
+  login,
+  logout
+} from '../api-actions';
 import {
   AuthorizationStatus
 } from '../../const';
-import {checkAuth} from '../api-actions';
 
 const api = createApi(() => {});
 

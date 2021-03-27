@@ -9,6 +9,7 @@ import {
   updateFavoriteOfferStatus,
   updateLocalFavoriteOfferStatus
 } from '../../store/api-actions';
+import {api} from '../../index';
 import {
   getRatingStarsWidth,
   isUserAuthorized
@@ -63,7 +64,7 @@ const OfferScreen = (props) => {
 
   useEffect(() => {
     if (!isDataPerOfferLoaded) {
-      fetchOfferById(id)
+      fetchOfferById(id, api)
         .then((offerData) => setCurrentOffer(offerData))
         .then(() => onReviewsPerOfferLoad(id))
         .then(() => setDataPerOfferLoaded(true))
@@ -106,7 +107,7 @@ const OfferScreen = (props) => {
 
   const handleFavoriteButtonClick = () => {
     if (isUserAuthorized(authorizationStatus)) {
-      updateLocalFavoriteOfferStatus(id, getUpdatedFavoriteStatus(isFavorite))
+      updateLocalFavoriteOfferStatus(id, getUpdatedFavoriteStatus(isFavorite), api)
       .then((offerData) => setCurrentOffer({
         ...currentOffer,
         isFavorite: offerData.isFavorite
@@ -227,10 +228,6 @@ const mapDispatchToProps = (dispatch) => ({
   onReviewsPerOfferLoad(id) {
     dispatch(fetchReviewsPerOffer(id));
   },
-  onFavoriteButtonClick(id, favoriteStatus) {
-    dispatch(updateFavoriteOfferStatus(id, favoriteStatus));
-  }
-
 });
 
 OfferScreen.propTypes = {
