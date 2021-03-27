@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import {setSorting} from '../../store/action';
 import classnames from 'classnames';
 import {SortingType} from '../../const';
 import {
   stringPropTypes,
   functionPropTypes
 } from '../../utils/props-validation';
+import {getSelectedSortingType} from '../../store/data-set/selectors';
 
 const SortingMenu = (props) => {
   const {selectedSortingType, onSortingSelect} = props;
@@ -75,12 +76,12 @@ const SortingMenu = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  selectedSortingType: state.selectedSortingType
+  selectedSortingType: getSelectedSortingType(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onSortingSelect(sortingType) {
-    dispatch(ActionCreator.setSorting(sortingType));
+    dispatch(setSorting(sortingType));
   }
 });
 

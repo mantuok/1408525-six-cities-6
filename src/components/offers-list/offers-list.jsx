@@ -1,34 +1,33 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import {setActiveCard} from '../../store/action';
 import SortingMenu from '../sorting-menu/sorting-menu';
 import OfferCard from '../offer-card/offer-card';
-import {applySorting} from '../../utils/offers-sorting';
 import {
   offersPropTypes,
   stringPropTypes,
   functionPropTypes
 } from '../../utils/props-validation';
+import {
+  getActiveCity,
+  getSortedOffersPerCity
+} from '../../store/data-set/selectors';
 
 const OffersList = (props) => {
-  const {offersPerCity, activeCity, onFilterOffers, onSetActiveCard, selectedSortingType} = props;
-  const [activeCardId, setActiveCard] = useState(undefined);
+  const {activeCity, onSetActiveCard, sortedOffersPerCity} = props;
+  const [currentCardId, setCurrentCard] = useState(undefined);
 
-  const isCardActive = (offer) => offer.id === activeCardId;
-
-  useEffect(() => {
-    onFilterOffers();
-  }, [activeCity]);
+  const isCardActive = (offer) => offer.id === currentCardId;
 
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">{offersPerCity.length} places to stay in {activeCity}</b>
+      <b className="places__found">{sortedOffersPerCity.length} places to stay in {activeCity}</b>
       <SortingMenu />
       <div className="cities__places-list places__list tabs__content">
-        {applySorting(offersPerCity, selectedSortingType).map((offer) => <OfferCard
+        {sortedOffersPerCity.map((offer) => <OfferCard
           handleMouseOver={() => {
-            setActiveCard(offer.id);
+            setCurrentCard(offer.id);
             onSetActiveCard(offer.id);
           }
           }
@@ -42,26 +41,20 @@ const OffersList = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  offersPerCity: state.offersPerCity,
-  activeCity: state.activeCity,
-  selectedSortingType: state.selectedSortingType
+  activeCity: getActiveCity(state),
+  sortedOffersPerCity: getSortedOffersPerCity(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onFilterOffers() {
-    dispatch(ActionCreator.setOffersPerCity());
-  },
   onSetActiveCard(offerId) {
-    dispatch(ActionCreator.setActiveCard(offerId));
+    dispatch(setActiveCard(offerId));
   }
 });
 
 OffersList.propTypes = {
-  offersPerCity: offersPropTypes,
+  sortedOffersPerCity: offersPropTypes,
   activeCity: stringPropTypes,
-  onFilterOffers: functionPropTypes,
-  onSetActiveCard: functionPropTypes,
-  selectedSortingType: stringPropTypes
+  onSetActiveCard: functionPropTypes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OffersList);

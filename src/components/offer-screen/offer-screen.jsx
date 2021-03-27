@@ -1,14 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import classnames from 'classnames';
 import {nanoid} from 'nanoid';
-import {Link, useParams, useHistory} from 'react-router-dom';
+import {useParams, useHistory} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {
   fetchOfferById,
-  fetchReviewsPerOffer
+  fetchReviewsPerOffer,
+  updateFavoriteOfferStatus,
+  updateLocalFavoriteOfferStatus
 } from '../../store/api-actions';
 import {
-  getRatingStarsWidth
+  getRatingStarsWidth,
+  isUserAuthorized
 } from '../../utils/common';
 import {
   reviewsPropTypes,
@@ -18,16 +21,19 @@ import {
 import {
   MapType,
   AppRoute,
-  AuthorizationStatus
+  FavoriteStatus
 } from '../../const';
 import LoadingPlaceholder, {} from '../loading-placeholder/loading-placeholder';
 import NearbyOffersList from '../nearby-offers-list/nearby-offers-list';
-import ProfileNavigation from '../profile-navigation/profile-navigation';
 import OfferImage from './offer-image';
 import OfferGood from './offer-good';
 import OfferReview from './offer-review';
 import NewReview from './new-review';
 import Map from '../map/map';
+import Header from '../header/header';
+import Footer from '../footer/footer';
+import {getReviewsPerOffer} from '../../store/data-load/selectors';
+import {getAuthorizationStatus} from '../../store/user/selectors';
 
 const renderImages = (images, title) => {
   return images.map((image) => <OfferImage image={image} title={title} key={nanoid()}/>);
@@ -41,10 +47,12 @@ const renderReviews = (reviews) => {
   return reviews.map((review) => <OfferReview review={review} key={review.id} />);
 };
 
-const getNewReviewForm = (authorizationStatus) =>
-  authorizationStatus === AuthorizationStatus.AUTH ?
-    <NewReview /> :
-    ``;
+const getNewReviewForm = (authorizationStatus) => isUserAuthorized(authorizationStatus) ? <NewReview /> : ``;
+
+const getUpdatedFavoriteStatus = (isCurrentlyFavorite) =>
+  isCurrentlyFavorite ?
+    FavoriteStatus.REMOVE :
+    FavoriteStatus.ADD;
 
 const OfferScreen = (props) => {
   const {reviewsPerOffer, onReviewsPerOfferLoad, authorizationStatus} = props;
@@ -69,30 +77,49 @@ const OfferScreen = (props) => {
     );
   }
 
-  const {bedrooms, description, goods, isPremium, images, maxAdults, title, price, rating, type} = currentOffer;
-  const {avatarUrl, isPro, name} = currentOffer.host;
-  const premiumMarkClass = classnames(`property__mark`, {"visually-hidden": !isPremium});
-  const avatarClass = classnames(`property__avatar-wrapper user__avatar-wrapper`, {"property__avatar-wrapper--pro": isPro});
+  const {
+    bedrooms,
+    description,
+    goods,
+    isPremium,
+    isFavorite,
+    images,
+    maxAdults,
+    title,
+    price,
+    rating,
+    type
+  } = currentOffer;
+  const {
+    avatarUrl,
+    isPro,
+    name
+  } = currentOffer.host;
+
+  const premiumMarkClass = classnames(
+      `property__mark`, {"visually-hidden": !isPremium}
+  );
+  const avatarClass = classnames(
+      `property__avatar-wrapper user__avatar-wrapper`, {"property__avatar-wrapper--pro": isPro}
+  );
+  const getFavoriteButtonColor = () => isFavorite ? `#4481c3` : `#b8b8b8`;
+
+  const handleFavoriteButtonClick = () => {
+    if (isUserAuthorized(authorizationStatus)) {
+      updateLocalFavoriteOfferStatus(id, getUpdatedFavoriteStatus(isFavorite))
+      .then((offerData) => setCurrentOffer({
+        ...currentOffer,
+        isFavorite: offerData.isFavorite
+      }));
+
+    } else {
+      history.push(AppRoute.LOGIN);
+    }
+  };
 
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Link className="header__logo-link" to="/">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </Link>
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <ProfileNavigation />
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
-
+      <Header />
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
@@ -109,12 +136,22 @@ const OfferScreen = (props) => {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
-                  <svg className="property__bookmark-icon" width="31" height="33">
+                <button
+                  className="property__bookmark-button button"
+                  type="button"
+                  onClick={handleFavoriteButtonClick}
+                >
+                  <svg
+                    className="property__bookmark-icon"
+                    width="31"
+                    height="33"
+                    style={{stroke: `${getFavoriteButtonColor()}`}}
+                  >
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
                 </button>
+
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
@@ -176,24 +213,24 @@ const OfferScreen = (props) => {
 
         <NearbyOffersList />
       </main>
-      <footer className="footer container">
-        <Link className="footer__logo-link" to="/">
-          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-        </Link>
-      </footer>
+      <Footer />
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
-  reviewsPerOffer: state.reviewsPerOffer,
-  authorizationStatus: state.authorizationStatus
+  reviewsPerOffer: getReviewsPerOffer(state),
+  authorizationStatus: getAuthorizationStatus(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onReviewsPerOfferLoad(id) {
     dispatch(fetchReviewsPerOffer(id));
+  },
+  onFavoriteButtonClick(id, favoriteStatus) {
+    dispatch(updateFavoriteOfferStatus(id, favoriteStatus));
   }
+
 });
 
 OfferScreen.propTypes = {

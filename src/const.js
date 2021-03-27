@@ -84,3 +84,8 @@ export const AppRoute = {
   OFFER: `/offer/:id`,
   NOT_FOUND: `/page-not-found`
 };
+
+export const FavoriteStatus = {
+  REMOVE: 0,
+  ADD: 1
+};

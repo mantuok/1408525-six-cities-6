@@ -7,6 +7,7 @@ import {
   offersPropTypes,
   functionPropTypes
 } from '../../utils/props-validation';
+import {getNearbyOffers} from '../../store/data-load/selectors';
 
 const NearbyOffersList = (props) => {
   const {nearbyOffers, onNearbyOffersLoad} = props;
@@ -29,7 +30,7 @@ const NearbyOffersList = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  nearbyOffers: state.nearbyOffers
+  nearbyOffers: getNearbyOffers(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -44,4 +45,3 @@ NearbyOffersList.propTypes = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NearbyOffersList);
-// export default NearbyOffersList;
