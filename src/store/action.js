@@ -23,10 +23,6 @@ export const setCity = (selectedCity) => ({
   payload: selectedCity,
 });
 
-export const setOffersPerCity = () => ({
-  type: ActionType.SET_OFFERS_PER_CITY
-});
-
 export const setSorting = (selectedSortingType) => ({
   type: ActionType.SET_SORTING,
   payload: selectedSortingType
