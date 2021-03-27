@@ -13,14 +13,6 @@ import {
 
 const api = createApi(() => {});
 
-const userData = {
-  avatar_url: `img/1.png`,
-  email: `johndoe@gmail.com`,
-  id: 1,
-  is_pro: false,
-  name: `John Doe`
-}
-
 describe(`Reducers work correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(user(undefined,{}))
@@ -95,14 +87,43 @@ describe(`Async operations work correctly`, () => {
     return loginLoader(dispatch, () => {}, api)
     .then(() => {
       expect(dispatch).toHaveBeenCalledTimes(2);
-      expect(dispatch).toHaveBeenCalledWith(1, {
+
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
         type: ActionType.SET_USER_DATA,
-        payload: userData
+        payload: [{fake: true}]
       });
-      expect(dispatch).toHaveBeenCalledWith(2, {
+
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
         type: ActionType.REQUIRED_AUTHORIZATION,
         payload: AuthorizationStatus.AUTH
       });
     });
   });
+
+  it(`Should make a correct GET call to API logout`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const logoutLoader = logout();
+
+    apiMock
+      .onGet(`/logout`)
+      .reply(200, [{fake: true}]);
+
+    return logoutLoader(dispatch, () => {}, api)
+    .then(() => {
+      expect(dispatch).toHaveBeenCalledTimes(2);
+
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: ActionType.SET_USER_DATA,
+        payload: {}
+      });
+
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
+        type: ActionType.REQUIRED_AUTHORIZATION,
+        payload: AuthorizationStatus.NO_AUTH
+      });
+    });
+  });
+
+
 });
