@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {fetchOffers} from '../../store/api-actions';
-import EmptyOffersListContainer from './empty-offers-list-container';
-import FullOffersListContianer from './full-offers-list-container';
+import EmptyOffersListContainer from '../empty-offers-list-container/empty-offers-list-container';
+import FullOffersListContianer from '../full-offers-list-container/full-offers-list-container';
 import CitiesList from '../cities-list/cities-list';
 import Header from '../header/header';
 import Footer from '../footer/footer';

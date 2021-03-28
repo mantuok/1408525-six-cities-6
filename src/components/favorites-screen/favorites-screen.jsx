@@ -14,8 +14,8 @@ import {
   functionPropTypes,
   booleanPropTypes
 } from '../../utils/props-validation';
-import EmptyFavoritesList from './empty-favorites-list';
-import FullFavoritesList from './full-favorites-list';
+import EmptyFavoritesList from '../empty-favorites-list/empty-favorites-list';
+import FullFavoritesList from '../full-favorites-list/full-favorites-list';
 import {resetDataLoadStatus} from '../../store/action';
 
 const FavoritesScreen = (props) => {

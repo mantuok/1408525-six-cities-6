@@ -1,33 +1,31 @@
 import React from 'react';
 import {render, screen} from '@testing-library/react';
-import PageNotFoundScreen from './page-not-found-screen';
+import CityItem from './city-item';
 import {Router} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 import configureStore from 'redux-mock-store';
 import * as redux from 'react-redux';
-import {
-  AuthorizationStatus
-} from '../../const';
 
-it(`PageNotFoundScreen should render correcty`, () => {
+it(`CityItem should render correcty`, () => {
   const history = createMemoryHistory();
 
   const mockStore = configureStore()({
-    USER:
-    {
-      authorizationStatus: AuthorizationStatus.NO_AUTH,
-      userEmail: `johndoe@gmail.com`,
-      userAvatar: `img/pic-1.jpg`
+    DATA_SET: {
+      activeCity: `Paris`
     }
   });
+
+  const city = {
+    NAME: `Amsterdam`
+  };
 
   render(
     <redux.Provider store={mockStore}>
       <Router history={history}>
-        <PageNotFoundScreen />
+        <CityItem city={city} />
       </Router>
     </redux.Provider>
   )
 
-  expect(screen.getByText(`Unfortunately page not found`)).toBeInTheDocument();
+  expect(screen.getByText(city.NAME)).toBeInTheDocument();
 })
