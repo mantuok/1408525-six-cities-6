@@ -1,9 +1,17 @@
 import {dataLoad} from './data-load';
 import {ActionType} from '../action';
+import MockAdapter from 'axios-mock-adapter';
+import {createApi} from '../../services/api';
+import {
+  fetchOffers
+} from '../api-actions';
+import {adaptOffersToClient} from '../../utils/adapter';
 import {
   SortingType,
   City
 } from '../../const';
+
+const api = createApi(() => {});
 
 const offer = {
   bedrooms: 3,
@@ -183,5 +191,26 @@ describe(`Reducers work correctly`, () => {
 
     expect(dataLoad(state, updateFavoriteStatusPerOffer))
       .toEqual({reviewsPerOffer: reviews})
+  });
+})
+
+describe(`Async operations work correctly`, () => {
+  it(`Should make a correct API call to /hotels`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const fetchOffersLoader = fetchOffers();
+
+    apiMock
+      .onGet(`/hotels`)
+      .reply(200, [{fake: true}])
+
+    return fetchOffersLoader(dispatch, () => {}, api)
+    .then(() => {
+      expect(dispatch).toHaveBeenCalledTimes(1)
+      expect(dispatch).toHaveBeenCalledWith({
+        type: ActionType.LOAD_OFFERS,
+        payload: [{fake: true}]
+      });
+    });
   });
 })
