@@ -14,28 +14,28 @@ describe(`SignInScreen renders and works correctly`, () => {
 
   it(`SignInScreen should render correcty`, () => {
     render(
-      <redux.Provider store={mockStore}>
-        <Router history={history}>
-          <SignInScreen onLoginSuccess={mockCallback} />
-        </Router>
-      </redux.Provider>
-    )
+        <redux.Provider store={mockStore}>
+          <Router history={history}>
+            <SignInScreen onLoginSuccess={mockCallback} />
+          </Router>
+        </redux.Provider>
+    );
     expect(screen.getByText(`Amsterdam`)).toBeInTheDocument();
     expect(screen.getByText(`E-mail`)).toBeInTheDocument();
     expect(screen.getByText(`Password`)).toBeInTheDocument();
-  })
+  });
 
   it(`SignInScreen form should work correctly`, () => {
     render(
-      <redux.Provider store={mockStore}>
-        <Router history={history}>
-          <SignInScreen onLoginSuccess={mockCallback} />
-        </Router>
-      </redux.Provider>
-    )
+        <redux.Provider store={mockStore}>
+          <Router history={history}>
+            <SignInScreen onLoginSuccess={mockCallback} />
+          </Router>
+        </redux.Provider>
+    );
 
-  userEvent.type(screen.getByTestId(`email`), `johndoe@gmail.com`);
-  userEvent.type(screen.getByTestId(`password`), `12345`);
+    userEvent.type(screen.getByTestId(`email`), `johndoe@gmail.com`);
+    userEvent.type(screen.getByTestId(`password`), `12345`);
 
-  })
+  });
 });

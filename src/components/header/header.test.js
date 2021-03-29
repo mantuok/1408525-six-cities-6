@@ -20,12 +20,12 @@ it(`Header should render correcty`, () => {
   });
 
   render(
-    <redux.Provider store={mockStore}>
-      <Router history={history}>
-        <Header />
-      </Router>
-    </redux.Provider>
-  )
+      <redux.Provider store={mockStore}>
+        <Router history={history}>
+          <Header />
+        </Router>
+      </redux.Provider>
+  );
 
   expect(screen.getByAltText(`6 cities logo`)).toBeInTheDocument();
 });

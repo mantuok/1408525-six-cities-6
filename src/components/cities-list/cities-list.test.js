@@ -16,12 +16,12 @@ it(`CitiesList should render correcty`, () => {
   });
 
   render(
-    <redux.Provider store={mockStore}>
-      <Router history={history}>
-        <CitiesList />
-      </Router>
-    </redux.Provider>
-  )
+      <redux.Provider store={mockStore}>
+        <Router history={history}>
+          <CitiesList />
+        </Router>
+      </redux.Provider>
+  );
 
   expect(screen.getByText(`Paris`)).toBeInTheDocument();
-})
+});

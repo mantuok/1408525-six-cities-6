@@ -8,12 +8,12 @@ it(`Footer should render correctly`, () => {
   const history = createMemoryHistory();
 
   const {getByAltText} = render(
-    <Router history={history}>
-      <Footer />
-    </Router>
-  )
+      <Router history={history}>
+        <Footer />
+      </Router>
+  );
 
   const logoElement = getByAltText(`6 cities logo`);
 
-  expect(logoElement).toBeInTheDocument()
-})
+  expect(logoElement).toBeInTheDocument();
+});

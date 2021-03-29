@@ -39,7 +39,7 @@ const offer = {
   rating: 4.8,
   title: `Beautiful & luxurious studio at great location`,
   type: `apartment`
-}
+};
 
 const offers = [
   {
@@ -100,85 +100,85 @@ const reviews = [
 
 describe(`Reducers work correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
-    expect(dataLoad(undefined,{}))
+    expect(dataLoad(undefined, {}))
       .toEqual({
         offers: [],
         favoriteOffers: [],
         nearbyOffers: [],
         reviewsPerOffer: [],
         isDataLoaded: false
-      })
+      });
   });
 
   it(`Reducer should update offers with loaded data`, () => {
-    const state = {offers: [], isDataLoaded: false}
+    const state = {offers: [], isDataLoaded: false};
 
     const updateOffersWithLoadedData = {
       type: ActionType.LOAD_OFFERS,
       payload: offers
-    }
+    };
 
     expect(dataLoad(state, updateOffersWithLoadedData))
-      .toEqual({offers, isDataLoaded: true})
+      .toEqual({offers, isDataLoaded: true});
   });
 
   it(`Reducer should update favorite offers with loaded data`, () => {
-    const state = {favoriteOffers: [], isDataLoaded: false}
+    const state = {favoriteOffers: [], isDataLoaded: false};
 
     const updateFavoriteOffersWithLoadedData = {
       type: ActionType.LOAD_FAVORITE_OFFERS,
       payload: offers
-    }
+    };
 
     expect(dataLoad(state, updateFavoriteOffersWithLoadedData))
-      .toEqual({favoriteOffers: offers, isDataLoaded: true})
+      .toEqual({favoriteOffers: offers, isDataLoaded: true});
   });
 
   it(`Reducer should reset isDataLoaded boolean to false`, () => {
-    const state = {isDataLoaded: true}
+    const state = {isDataLoaded: true};
 
     const resetDataLoadedBoolean = {
       type: ActionType.RESET_DATA_LOAD_STATUS
-    }
+    };
 
     expect(dataLoad(state, resetDataLoadedBoolean))
-      .toEqual({isDataLoaded: false})
+      .toEqual({isDataLoaded: false});
   });
 
   it(`Reducer should update nearby offers with loaded data`, () => {
-    const state = {nearbyOffers: []}
+    const state = {nearbyOffers: []};
 
     const updateNearbyOffersWithLoadedData = {
       type: ActionType.LOAD_NEARBY_OFFERS,
       payload: offers
-    }
+    };
 
     expect(dataLoad(state, updateNearbyOffersWithLoadedData))
-      .toEqual({nearbyOffers: offers})
+      .toEqual({nearbyOffers: offers});
   });
 
   it(`Reducer should update reviews with loaded data`, () => {
-    const state = {reviewsPerOffer: []}
+    const state = {reviewsPerOffer: []};
 
     const updateReviewsWithLoadedData = {
       type: ActionType.LOAD_REVIEWS_PER_OFFER,
       payload: reviews
-    }
+    };
 
     expect(dataLoad(state, updateReviewsWithLoadedData))
-      .toEqual({reviewsPerOffer: reviews})
+      .toEqual({reviewsPerOffer: reviews});
   });
 
   it(`Reducer should update favorite status per offer`, () => {
-    const state = {reviewsPerOffer: []}
+    const state = {reviewsPerOffer: []};
 
     const updateFavoriteStatusPerOffer = {
       type: ActionType.CHANGE_FAVORITE_OFFER_STATUS,
       payload: offer
-    }
+    };
 
     expect(dataLoad(state, updateFavoriteStatusPerOffer))
-      .toEqual({reviewsPerOffer: reviews})
+      .toEqual({reviewsPerOffer: reviews});
   });
-})
+});
 

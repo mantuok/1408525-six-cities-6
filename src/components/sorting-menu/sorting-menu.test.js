@@ -17,12 +17,12 @@ it(`SortingMenu should render correcty if authorized`, () => {
   });
 
   render(
-    <redux.Provider store={mockStore}>
-      <Router history={history}>
-        <SortingMenu />
-      </Router>
-    </redux.Provider>
-  )
+      <redux.Provider store={mockStore}>
+        <Router history={history}>
+          <SortingMenu />
+        </Router>
+      </redux.Provider>
+  );
 
   expect(screen.getByText(`Sort by`)).toBeInTheDocument();
 });

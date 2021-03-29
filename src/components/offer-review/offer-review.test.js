@@ -14,11 +14,11 @@ it(`OfferImage should render correcty`, () => {
       isPro: false,
       name: `Ben`
     }
-  }
+  };
 
   render(
       <OfferReview review={mockReview} />
-  )
+  );
 
   expect(screen.getByText(`Curabitur mattis, ante vitae hendrerit lobortis, massa lorem feugiat ipsum, ut sagittis nibh nisi eleifend ligula. Praesent accumsan urna at elit euismod accumsan.`)).toBeInTheDocument();
-})
+});

@@ -12,12 +12,12 @@ it(`NewReview should render correcty`, () => {
   const mockStore = configureStore()({});
 
   render(
-    <redux.Provider store={mockStore}>
-      <Router history={history}>
-        <NewReview />
-      </Router>
-    </redux.Provider>
-  )
+      <redux.Provider store={mockStore}>
+        <Router history={history}>
+          <NewReview />
+        </Router>
+      </redux.Provider>
+  );
 
   expect(screen.getByText(`Your review`)).toBeInTheDocument();
   expect(screen.getByText(`Submit`)).toBeInTheDocument();

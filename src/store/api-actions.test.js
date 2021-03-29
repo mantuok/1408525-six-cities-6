@@ -30,46 +30,46 @@ const apiMock = new MockAdapter(api);
 const mockUser = {email: `johndoe@gmail.com`, password: `12345`};
 
 const mockOffer = {
-    bedrooms: 3,
-    city: {
-      location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
-        zoom: 10
-      },
-      name: `Amsterdam`
-    },
-    description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-    goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
-    host: {
-      avatarUrl: `img/avatar-angelina.jpg`,
-      id: 3,
-      isPro: true,
-      name: `Angelina`
-    },
-    id: 1,
-    images: [
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/6.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/7.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/14.jpg`
-    ],
-    isFavorite: true,
-    isPremium: true,
+  bedrooms: 3,
+  city: {
     location: {
-      latitude: 52.3909553943508,
-      longitude: 4.85309666406198,
-      zoom: 8
+      latitude: 52.370216,
+      longitude: 4.895168,
+      zoom: 10
     },
-    maxAdults: 4,
-    previewImage: `img/apartment-01.jpg`,
-    price: 120,
-    rating: 4.8,
-    title: `Beautiful & luxurious studio at great location`,
-    type: `apartment`
-  };
+    name: `Amsterdam`
+  },
+  description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+  goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+  host: {
+    avatarUrl: `img/avatar-angelina.jpg`,
+    id: 3,
+    isPro: true,
+    name: `Angelina`
+  },
+  id: 1,
+  images: [
+    `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg`,
+    `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/6.jpg`,
+    `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/7.jpg`,
+    `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/14.jpg`
+  ],
+  isFavorite: true,
+  isPremium: true,
+  location: {
+    latitude: 52.3909553943508,
+    longitude: 4.85309666406198,
+    zoom: 8
+  },
+  maxAdults: 4,
+  previewImage: `img/apartment-01.jpg`,
+  price: 120,
+  rating: 4.8,
+  title: `Beautiful & luxurious studio at great location`,
+  type: `apartment`
+};
 
-const mockOffers = [mockOffer]
+const mockOffers = [mockOffer];
 
 const mockReviews = [
   {
@@ -84,12 +84,12 @@ const mockReviews = [
       name: `Ben`
     }
   }
-]
+];
 
 const mockNewReview = {
   comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
   rating: 4
-}
+};
 
 describe(`Async operations work correctly`, () => {
   it(`Should make a correct GET call to API login`, () => {
@@ -165,11 +165,11 @@ describe(`Async operations work correctly`, () => {
 
     apiMock
       .onGet(`/hotels`)
-      .reply(200, mockOffers)
+      .reply(200, mockOffers);
 
     return fetchOffersLoader(dispatch, () => {}, api)
     .then(() => {
-      expect(dispatch).toHaveBeenCalledTimes(1)
+      expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenCalledWith({
         type: ActionType.LOAD_OFFERS,
         payload: adaptOffersToClient(mockOffers)
@@ -180,12 +180,12 @@ describe(`Async operations work correctly`, () => {
   it(`Should make a correct API call to /hotels/:id`, () => {
     apiMock
       .onGet(`/hotels/${mockOffer.id}`)
-      .reply(200, mockOffer)
+      .reply(200, mockOffer);
 
     return fetchOfferById(mockOffer.id, api)
     .then((response) => {
-      expect(response).toEqual(adaptOffersToClient(mockOffer))
-    })
+      expect(response).toEqual(adaptOffersToClient(mockOffer));
+    });
   });
 
   it(`Should make a correct API call to /comments/:id`, () => {
@@ -194,11 +194,11 @@ describe(`Async operations work correctly`, () => {
 
     apiMock
       .onGet(`/comments/${mockOffer.id}`)
-      .reply(200, mockReviews)
+      .reply(200, mockReviews);
 
     return fetchReviewsPerOfferLoader(dispatch, () => {}, api)
     .then(() => {
-      expect(dispatch).toHaveBeenCalledTimes(1)
+      expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenCalledWith({
         type: ActionType.LOAD_REVIEWS_PER_OFFER,
         payload: adaptReviewsToClient(mockReviews)
@@ -216,7 +216,7 @@ describe(`Async operations work correctly`, () => {
 
     return postReviewLoader(dispatch, () => {}, api)
     .then(() => {
-      expect(dispatch).toHaveBeenCalledTimes(1)
+      expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenCalledWith({
         type: ActionType.LOAD_REVIEWS_PER_OFFER,
         payload: adaptReviewsToClient(mockReviews)
@@ -230,11 +230,11 @@ describe(`Async operations work correctly`, () => {
 
     apiMock
       .onGet(`/hotels/${mockOffer.id}/nearby`)
-      .reply(200, mockOffers)
+      .reply(200, mockOffers);
 
     return fetchNearbyOffersLoader(dispatch, () => {}, api)
     .then(() => {
-      expect(dispatch).toHaveBeenCalledTimes(1)
+      expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenCalledWith({
         type: ActionType.LOAD_NEARBY_OFFERS,
         payload: adaptOffersToClient(mockOffers)
@@ -248,11 +248,11 @@ describe(`Async operations work correctly`, () => {
 
     apiMock
       .onGet(`/favorite`)
-      .reply(200, mockOffers)
+      .reply(200, mockOffers);
 
     return fetchFavoriteOffersLoader(dispatch, () => {}, api)
     .then(() => {
-      expect(dispatch).toHaveBeenCalledTimes(1)
+      expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenCalledWith({
         type: ActionType.LOAD_FAVORITE_OFFERS,
         payload: adaptOffersToClient(mockOffers)
@@ -266,11 +266,11 @@ describe(`Async operations work correctly`, () => {
 
     apiMock
       .onPost(`/favorite/${mockOffer.id}/${FavoriteStatus.ADD}`)
-      .reply(200, mockOffer)
+      .reply(200, mockOffer);
 
     return updateFavoriteOfferStatusLoader(dispatch, () => {}, api)
     .then(() => {
-      expect(dispatch).toHaveBeenCalledTimes(1)
+      expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenCalledWith({
         type: ActionType.CHANGE_FAVORITE_OFFER_STATUS,
         payload: adaptOffersToClient(mockOffer)

@@ -22,12 +22,12 @@ it(`PageNotFoundScreen should render correcty`, () => {
   });
 
   render(
-    <redux.Provider store={mockStore}>
-      <Router history={history}>
-        <PageNotFoundScreen />
-      </Router>
-    </redux.Provider>
-  )
+      <redux.Provider store={mockStore}>
+        <Router history={history}>
+          <PageNotFoundScreen />
+        </Router>
+      </redux.Provider>
+  );
 
   expect(screen.getByText(`Unfortunately page not found`)).toBeInTheDocument();
-})
+});

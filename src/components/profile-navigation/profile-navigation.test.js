@@ -19,12 +19,12 @@ describe(`ProfileNavigation should render correcty`, () => {
     });
 
     render(
-      <redux.Provider store={mockStore}>
-        <Router history={history}>
-          <ProfileNavigation />
-        </Router>
-      </redux.Provider>
-    )
+        <redux.Provider store={mockStore}>
+          <Router history={history}>
+            <ProfileNavigation />
+          </Router>
+        </redux.Provider>
+    );
 
     expect(screen.getByText(`Log out`)).toBeInTheDocument();
   });
@@ -38,12 +38,12 @@ describe(`ProfileNavigation should render correcty`, () => {
     });
 
     render(
-      <redux.Provider store={mockStore}>
-        <Router history={history}>
-          <ProfileNavigation />
-        </Router>
-      </redux.Provider>
-    )
+        <redux.Provider store={mockStore}>
+          <Router history={history}>
+            <ProfileNavigation />
+          </Router>
+        </redux.Provider>
+    );
 
     expect(screen.getByText(`Sign in`)).toBeInTheDocument();
   });
