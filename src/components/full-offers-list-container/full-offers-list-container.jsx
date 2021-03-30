@@ -5,7 +5,7 @@ import {MapType} from '../../const';
 
 const FullOffersListContianer = () => {
   return (
-    <div className="cities__places-container container">
+    <div className="cities__places-container container" data-testid="full-offers-list-contianer">
       <OffersList />
       <div className="cities__right-section">
         <section className="cities__map map">

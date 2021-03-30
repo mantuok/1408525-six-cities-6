@@ -14,7 +14,6 @@ import {
 import {
   AuthorizationStatus
 } from '../const';
-import {api as importedApi} from '../index';
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
@@ -44,8 +43,8 @@ export const fetchOffers = () => (dispatch, _getState, api) => (
   .then((data) => dispatch(loadOffers(data)))
 );
 
-export const fetchOfferById = (id) => {
-  return importedApi.get(`hotels/${id}`)
+export const fetchOfferById = (id, api) => {
+  return api.get(`hotels/${id}`)
   .then(({data}) => adaptOffersToClient(data));
 };
 
@@ -79,7 +78,7 @@ export const updateFavoriteOfferStatus = (offerId, status) => (dispatch, _getSta
   .then((data) => dispatch(changeFavoriteOfferStatus(data)))
 );
 
-export const updateLocalFavoriteOfferStatus = (offerId, status) => {
-  return importedApi.post(`/favorite/${offerId}/${status}`, {offerId, status})
+export const updateLocalFavoriteOfferStatus = (offerId, status, api) => {
+  return api.post(`/favorite/${offerId}/${status}`, {offerId, status})
   .then(({data}) => adaptOffersToClient(data));
 };

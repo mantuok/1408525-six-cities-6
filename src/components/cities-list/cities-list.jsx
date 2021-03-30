@@ -1,5 +1,5 @@
 import React from 'react';
-import CityItem from './city-item';
+import CityItem from '../city-item/city-item';
 import {City} from '../../const';
 
 

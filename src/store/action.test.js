@@ -6,7 +6,6 @@ import {
 import {
   ActionType,
   setCity,
-  setOffersPerCity,
   setSorting,
   setActiveCard,
   resetDataLoadStatus,
@@ -29,14 +28,6 @@ describe(`Action creators work correctly`, () => {
     const cityName = `Paris`;
 
     expect(setCity(cityName)).toEqual(expectedAction);
-  });
-
-  it(`Action creator for setting offers per active city returns correct action`, () => {
-    const expectedAction = {
-      type: ActionType.SET_OFFERS_PER_CITY
-    };
-
-    expect(setOffersPerCity()).toEqual(expectedAction);
   });
 
   it(`Action creator for setting active sorting returns correct action`, () => {

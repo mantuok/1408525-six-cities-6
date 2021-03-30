@@ -1,7 +1,7 @@
 import React from 'react';
 import {City} from '../../const';
 import {nanoid} from 'nanoid';
-import FavoritesLocationItem from './favorites-location-item';
+import FavoritesLocationItem from '../favorites-location-item/favorites-location-item';
 import {getOffersPerCity} from '../../utils/common';
 import {
   offersPropTypes

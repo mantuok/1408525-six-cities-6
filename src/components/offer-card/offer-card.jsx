@@ -11,6 +11,7 @@ import {
 } from '../../utils/props-validation';
 import {connect} from 'react-redux';
 import {updateFavoriteOfferStatus} from '../../store/api-actions';
+import {api} from '../../index';
 import {isUserAuthorized} from '../../utils/common';
 import {getAuthorizationStatus} from '../../store/user/selectors';
 import {
@@ -117,7 +118,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onFavoriteButtonClick(id, favoriteStatus) {
-    dispatch(updateFavoriteOfferStatus(id, favoriteStatus));
+    dispatch(updateFavoriteOfferStatus(id, favoriteStatus, api));
   }
 });
 

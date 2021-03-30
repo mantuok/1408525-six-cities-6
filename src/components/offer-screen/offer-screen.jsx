@@ -6,9 +6,9 @@ import {connect} from 'react-redux';
 import {
   fetchOfferById,
   fetchReviewsPerOffer,
-  updateFavoriteOfferStatus,
   updateLocalFavoriteOfferStatus
 } from '../../store/api-actions';
+import {api} from '../../index';
 import {
   getRatingStarsWidth,
   isUserAuthorized
@@ -25,10 +25,10 @@ import {
 } from '../../const';
 import LoadingPlaceholder, {} from '../loading-placeholder/loading-placeholder';
 import NearbyOffersList from '../nearby-offers-list/nearby-offers-list';
-import OfferImage from './offer-image';
-import OfferGood from './offer-good';
-import OfferReview from './offer-review';
-import NewReview from './new-review';
+import OfferImage from '../offer-image/offer-image';
+import OfferGood from '../offer-good/offer-good';
+import OfferReview from '../offer-review/offer-review';
+import NewReview from '../new-review/new-review';
 import Map from '../map/map';
 import Header from '../header/header';
 import Footer from '../footer/footer';
@@ -63,7 +63,7 @@ const OfferScreen = (props) => {
 
   useEffect(() => {
     if (!isDataPerOfferLoaded) {
-      fetchOfferById(id)
+      fetchOfferById(id, api)
         .then((offerData) => setCurrentOffer(offerData))
         .then(() => onReviewsPerOfferLoad(id))
         .then(() => setDataPerOfferLoaded(true))
@@ -106,7 +106,7 @@ const OfferScreen = (props) => {
 
   const handleFavoriteButtonClick = () => {
     if (isUserAuthorized(authorizationStatus)) {
-      updateLocalFavoriteOfferStatus(id, getUpdatedFavoriteStatus(isFavorite))
+      updateLocalFavoriteOfferStatus(id, getUpdatedFavoriteStatus(isFavorite), api)
       .then((offerData) => setCurrentOffer({
         ...currentOffer,
         isFavorite: offerData.isFavorite
@@ -227,10 +227,6 @@ const mapDispatchToProps = (dispatch) => ({
   onReviewsPerOfferLoad(id) {
     dispatch(fetchReviewsPerOffer(id));
   },
-  onFavoriteButtonClick(id, favoriteStatus) {
-    dispatch(updateFavoriteOfferStatus(id, favoriteStatus));
-  }
-
 });
 
 OfferScreen.propTypes = {

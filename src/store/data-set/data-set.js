@@ -1,5 +1,4 @@
 import {ActionType} from '../action';
-import {getOffersPerCity} from '../../utils/common';
 import {
   SortingType,
   City
@@ -18,11 +17,6 @@ const dataSet = (state = initialState, action) => {
       return {
         ...state,
         activeCity: action.payload
-      };
-    case ActionType.SET_OFFERS_PER_CITY:
-      return {
-        ...state,
-        offersPerCity: getOffersPerCity(state.offers, state.activeCity)
       };
     case ActionType.SET_SORTING:
       return {
