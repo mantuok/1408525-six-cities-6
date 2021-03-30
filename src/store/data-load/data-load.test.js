@@ -26,7 +26,7 @@ const offer = {
     `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/7.jpg`,
     `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/14.jpg`
   ],
-  isFavorite: true,
+  isFavorite: false,
   isPremium: true,
   location: {
     latitude: 52.3909553943508,
@@ -170,15 +170,20 @@ describe(`Reducers work correctly`, () => {
   });
 
   it(`Reducer should update favorite status per offer`, () => {
-    const state = {reviewsPerOffer: []};
+    const state = {
+      offers,
+      favoriteOffers: offers
+    };
+
+    const updatedOffer = offer;
 
     const updateFavoriteStatusPerOffer = {
       type: ActionType.CHANGE_FAVORITE_OFFER_STATUS,
-      payload: offer
+      payload: updatedOffer
     };
 
     expect(dataLoad(state, updateFavoriteStatusPerOffer))
-      .toEqual({reviewsPerOffer: reviews});
+      .toEqual({offers: [updatedOffer], favoriteOffers: []});
   });
 });
 

@@ -35,8 +35,8 @@ describe(`Reducers work correctly`, () => {
     const setUserData = {
       type: ActionType.SET_USER_DATA,
       payload: {
-        email: `johndoe@gmail.com`,
-        avatar_url: `img/1.png`
+        "email": `johndoe@gmail.com`,
+        "avatar_url": `img/1.png`
       }
     };
 
