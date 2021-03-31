@@ -12,6 +12,13 @@ const NewReview = (props) => {
     rating: 0
   });
 
+  const getButtonDisabledBoolean = () => {
+    if (reviewForm.rating === 0 || reviewForm.comment.length === 0) {
+      return true;
+    }
+    return false;
+  };
+
   const handleFieldChange = (evt) => {
     const {name, value} = evt.target;
     setReviewForm({
@@ -87,7 +94,12 @@ const NewReview = (props) => {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
+        <button
+          className="reviews__submit form__submit button"
+          type="submit"
+          disabled={getButtonDisabledBoolean()}>
+          Submit
+        </button>
       </div>
     </form>
   );
