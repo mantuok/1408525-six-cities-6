@@ -10,7 +10,7 @@ import {
   setActiveCard,
   resetDataLoadStatus,
   setUserData,
-  requireAuthorization,
+  setAuthorizationStatus,
   loadOffers,
   loadFavoriteOffers,
   loadNearbyOffers,
@@ -91,7 +91,7 @@ describe(`Action creators work correctly`, () => {
 
     const authorizationStatus = AuthorizationStatus.AUTH;
 
-    expect(requireAuthorization(authorizationStatus)).toEqual(expectedAction);
+    expect(setAuthorizationStatus(authorizationStatus)).toEqual(expectedAction);
   });
 
   it(`Action creator for loading offers returns correct action`, () => {

@@ -1,5 +1,5 @@
 import {
-  requireAuthorization,
+  setAuthorizationStatus,
   setUserData,
   loadOffers,
   loadReviewsPerOffer,
@@ -17,7 +17,7 @@ import {
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
-  .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
+  .then(() => dispatch(setAuthorizationStatus(AuthorizationStatus.AUTH)))
   .catch(() => {})
 );
 
@@ -25,7 +25,7 @@ export const login = ({email, password}) => (dispatch, _getState, api) => (
   api.post(`/login`, {email, password})
   .then(({data}) => {
     dispatch(setUserData(data));
-    dispatch(requireAuthorization(AuthorizationStatus.AUTH));
+    dispatch(setAuthorizationStatus(AuthorizationStatus.AUTH));
   })
 );
 
@@ -33,7 +33,7 @@ export const logout = () => (dispatch, _getState, api) => (
   api.get(`/logout`)
   .then(() => {
     dispatch(setUserData({}));
-    dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH));
+    dispatch(setAuthorizationStatus(AuthorizationStatus.NO_AUTH));
   })
 );
 

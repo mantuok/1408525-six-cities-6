@@ -13,7 +13,7 @@ export const ActionType = {
   SET_USER_DATA: `user/setUserData`
 };
 
-export const requireAuthorization = (status) => ({
+export const setAuthorizationStatus = (status) => ({
   type: ActionType.REQUIRED_AUTHORIZATION,
   payload: status
 });
